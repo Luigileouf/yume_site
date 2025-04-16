@@ -272,17 +272,18 @@
 
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwZydI5pAtxT3nQVRTQuKYEJo-wW5swuk_IUubRthY4YMjkmXyUvCLvt4DrPa90XIsz/exec';
-    const form = document.getElementById('formContact');
+    const form = document.getElementById("formContact");
   
-    form.addEventListener('submit', e => {
+    form.addEventListener("submit", e => {
       e.preventDefault();
       const formData = new FormData(form);
   
       fetch(scriptURL, {
-        method: 'POST',
+        method: "POST",
         body: formData
       })
-      .then(response => {
+      .then(response => response.text())
+      .then(data => {
         alert("Merci, votre message a été envoyé !");
         form.reset();
       })
