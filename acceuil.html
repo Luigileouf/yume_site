@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YUME - Soutiens un rêve sportif</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    .hero {
+      background: url('https://via.placeholder.com/1600x600?text=YUME+R%C3%AAve+Sportif') center/cover no-repeat;
+      height: 60vh;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+    .dream-card {
+      transition: transform 0.3s;
+    }
+    .dream-card:hover {
+      transform: scale(1.03);
+    }
+    .navbar-brand img {
+      object-fit: contain;
+    }
+    .nav-link {
+      font-weight: 500;
+      color: #000;
+    }
+    .nav-link:hover {
+      color: #0d6efd;
+    }
+  </style>
+</head>
+<body style="padding-top: 90px;">
+  <!-- Navbar YUME -->
+  <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm py-3 fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="logo-yume.png" alt="YUME" width="50" height="50">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#yumeNavbar" aria-controls="yumeNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="yumeNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+  <li class="nav-item">
+    <a class="nav-link fw-bold" href="#">Média</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link fw-bold" href="#">Vendre</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link fw-bold" href="#">Acheter</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link fw-bold" href="#voeu">Je fais un vœu</a>
+  </li>
+</ul>
+        <div class="d-flex align-items-center gap-3">
+  <a href="#" class="btn btn-outline-primary rounded-pill">Je vends un objet</a>
+  <a href="#profil" class="btn p-0 border-0 bg-transparent">
+    <img src="profil-icon.svg" alt="Profil" width="32" height="32">
+  </a>
+</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Promesse Section -->
+<section class="py-5 text-center text-white" style="background-color: #000;">
+  <div class="container">
+    <h2 class="fw-bold mb-3" style="font-size: 2rem;">Lorsque tu vends un objet de seconde main, tu soutiens un athlète entre 1% et 100% selon ton choix.</h2>
+    <p class="fw-bold text-warning mb-5" style="font-size: 1.75rem;">
+      1€ de soutien aux sportifs = 1 point partenaire d’une valeur d’1€
+    </p>
+    <div class="d-flex justify-content-center flex-column flex-md-row align-items-center gap-3">
+      <input type="text" class="form-control form-control-lg w-75 w-md-50 rounded-pill" placeholder="Ex : paire de chaussures, vélo, kimono...">
+      <a href="#vendre" class="btn btn-warning btn-lg rounded-pill px-4">Vendre un objet</a>
+    </div>
+  </div>
+</section>
+
+<!-- Rêves mis en avant -->
+  <section id="dreams" class="py-5 text-white" style="background-color: #000;">
+  <div class="container">
+    <h2 class="text-center text-warning mb-5" style="font-size: 2rem; color: #facc15 !important;">Découvrez les sportifs soutenus</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card dream-card bg-white text-dark">
+          <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Lisa - lutteuse">
+          <div class="card-body">
+            <h5 class="card-title text-warning fw-bold">Lisa, 14 ans - Lutte</h5>
+            <p class="card-text">Objectif : financer des chaussures de compétition. Chaque vente l’aide à avancer !</p>
+            <a href="#" class="btn btn-outline-dark">Soutenir Lisa</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dream-card bg-white text-dark">
+          <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Yanis - escrime">
+          <div class="card-body">
+            <h5 class="card-title text-warning fw-bold">Yanis, 17 ans - Escrime</h5>
+            <p class="card-text">Objectif : acheter un nouveau fleuret. Une vente = un pas vers Paris 2028.</p>
+            <a href="#" class="btn btn-outline-dark">Soutenir Yanis</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card dream-card bg-white text-dark">
+          <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Maya - trail">
+          <div class="card-body">
+            <h5 class="card-title text-warning fw-bold">Maya, 22 ans - Trail</h5>
+            <p class="card-text">Elle rêve de participer à sa première course internationale en Espagne.</p>
+            <a href="#" class="btn btn-outline-dark">Soutenir Maya</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Sections à venir -->
+  <!-- Les partenaires -->
+<section id="partenaires" class="py-5 bg-white border-top">
+  <div class="container">
+    <h2 class="text-center mb-4">Ils soutiennent les rêves sportifs</h2>
+    <div class="overflow-auto">
+      <div class="d-flex justify-content-start align-items-center gap-5" style="min-width: max-content; animation: defilement 30s linear infinite;">
+        <img src="https://via.placeholder.com/120x60?text=Partenaire+1" alt="Partenaire 1">
+        <img src="https://via.placeholder.com/120x60?text=Partenaire+2" alt="Partenaire 2">
+        <img src="https://via.placeholder.com/120x60?text=Partenaire+3" alt="Partenaire 3">
+        <img src="https://via.placeholder.com/120x60?text=Partenaire+4" alt="Partenaire 4">
+        <img src="https://via.placeholder.com/120x60?text=Partenaire+5" alt="Partenaire 5">
+        <img src="https://via.placeholder.com/120x60?text=Partenaire+6" alt="Partenaire 6">
+        <img src="https://via.placeholder.com/120x60?text=Partenaire+1" alt="Partenaire 1 copy">
+        <img src="https://via.placeholder.com/120x60?text=Partenaire+2" alt="Partenaire 2 copy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes defilement {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
+  <!-- Vendre un objet -->
+<section id="vendre" class="py-5 text-white" style="background-color: #000;">
+  <div class="container text-center">
+    <h2 class="text-warning mb-4" style="font-size: 2rem;">Vendez vos objets vite et bien</h2>
+    <p class="mb-4" style="max-width: 700px; margin: auto; font-size: 1.2rem;">
+      Apprenez à valoriser vos objets, à écrire une annonce efficace et à choisir le bon moment pour vendre. Maximisez vos ventes et vos dons avec nos conseils pratiques.
+    </p>
+    <div class="d-flex justify-content-center gap-3 flex-column flex-sm-row">
+      <a href="#conseils" class="btn btn-outline-light btn-lg rounded-pill">Nos meilleurs conseils</a>
+      <a href="#expert" class="btn btn-warning btn-lg rounded-pill">Deviens un expert</a>
+    </div>
+  </div>
+</section>
+  <!-- Dans les coulisses -->
+<section id="coulisses" class="py-5 text-dark" style="background-color: #fff;">
+  <div class="container">
+    <h2 class="text-center text-warning mb-5" style="font-size: 2rem;">Dans les coulisses : Découvre les aventures des athlètes soutenus sur YUME</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="bg-white border p-4 rounded-4 h-100">
+          <h5 class="fw-bold" style="color: #facc15;">Léna - 19 ans, judo</h5>
+          <p>Grâce à vos ventes, Léna a pu financer un stage intensif au Japon, au cœur de la culture du judo. Elle nous partage son expérience unique.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="bg-white border p-4 rounded-4 h-100">
+          <h5 class="fw-bold" style="color: #facc15;">Yacine - 23 ans, athlétisme</h5>
+          <p>Yacine revient de blessure. Les dons ont permis l’achat d’un équipement spécialisé pour sa rééducation. Il partage son parcours de résilience.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="bg-white border p-4 rounded-4 h-100">
+          <h5 class="text-warning fw-bold">Chloé - 16 ans, natation</h5>
+          <p>Issue d’un petit village, Chloé a pu participer à une compétition nationale grâce à YUME. Elle raconte son défi personnel et ses rêves pour 2026.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- Faites un vœu -->
+<section id="voeu" class="py-5 text-white" style="background-color: #000;">
+  <div class="container">
+    <h2 class="text-center text-warning mb-4" style="font-size: 2rem;">Faites un vœu pour une personne que vous aimez</h2>
+    <p class="text-center mb-5" style="max-width: 700px; margin: auto; font-size: 1.2rem;">
+      Offrez un moment magique à une personne chère à votre cœur en lui dédiant un vœu sportif réalisé grâce à votre contribution.
+    </p>
+    <div class="text-center">
+      <a href="#faire-un-voeu" class="btn btn-warning btn-lg rounded-pill px-5">Faire un vœu</a>
+    </div>
+  </div>
+</section>
+  <!-- Faire une affaire -->
+<section id="bonnes-affaires" class="py-5 text-dark" style="background-color: #fff;">
+  <div class="container text-center">
+    <h2 class="text-warning mb-4" style="font-size: 2rem;">Le coin des bonnes affaires</h2>
+    <p class="mb-4" style="max-width: 750px; margin: auto; font-size: 1.2rem; color: #000;">
+      Utilisez vos points YUME et profitez d’avantages exclusifs sur les offres de nos partenaires… Parce qu’eux aussi soutiennent nos sportifs !
+    </p>
+    <a href="#offres-partenaires" class="btn btn-warning btn-lg rounded-pill">Voir les offres disponibles</a>
+  </div>
+</section>
+  <!-- Contenu inspirant -->
+<section id="inspirations" class="py-5 text-white" style="background-color: #000;">
+  <div class="container text-center">
+    <h2 class="text-warning mb-4" style="font-size: 2rem;">Inspirez, expirez</h2>
+    <p class="mb-5" style="max-width: 800px; margin: auto; font-size: 1.2rem;">
+      Entrez dans les coulisses du monde palpitant du sport de haut niveau. Articles, conseils, vidéos, témoignages : découvrez tous nos contenus inspirants et poussez la réflexion plus loin.
+    </p>
+    <a href="#contenu" class="btn btn-outline-light btn-lg rounded-pill">Explorer le média</a>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="text-center py-5" style="background-color: #fff;">
+  <div class="container">
+    <p class="mb-2" style="color: #facc15;">📧 <a href="mailto:contact@yu-me.fr" style="color: #facc15; text-decoration: underline;">contact@yu-me.fr</a></p>
+    <p class="mb-2" style="color: #facc15;"><a href="#" style="color: #facc15; text-decoration: underline;">Mentions légales</a> – Pour vous servir 💛</p>
+    <div class="my-3">
+      <img src="https://via.placeholder.com/200x50?text=%C3%89quipe+YUME" alt="Équipe YUME" class="img-fluid">
+    </div>
+    <p class="fst-italic" style="color: #facc15;">Cette page web est une maquette HTML/CSS</p>
+    <p class="fw-bold" style="color: #facc15;">TOUT DROIT RÉSERVÉ © YUME</p>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
