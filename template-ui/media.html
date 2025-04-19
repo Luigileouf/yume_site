@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espace Média - YUME</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .media-card {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .media-card:hover {
+      transform: translateY(-5px);
+    }
+    .media-thumbnail {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .media-body {
+      padding: 1rem;
+    }
+    .media-meta {
+      font-size: 0.875rem;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body style="padding-top: 90px;">
+
+<!-- Navbar YUME -->
+<nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm py-3 fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <img src="img/logo-yume-solidarite.png" alt="YUME" width="50" height="50">
+      <div class="d-none d-md-block">
+        <span class="fw-bold d-block">YUME</span>
+        <small class="d-block">Objets vendus</small>
+        <small class="d-block">Athlètes soutenus</small>
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#yumeNavbar" aria-controls="yumeNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="yumeNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+        <li class="nav-item">
+          <a class="nav-link fw-bold" href="#">Média</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" href="#">Vendre</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" href="#">Acheter</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" href="#voeu">Je fais un vœu</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center gap-3">
+        <a href="#" class="btn btn-outline-primary rounded-pill">Je vends un objet</a>
+        <a href="#profil" class="btn p-0 border-0 bg-transparent">
+          <img src="img/profil-icon.svg.png" alt="Profil" width="32" height="32">
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="py-5">
+  <div class="container">
+    <h2 class="mb-4 text-center">🎙️ Espace Média</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="media-card">
+          <img src="img/media1.jpg" alt="Vidéo athlète" class="media-thumbnail">
+          <div class="media-body">
+            <h5>Interview : Clara D., karatéka engagée</h5>
+            <p class="media-meta">🎥 Vidéo - 3 min</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="media-card">
+          <img src="img/media2.jpg" alt="Podcast athlète" class="media-thumbnail">
+          <div class="media-body">
+            <h5>Podcast : Les défis du sport amateur</h5>
+            <p class="media-meta">🎧 Podcast - 12 min</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="media-card">
+          <img src="img/media3.jpg" alt="Article" class="media-thumbnail">
+          <div class="media-body">
+            <h5>Article : Soutenir les jeunes talents</h5>
+            <p class="media-meta">📰 Article - 4 min de lecture</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

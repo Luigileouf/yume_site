@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recherche Produits - YUME</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .product-card {
+      background-color: white;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-image {
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
+    .filter-section select {
+      max-width: 200px;
+    }
+  </style>
+</head>
+<body style="padding-top: 90px;">
+
+<!-- Navbar YUME -->
+<nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm py-3 fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <img src="img/logo-yume-solidarite.png" alt="YUME" width="50" height="50">
+      <div class="d-none d-md-block">
+        <span class="fw-bold d-block">YUME</span>
+        <small class="d-block">Objets vendus</small>
+        <small class="d-block">Athlètes soutenus</small>
+      </div>
+    </a>
+    <div class="collapse navbar-collapse" id="yumeNavbar">
+      <ul class="navbar-nav ms-4">
+        <li class="nav-item"><a class="nav-link fw-bold" href="#">Média</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold" href="#">Vendre</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold" href="#">Acheter</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold" href="#voeu">Je fais un vœu</a></li>
+      </ul>
+      <form class="d-flex ms-auto" role="search">
+        <input class="form-control me-2" type="search" placeholder="Rechercher des objets..." aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">🔍</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<section class="py-5">
+  <div class="container">
+    <h2 class="mb-4">🔎 Résultats de recherche</h2>
+
+    <!-- Filtres -->
+    <div class="filter-section mb-4 d-flex gap-3 flex-wrap">
+      <select class="form-select">
+        <option>Catégories</option>
+        <option>Vêtements</option>
+        <option>Chaussures</option>
+        <option>Livres</option>
+      </select>
+      <select class="form-select">
+        <option>État</option>
+        <option>Neuf</option>
+        <option>Très bon</option>
+        <option>Bon</option>
+      </select>
+      <select class="form-select">
+        <option>Prix croissant</option>
+        <option>Prix décroissant</option>
+      </select>
+      <select class="form-select">
+        <option>Points Partenaires</option>
+        <option>1 à 10</option>
+         <option>10 à 20</option>
+         <option>20 et plus</option>
+      </select>
+    </div>
+
+    <!-- Résultats -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <div class="col">
+        <div class="product-card">
+          <img src="img/chaussure1.jpg" class="w-100 product-image" alt="Produit 1">
+          <div class="p-3">
+            <h6>Converse enfants</h6>
+            <p class="mb-1 text-muted">Taille 30 • Bon état</p>
+            <strong>10,00 €</strong><br>
+            <small class="text-success">+10 pts Partenaire YUME</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="product-card">
+          <img src="img/peluche.jpg" class="w-100 product-image" alt="Produit 2">
+          <div class="p-3">
+            <h6>Peluche licorne</h6>
+            <p class="mb-1 text-muted">État neuf</p>
+            <strong>6,50 €</strong><br>
+            <small class="text-success">+6.50 pts Partenaire YUME</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ajoutez d'autres cartes ici -->
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
