@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <span class="navbar-toggler-icon"></span>
       </button>
       
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="mainNavbar">
           <ul class="navbar-nav ms-4">
             <li class="nav-item"><a class="nav-link fw-bold" href="#">👥 Média</a></li>
             <li class="nav-item"><a class="nav-link fw-bold" href="#">🛒 Vendre</a></li>
