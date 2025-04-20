@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
             <small class="d-block">Athlètes soutenus</small>
           </div>
         </a>
+
+        <!-- BOUTON TOGGLE -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav ms-4">
             <li class="nav-item"><a class="nav-link fw-bold" href="#">👥 Média</a></li>
