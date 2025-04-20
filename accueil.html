@@ -41,44 +41,10 @@
   </style>
 </head>
 <body style="padding-top: 90px;">
-  <!-- Navbar YUME -->
-  <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm py-3 fixed-top">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-        <img src="img/logo-yume-solidarite.png" alt="YUME" width="50" height="50">
-        <div class="d-none d-md-block">
-          <span class="fw-bold d-block">YUME</span>
-          <small class="d-block">Objets vendus</small>
-          <small class="d-block">Athlètes soutenus</small>
-        </div>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#yumeNavbar" aria-controls="yumeNavbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="yumeNavbar">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
-  <li class="nav-item">
-    <a class="nav-link fw-bold" href="#">Média</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link fw-bold" href="#">Vendre</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link fw-bold" href="#">Acheter</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link fw-bold" href="#voeu">Je fais un vœu</a>
-  </li>
-</ul>
-        <div class="d-flex align-items-center gap-3">
-  <a href="#" class="btn btn-outline-primary rounded-pill">Je vends un objet</a>
-  <a href="#profil" class="btn p-0 border-0 bg-transparent">
-    <img src="profil-icon.svg" alt="Profil" width="32" height="32">
-  </a>
-</div>
-      </div>
-    </div>
-  </nav>
+  
+<!-- Navbar YUME -->
+<script src="js/header.js" defer></script>
+
  <!-- Fenêtre modale de notification -->
  <div class="modal fade" id="devModal" tabindex="-1" aria-labelledby="devModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -98,10 +64,14 @@
   <!-- Promesse Section -->
 <section class="py-5 text-center text-white" style="background-color: #000;">
   <div class="container">
-    <h2 class="fw-bold mb-3" style="font-size: 2rem;">Lorsque tu vends un objet de seconde main, tu soutiens un athlète entre 1% et 100% selon ton choix.</h2>
+    <h1 class="fw-bold mb-3" style="font-size: 2rem;">Tu vends un objet de seconde main sur YUME, tu soutiens un athlète de haut niveau.</h1>
+    <h2>Choisis librement le pourcentage de ta vente à reverser, de 1 % à 100 % du montant.</h2>
     <p class="fw-bold text-warning mb-5" style="font-size: 1.75rem;">
       1€ de soutien aux sportifs = 1 point partenaire d’une valeur d’1€
     </p>
+    <h3 class="text-white mt-3" style="font-weight: 400; font-size: 1.1rem;">
+      YUME est une plateforme solidaire, d’achat, vente d’objets de seconde main et de bonnes affaires, pensée pour soutenir tous les athlètes de haut niveau peu médiatisés — qu’ils soient valides, féminins ou en situation de handicap.
+    </h3>    
     <div class="d-flex justify-content-center flex-column flex-md-row align-items-center gap-3">
       <input type="text" class="form-control form-control-lg w-75 w-md-50 rounded-pill" placeholder="Ex : paire de chaussures, vélo, kimono...">
       <a href="#vendre" class="btn btn-warning btn-lg rounded-pill px-4">Vendre un objet</a>
