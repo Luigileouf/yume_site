@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <li class="nav-item"><a class="nav-link fw-bold" href="#">🛒 Vendre</a></li>
             <li class="nav-item"><a class="nav-link fw-bold" href="#">📦 Acheter</a></li>
             <li class="nav-item"><a class="nav-link fw-bold" href="#">🪄 Je fais un vœu</a></li>
-            <li class="nav-item"><a class="nav-link fw-bold" href="${linkToForm}">📣 Oyé Oyé News Yume</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold" href="${linkToForm}">📣 Newsletter</a></li>
           </ul>
         </div>
         <div>
