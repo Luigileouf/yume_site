@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Podcast YUME</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    .nav-link {
+      font-weight: 500;
+      color: #000;
+    }
+    .nav-link:hover {
+      color: #0d6efd;
+    }
+    .nav-link.active {
+      font-weight: bold;
+      color: #0d6efd;
+    }
+    .hero {
+      background: url('img/hero.png') center/cover no-repeat;
+      height: 60vh;
+    }
+    .hero-text {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .hero-text h1 {
+      font-size: 2.5rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 1rem;
+      border-radius: 1rem;
+      color: white;
+      display: inline-block;
+    }
+    .hero-text p {
+      max-width: 900px;
+      margin: 1rem auto;
+      font-size: 1.1rem;
+    }
+    .theme-card:hover {
+      transform: scale(1.03);
+      transition: transform 0.3s;
+    }
+  </style>
+</head>
+<body style="padding-top: 90px;">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-white fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="accueil.html">
+      <img src="img/logo-yume-solidarite.png" alt="Logo YUME" class="me-2 rounded-circle" width="40">
+      <div>
+        <strong>YUME</strong><br>
+        <small>Objets vendus<br> Athlètes soutenus</small>
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+        <li class="nav-item"><a class="nav-link" href="#newsletter"><i class="bi bi-envelope-paper"></i> Newsletter</a></li>
+        <li class="nav-item"><a class="nav-link" href="accueil.html"><i class="bi bi-house"></i> Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-info-circle"></i> Projet</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero image only -->
+<section class="hero"></section>
+
+<!-- Hero text below image -->
+<section class="hero-text container">
+  <h1>Bienvenue sur le podcast de YUME 😊</h1>
+  <p class="lead">YUME veut dire rêve en japonais alors il est tout naturel ici de parler de rêve de champion, de rêve d’entrepreneurs et de rêver d’une société plus durable pour inspirer et agir.</p>
+  <p>Vous retrouverez ici et bientôt sur les plateformes de streaming l’ensemble des épisodes.</p>
+</section>
+
+<!-- Épisode vedette -->
+<section class="container py-5">
+  <h2 class="text-center mb-4">Episode en vedette</h2>
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <img src="img/episode1.png" alt="Episode" class="img-fluid rounded">
+      <audio controls class="w-100 mt-3">
+        <source src="audio/Episode 1_Yannick Matejicek_Ton rêve Ton combat_YUME.mp3" type="audio/mpeg">
+        Ton navigateur ne supporte pas l'audio HTML5.
+      </audio>
+    </div>
+    <div class="col-md-6">
+      <p>Pour suivre et contacter Yannick, c’est par ici :</p>
+      <div class="d-flex flex-wrap gap-3">
+        <a href="https://yannickmatejicek.fr" target="_blank"><i class="bi bi-globe"></i></a>
+        <a href="https://facebook.com/profile.php?id=100057128660179" target="_blank"><i class="bi bi-facebook"></i></a>
+        <a href="https://instagram.com/yannickmatej" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.youtube.com/@yannickmatejicek" target="_blank"><i class="bi bi-youtube"></i></a>
+        <a href="https://linkedin.com/in/yannick-matejicek-525162221" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:contact@yannickmatejicek.fr"><i class="bi bi-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section id="newsletter" class="bg-light py-5">
+  <div class="container text-center">
+    <h2 class="text-center mb-4">Inscris-toi à notre newsletter</h2>
+    <iframe src="newsletter.html" style="width: 100%; height: 320px; border: none;" title="Formulaire d'inscription à la newsletter" class="rounded"></iframe>
+  </div>
+</section>
+
+<!-- Thématiques -->
+<section class="container py-5">
+  <h2 class="text-center mb-5">Les séries thématiques du podcast</h2>
+  <div class="row g-4">
+    <div class="col-md-4 theme-card">
+      <div class="p-4 border rounded h-100">
+        <h4>« Ton rêve, Ton combat »</h4>
+        <p>Chaque invité partage un rêve personnel et les obstacles rencontrés.</p>
+      </div>
+    </div>
+    <div class="col-md-4 theme-card">
+      <div class="p-4 border rounded h-100">
+        <h4>« Changer les règles du jeu »</h4>
+        <p>Donner la parole à celles et ceux qui inventent d’autres modèles.</p>
+      </div>
+    </div>
+    <div class="col-md-4 theme-card">
+      <div class="p-4 border rounded h-100">
+        <h4>« Et si on pouvait tous gagner ? »</h4>
+        <p>La collaboration serait-elle une clé ?</p>
+      </div>
+    </div>
+    <div class="col-md-6 theme-card">
+      <div class="p-4 border rounded h-100">
+        <h4>« Un objet, une histoire »</h4>
+        <p>Un objet de seconde main devient le point de départ du récit.</p>
+      </div>
+    </div>
+    <div class="col-md-6 theme-card">
+      <div class="p-4 border rounded h-100">
+        <h4>« Rêves croisés »</h4>
+        <p>Dialogue entre deux personnes issues d’univers différents.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center py-4">
+  <p>Bientôt suivez-nous sur :</p>
+  <div class="d-flex justify-content-center gap-3 mb-3">
+    <i class="bi bi-facebook"></i>
+    <i class="bi bi-instagram"></i>
+    <i class="bi bi-whatsapp"></i>
+    <i class="bi bi-linkedin"></i>
+    <i class="bi bi-spotify"></i>
+    <i class="bi bi-soundwave"></i>
+  </div>
+  <p class="text-muted small">&copy; 2025 YUME - Tous droits réservés</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
