@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Index des templates UI — YUME</title>
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="light only" />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Skin luxe -->
+  <link rel="stylesheet" href="./yume_luxe_nb.css">
+  <style>
+    body{color:#111}
+    .wrap{max-width:1140px;margin:auto;padding:64px 20px}
+  </style>
+</head>
+<body>
+<script src="../js/header.js" defer></script>
+
+<main class="wrap">
+  <header class="text-center mb-4 reveal">
+    <div class="jp-kicker mb-2"><span class="jp-rule"></span>Design system</div>
+    <h1 class="jp-title" style="font-size:28px;">Index des templates UI</h1>
+  </header>
+  <section class="reveal">
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="inscription_luxe.html">Inscription & connexion <span>→</span></a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="dashboard_luxe.html">Tableau de bord <span>→</span></a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="produit_luxe.html">Fiche produit <span>→</span></a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="recherche_luxe.html">Recherche <span>→</span></a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="panier_luxe.html">Panier & Paiement <span>→</span></a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="messagerie_luxe.html">Messagerie <span>→</span></a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="media_luxe.html">Média <span>→</span></a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="bonnes_affaires_luxe.html">Bonnes affaires <span>→</span></a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="partenaires_luxe.html">Partenaires / Objets certifiés <span>→</span></a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+<script>
+  // Reveal
+  const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } }),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>

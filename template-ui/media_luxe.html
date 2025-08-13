@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Média — YUME</title>
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="light only" />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Skin luxe -->
+  <link rel="stylesheet" href="./yume_luxe_nb.css">
+  <style>
+    body{color:#111}
+    .wrap{max-width:1140px;margin:auto;padding:64px 20px}
+  </style>
+</head>
+<body>
+<script src="../js/header.js" defer></script>
+
+<style>
+  .lux-hero{ position:relative; isolation:isolate; }
+  .lux-hero .lux-media{ position:absolute; inset:0; z-index:-1; overflow:hidden; }
+  .lux-hero .lux-media video, .lux-hero .lux-media img{ width:100%; height:88vh; object-fit:cover; display:block; }
+  .lux-hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,.55) 22%, rgba(255,255,255,.15) 60%, rgba(255,255,255,0) 100%); pointer-events:none; }
+  .lux-hero .container{ min-height:calc(82vh - var(--navbar-h,90px)); display:flex; flex-direction:column; justify-content:center; }
+  .lux-eyebrow{ font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:#8a8a8a; display:inline-flex; gap:10px; align-items:center; }
+  .lux-rule{ width:28px; height:1px; background:rgba(0,0,0,.14); display:inline-block; }
+  .lux-title{ font-family:"Playfair Display",ui-serif,Georgia,serif; text-transform:uppercase; letter-spacing:.22em; line-height:1.1; font-size:clamp(28px, 6vw, 56px); margin:.25rem 0 .75rem; }
+  .lux-lead{ max-width:880px; color:#222; font-size:clamp(16px, 2.2vw, 18px); }
+  .lux-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; align-items:center; }
+  .btn-play{ position:relative; width:46px; height:46px; border-radius:999px; border:1px solid rgba(0,0,0,.18); background:#fff; color:#111; display:grid; place-items:center; }
+  .btn-play:hover{ box-shadow:0 10px 30px rgba(0,0,0,.06); transform:translateY(-1px); }
+  .btn-play .icon-pause{ position:absolute; opacity:0; transition:opacity .18s ease; }
+  .btn-play .icon-play{ opacity:1; transition:opacity .18s ease; }
+  .btn-play.is-playing .icon-play{ opacity:0; } .btn-play.is-playing .icon-pause{ opacity:1; }
+  .player-link{ font-weight:600; color:#111; text-decoration:none; border-bottom:1px solid rgba(0,0,0,.22); padding-bottom:2px; }
+  .player-link:hover{ color:#000; border-bottom-color:#000; }
+  .lux-scroll{ position:absolute; left:0; right:0; bottom:18px; text-align:center; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:#7a7a7a; }
+</style>
+
+<section class="lux-hero" role="banner" aria-label="Podcast YUME – Hero">
+  <div class="lux-media" aria-hidden="true">
+    <video autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop">
+      <source src="https://cdn.coverr.co/videos/coverr-night-city-run-6222/1080p.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="container">
+    <div class="lux-eyebrow mb-2"><span class="lux-rule"></span> Le média YUME</div>
+    <h1 class="lux-title">Podcast · Histoires vraies</h1>
+    <p class="lux-lead">YUME signifie « rêve » en japonais. Ici, on parle de rêves de champions, d’entrepreneurs et de société plus durable. Chaque transaction finance des athlètes peu médiatisés et des associations locales — sans détour.</p>
+    <div class="lux-actions">
+      <a href="#episode-vedette" class="btn-ink-fill btn">Écouter l’épisode en vedette</a>
+      <a href="#newsletter" class="btn-ink btn">S’abonner à la newsletter</a>
+      <div class="player-cta d-flex align-items-center gap-2">
+        <button id="playIntroBtn" class="btn-play" aria-label="Lire : Qu’est-ce que YUME ?">
+          <svg class="icon-play" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z" fill="currentColor"/></svg>
+          <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor"/></svg>
+        </button>
+        <a id="whatIsYumeLink" href="#intro-audio" class="player-link">Qu’est‑ce que YUME&nbsp;?</a>
+      </div>
+    </div>
+  </div>
+  <div class="lux-scroll">Faites défiler</div>
+</section>
+
+<main class="wrap">
+  <section id="episode-vedette" class="jp-card p-4 p-md-5 mb-5 reveal">
+    <h2 class="jp-title fs-6 mb-3">Épisode en vedette</h2>
+    <p class="muted mb-3">#5 — Récit d’une qualification inattendue</p>
+    <audio id="intro-audio" controls class="w-100 rounded-4 border" style="border-color: rgba(0,0,0,.15);">
+      <source src="/media/yume-intro.mp3" type="audio/mpeg" />
+    </audio>
+  </section>
+
+  <section class="reveal">
+    <div class="row g-4">
+      <article class="col-md-4"><div class="jp-card h-100 overflow-hidden"><img src="img/media1.jpg" class="thumb-cover" alt=""><div class="p-3"><h6>Interview : Clara D., karatéka</h6><small class="muted">🎥 Vidéo • 3 min</small></div></div></article>
+      <article class="col-md-4"><div class="jp-card h-100 overflow-hidden"><img src="img/media2.jpg" class="thumb-cover" alt=""><div class="p-3"><h6>Podcast : Les défis du sport</h6><small class="muted">🎧 Podcast • 12 min</small></div></div></article>
+      <article class="col-md-4"><div class="jp-card h-100 overflow-hidden"><img src="img/media3.jpg" class="thumb-cover" alt=""><div class="p-3"><h6>Article : Jeunes talents</h6><small class="muted">📰 Article • 4 min</small></div></div></article>
+    </div>
+  </section>
+
+  <section id="newsletter" class="mt-5 reveal">
+    <div class="jp-card overflow-hidden">
+      <iframe src="../newsletter.html" title="Formulaire newsletter" style="width:100%; height: 520px; border:0; display:block;"></iframe>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const btn   = document.getElementById('playIntroBtn');
+  const link  = document.getElementById('whatIsYumeLink');
+  const audio = document.getElementById('intro-audio');
+  if(!btn || !link || !audio) return;
+  function togglePlay(e){
+    e.preventDefault();
+    if (audio.paused) { audio.play(); btn.classList.add('is-playing'); }
+    else { audio.pause(); btn.classList.remove('is-playing'); }
+    const h = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--navbar-h')) || 90;
+    const y = audio.getBoundingClientRect().top + window.pageYOffset - (h + 16);
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+  btn.addEventListener('click', togglePlay);
+  link.addEventListener('click', togglePlay);
+  audio.addEventListener('pause', () => btn.classList.remove('is-playing'));
+  audio.addEventListener('play',  () => btn.classList.add('is-playing'));
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+<script>
+  // Reveal
+  const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } }),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>

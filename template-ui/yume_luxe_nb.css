@@ -1,0 +1,30 @@
+
+/* YUME — Noir & Blanc Luxe (extract) */
+:root{
+  --bg:#ffffff; --fg:#111111; --muted:#666; --border:rgba(0,0,0,.14);
+  --radius:22px; --shadow:0 10px 30px rgba(0,0,0,.06);
+  --font-serif:"Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--fg);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+.container,.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+/* Typography */
+.jp-title{font-family:var(--font-serif);text-transform:uppercase;letter-spacing:.22em}
+.jp-kicker{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#9a9a9a;display:inline-flex;align-items:center;gap:10px}
+.jp-rule{width:28px;height:1px;background:var(--border);display:inline-block}
+.muted{color:var(--muted)}
+/* Cards & Buttons */
+.jp-card{border:1px solid var(--border);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow)}
+.btn-ink{border-radius:999px;border:1px solid rgba(0,0,0,.18);background:#fff;color:#111;font-weight:600}
+.btn-ink:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+.btn-ink-fill{border-radius:999px;border:1px solid #111;background:#111;color:#fff;font-weight:600}
+/* Forms */
+.form-control{border-radius:18px;border:1px solid var(--border)}
+.form-control:focus{border-color:#b39545;box-shadow:0 0 0 6px rgba(230,212,150,.25)}
+/* Reveal */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in-view{opacity:1;transform:none}
+/* Utilities */
+.thumb-cover{display:block;width:100%;height:200px;object-fit:cover}
+.rounded-4{border-radius:22px}
