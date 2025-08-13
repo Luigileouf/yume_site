@@ -1,52 +1,116 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Podcast YUME</title>
-  <link rel="icon" href="/favicon.ico">
+  <meta name="description" content="Le podcast YUME : histoires d’athlètes, coulisses solidaires et partenaires engagés." />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="light only" />
+  <!-- (optionnel) Canonical si l’URL finale est fixe -->
+  <!-- <link rel="canonical" href="https://yu-me.fr/media.html" /> -->
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Podcast YUME" />
+  <meta property="og:description" content="Histoires d’athlètes et solidarité via la seconde main." />
+  <meta property="og:image" content="/og-media.jpg" />
+  <meta property="og:url" content="https://yu-me.fr/media.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Perf: préconnect aux CDNs -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Bootstrap CSS + Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Fonts & skin luxe -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="yume_luxe_nb.css">
   <style>
-    .nav-link {
-      font-weight: 500;
-      color: #000;
-    }
-    .nav-link:hover {
-      color: #0d6efd;
-    }
-    .nav-link.active {
-      font-weight: bold;
-      color: #0d6efd;
-    }
-    .hero {
-      background: url('img/hero.png') center/cover no-repeat;
-      height: 60vh;
-    }
-    .hero-text {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .hero-text h1 {
-      font-size: 2.5rem;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 1rem;
-      border-radius: 1rem;
-      color: white;
-      display: inline-block;
-    }
-    .hero-text p {
-      max-width: 900px;
-      margin: 1rem auto;
-      font-size: 1.1rem;
-    }
-    .theme-card:hover {
-      transform: scale(1.03);
-      transition: transform 0.3s;
-    }
-  </style>
+  /* hauteur de navbar pilotée par variable */
+  :root { --navbar-h: 90px; }
+
+  /* applique l’offset à la page + aux ancres */
+  body { padding-top: var(--navbar-h); }
+  .hero, .hero-text, [id] { scroll-margin-top: calc(var(--navbar-h) + 16px); }
+
+  /* Option UX : éviter la nav trop haute sur mobile */
+  .navbar-brand small { line-height: 1.1; }
+  @media (max-width: 991.98px) { /* < lg */
+    .navbar-brand small { display: none; }  /* masque la 2e ligne quand l’espace est réduit */
+  }
+</style>
+<style>
+  /* ——— HERO LUXE (inspirations JPG / YSL / LV / Rolls) ——— */
+  .lux-hero{ position:relative; isolation:isolate; }
+  .lux-hero .lux-media{ position:absolute; inset:0; z-index:-1; overflow:hidden; }
+  .lux-hero .lux-media video,
+  .lux-hero .lux-media img{ width:100%; height:92vh; object-fit:cover; display:block; }
+  /* voile luxueux (blanc vers transparent) */
+  .lux-hero::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,.55) 22%, rgba(255,255,255,.15) 60%, rgba(255,255,255,.0) 100%);
+    pointer-events:none;
+  }
+
+  .lux-hero .container{
+    min-height:calc(86vh - var(--navbar-h,90px));
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  /* micro système typographique */
+  .lux-eyebrow{ font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:#8a8a8a; display:inline-flex; align-items:center; gap:10px; }
+  .lux-rule{ width:28px; height:1px; background:rgba(0,0,0,.14); display:inline-block; }
+  .lux-title{ font-family:"Playfair Display", ui-serif, Georgia, serif; text-transform:uppercase; letter-spacing:.22em; line-height:1.1; font-size:clamp(28px, 6vw, 56px); margin:.25rem 0 .75rem; }
+  .lux-lead{ max-width:880px; color:#222; font-size:clamp(16px, 2.2vw, 18px); }
+  .lux-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; }
+  /* boutons pilules sobres */
+  .btn-ink{ border-radius:999px; border:1px solid rgba(0,0,0,.18); background:#fff; color:#111; font-weight:600; padding:.85rem 1.2rem; }
+  .btn-ink:hover{ box-shadow:0 10px 30px rgba(0,0,0,.06); transform:translateY(-1px); }
+  .btn-ink-fill{ border-radius:999px; border:1px solid #111; background:#111; color:#fff; font-weight:600; padding:.95rem 1.35rem; }
+  .btn-ink-fill:hover{ filter:contrast(1.08); }
+
+  /* invite à scroller */
+  .lux-scroll{ position:absolute; left:0; right:0; bottom:18px; text-align:center;
+    font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:#7a7a7a; }
+
+  /* responsive */
+  @media (max-width: 991.98px){
+    .lux-hero .lux-media video, .lux-hero .lux-media img{ height:84vh; }
+  }
+</style>
+<style>
+/* Player CTA (luxe, sobre) */
+.player-cta{ display:flex; align-items:center; gap:10px; }
+.btn-play{
+  position:relative; width:46px; height:46px; border-radius:999px;
+  border:1px solid rgba(0,0,0,.18); background:#fff; color:#111;
+  display:grid; place-items:center; transition:transform .25s ease, box-shadow .25s ease;
+}
+.btn-play:hover{ transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,0,0,.06); }
+.btn-play .icon-pause{ position:absolute; opacity:0; transition:opacity .18s ease; }
+.btn-play .icon-play{ opacity:1; transition:opacity .18s ease; }
+.btn-play.is-playing .icon-play{ opacity:0; }
+.btn-play.is-playing .icon-pause{ opacity:1; }
+
+.player-link{
+  font-weight:600; color:#111; text-decoration:none; border-bottom:1px solid rgba(0,0,0,.22);
+  padding-bottom:2px;
+}
+.player-link:hover{ color:#000; border-bottom-color:#000; }
+
+/* s’assure que tout reste sur une seule ligne si la place le permet */
+.lux-actions{ align-items:center; }
+</style>
 </head>
-<body style="padding-top: 90px;">
+
+<body>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-white fixed-top shadow-sm">
@@ -71,20 +135,59 @@
   </div>
 </nav>
 
-<!-- Hero image only -->
-<section class="hero"></section>
+<!-- HERO LUXE -->
+<section class="lux-hero" role="banner" aria-label="Podcast YUME – Hero">
+  <div class="lux-media" aria-hidden="true">
+    <!-- Vidéo de fond (silencieuse) + fallback image -->
+    <video autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop">
+      <source src="https://cdn.coverr.co/videos/coverr-night-city-run-6222/1080p.mp4" type="video/mp4" />
+    </video>
+    <!-- <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="" /> -->
+  </div>
 
-<!-- Hero text below image -->
-<section class="hero-text container">
-  <h1>Bienvenue sur le podcast de YUME 😊</h1>
-  <p class="lead">YUME veut dire rêve en japonais alors il est tout naturel ici de parler de rêve de champion, de rêve d’entrepreneurs et de rêver d’une société plus durable pour inspirer et agir.</p>
-  <p>YUME est une plateforme digitale solidaire qui soutient les sportifs de haut niveau peu médiatisés ainsi que les associations locales.</p>
-  <p>Vous retrouvez ici et bientôt sur les plateformes de streaming l’ensemble des épisodes du podcast de YUME.</p>
+  <div class="container">
+    <div class="lux-eyebrow mb-2">
+      <span class="lux-rule"></span> Le média YUME
+    </div>
+    <h1 class="lux-title">Podcast · Histoires vraies</h1>
+    <p class="lux-lead">
+      YUME signifie « rêve » en japonais. Ici, on parle de rêves de champions, d’entrepreneurs et de société plus durable. 
+      Une plateforme de seconde main qui finance des athlètes peu médiatisés et des associations locales — sans détour.
+    </p>
+     <div class="lux-actions">
+  <a href="#episode-vedette" class="btn-ink-fill">Écouter l’épisode en vedette</a>
+
+  <a href="#newsletter" class="btn-ink">S’abonner à la newsletter</a>
+
+  <!-- Groupe Player -->
+  <div class="player-cta">
+    <button id="playIntroBtn" class="btn-play" aria-label="Lire : Qu’est-ce que YUME ?">
+      <!-- Play -->
+       <svg class="icon-play" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M8 5v14l11-7-11-7z" fill="currentColor"></path>
+       </svg>
+      <!-- Pause -->
+        <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor"></path>
+        </svg>
+       </button>
+      <a id="whatIsYumeLink" href="#intro-audio" class="player-link">Qu’est-ce que YUME&nbsp;?</a>
+     </div>
+ </div>
+    <audio id="intro-audio" controls class="w-100 rounded-4 border" style="border-color: rgba(0,0,0,.15);">
+    <source src="audio/YUME___La_Seconde_Main_Solidaire_qui_Rêve_de_Grandir.mp3" type="audio/mpeg" />
+     Votre navigateur ne supporte pas l’audio HTML5.
+    </audio>
+
+  </div>
+
+  <div class="lux-scroll">Faites défiler</div>
 </section>
+
 
 <!-- Épisode vedette -->
  <!-- Épisode 5 - Delphine (Alliance Locale) -->
-<section class="container py-5 border-top mt-5">
+<section id="episode-vedette" class="container py-5 border-top mt-5"> 
   <h2 class="text-center mb-4">Épisode en vedette</h2>
   <div class="row align-items-center">
     <div class="col-md-6">
@@ -277,5 +380,49 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function setNavOffset() {
+    const nav = document.querySelector('.navbar.fixed-top');
+    const h = nav ? nav.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty('--navbar-h', h + 'px');
+  }
+  window.addEventListener('load', setNavOffset);
+  window.addEventListener('resize', setNavOffset);
+  document.addEventListener('shown.bs.collapse', setNavOffset);
+  document.addEventListener('hidden.bs.collapse', setNavOffset);
+</script>
+<script>
+  (function(){
+    const btn   = document.getElementById('playIntroBtn');
+    const link  = document.getElementById('whatIsYumeLink');
+    const audio = document.getElementById('intro-audio');
+
+    if(!btn || !link || !audio) return;
+
+    function togglePlay(e){
+      e.preventDefault();
+      // Lance/Met en pause
+      if (audio.paused) {
+        audio.play();
+        btn.classList.add('is-playing');
+      } else {
+        audio.pause();
+        btn.classList.remove('is-playing');
+      }
+      // Amène l’audio en vue (sans masquer sous la navbar)
+      const h = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--navbar-h')) || 90;
+      const y = audio.getBoundingClientRect().top + window.pageYOffset - (h + 16);
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    btn.addEventListener('click', togglePlay);
+    link.addEventListener('click', togglePlay);
+
+    // Si l’utilisateur met en pause depuis le player natif, synchroniser l’icône
+    audio.addEventListener('pause', () => btn.classList.remove('is-playing'));
+    audio.addEventListener('play',  () => btn.classList.add('is-playing'));
+  })();
+</script>
+
 </body>
 </html>

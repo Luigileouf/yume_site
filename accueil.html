@@ -1,326 +1,340 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>YUME - Plateforme solidaire </title>
-  <link rel="icon" href="/favicon.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>YUME – Plateforme solidaire</title>
+  <meta name="description" content="YUME : seconde main qui finance des athlètes peu médiatisés et des associations locales." />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="light only" />
+
+  <!-- Partage social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="YUME – Plateforme solidaire" />
+  <meta property="og:description" content="Seconde main, dons, avantages partenaires. Transparence & cadre éthique." />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fonts & skin luxe -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="yume_luxe_nb.css">
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    .hero {
-      background: url('https://via.placeholder.com/1600x600?text=YUME+R%C3%AAve+Sportif') center/cover no-repeat;
-      height: 60vh;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    /* ——— JPG-inspired layer (blanc & noir, ultra sobre) ——— */
+    :root{
+      --ink:#111; --muted:#6b6b6b; --line:rgba(0,0,0,.14);
+      --radius:22px; --shadow:0 10px 30px rgba(0,0,0,.06);
     }
-    .hero h1 {
-      font-size: 3rem;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 1rem;
-      border-radius: 1rem;
-    }
-    .dream-card {
-      transition: transform 0.3s;
-    }
-    .dream-card:hover {
-      transform: scale(1.03);
-    }
-    .navbar-brand img {
-      object-fit: contain;
-    }
-    .nav-link {
-      font-weight: 500;
-      color: #000;
-    }
-    .nav-link:hover {
-      color: #0d6efd;
-    }
-    .card-img-top {
-      height: 400px;       /* ou adapte selon ton design */
-      object-fit: cover;
-      object-position: center;
-    }
-    .logo-partenaire {
-      height: 2cm;
-      object-fit: contain;
+    body{ padding-top:90px; color:var(--ink); }
+    .container{ max-width:1140px; }
+
+    /* Titres façon maison : serif, uppercase, tracking léger */
+    .jp-title{ font-family:"Playfair Display", ui-serif, Georgia, serif; text-transform:uppercase; letter-spacing:.22em; }
+    .jp-kicker{ font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:#9a9a9a; display:inline-flex; align-items:center; gap:10px; }
+    .jp-rule{ width:28px; height:1px; background:var(--line); display:inline-block; }
+
+    /* Boutons pilules sobres */
+    .btn-ink{ border-radius:999px; border:1px solid var(--line); color:var(--ink); background:#fff; font-weight:600; }
+    .btn-ink:hover{ box-shadow:var(--shadow); transform:translateY(-1px); }
+    .btn-ink-fill{ border-color:#000; background:#000; color:#fff; }
+    .btn-ink-fill:hover{ filter:contrast(1.1); }
+
+    /* Cartes & tuiles */
+    .jp-card{ border:1px solid var(--line); border-radius:var(--radius); background:#fff; box-shadow:var(--shadow); }
+    .jp-card .card-img-top{ height:260px; object-fit:cover; }
+    .jp-tile{ border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
+
+    /* Séparateurs très légers */
+    .jp-band{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+
+    /* Micro-motions discrètes */
+    .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+    .reveal.in-view{ opacity:1; transform:none; }
+    .hover-rise{ transition:transform .35s ease; }
+    .hover-rise:hover{ transform:translateY(-4px); }
+
+    /* Défilement logos partenaires */
+    @keyframes defilement { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .logo-partenaire{ height:34px; opacity:.8; }
+    .logo-partenaire:hover{ opacity:1; }
+
+    /* Ajustements blocs */
+    .lead{ max-width:820px; margin-inline:auto; color:#222; }
+    .section-pad{ padding:64px 0; }
+    .section-pad-sm{ padding:44px 0; }
+
+    @media (min-width:992px){
+      .hero-title{ font-size:48px; }
     }
   </style>
 </head>
-<body style="padding-top: 90px;">
-  
-<!-- Navbar YUME -->
-<script src="js/header.js" defer></script>
 
- <!-- Fenêtre modale de notification -->
- <div class="modal fade" id="devModal" tabindex="-1" aria-labelledby="devModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<body>
+  <!-- Navbar (injectée) -->
+  <script src="js/header.js" defer></script>
+
+  <!-- Modale info dev -->
+  <div class="modal fade" id="devModal" tabindex="-1" aria-labelledby="devModalLabel" aria-hidden="true">
+    <div class="modal-dialog"><div class="modal-content">
       <div class="modal-header bg-warning">
         <h5 class="modal-title" id="devModalLabel">🚧 Site en cours de développement</h5>
       </div>
       <div class="modal-body">
-        Bienvenue sur YUME ! Cette plateforme est actuellement en phase de développement. Certains boutons ne sont pas encore actifs. Merci pour votre compréhension 🙏
+        Bienvenue sur YUME ! Certains boutons ne sont pas encore actifs. Merci pour votre compréhension 🙏
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">J'ai compris</button>
+        <button type="button" class="btn btn-ink" data-bs-dismiss="modal">J’ai compris</button>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- HÉROS / PROMESSE -->
+  <section class="section-pad text-center reveal">
+    <div class="container">
+      <div class="jp-kicker mb-3"><span class="jp-rule"></span>Plateforme solidaire</div>
+      <h1 class="jp-title hero-title mb-3">Vends un objet. Soutiens un athlète.</h1>
+      <p class="mb-2">Choisis le pourcentage reversé <strong>à partir de 1%</strong>.</p>
+      <p class="fw-bold mb-4" style="letter-spacing:.06em;">1€ de don = 1 point partenaire (valeur 1€)</p>
+      <p class="lead">
+        YUME est une plateforme d’achat-vente de seconde main. Chaque transaction finance des athlètes de haut niveau peu médiatisés — valides, féminines et handisports — et des associations.
+      </p>
+      <div class="d-flex justify-content-center flex-column flex-md-row align-items-center gap-3 mt-4">
+        <input type="text" class="form-control form-control-lg w-75 w-md-50 rounded-pill"
+               placeholder="Ex : chaussures, vélo, kimono…" aria-label="Rechercher un objet à vendre">
+        <a href="#vendre" class="btn btn-ink-fill btn-lg px-4">Vendre un objet</a>
       </div>
     </div>
-  </div>
-</div>
-  <!-- Promesse Section -->
-<section class="py-5 text-center text-white" style="background-color: #000;">
-  <div class="container">
-    <h1 class="fw-bold mb-3" style="font-size: 2rem;">Tu vends un objet de seconde main sur YUME, tu soutiens un athlète de haut niveau.</h1>
-    <h2>Choisis librement le pourcentage de ta vente à reverser, de 1 % à 100 % du montant.</h2>
-    <p class="fw-bold text-warning mb-5" style="font-size: 1.75rem;">
-      1€ de soutien aux sportifs = 1 point partenaire d’une valeur d’1€
-    </p>
-    <h3 class="text-white mt-3" style="font-weight: 400; font-size: 1.1rem;">
-      YUME est une plateforme solidaire, d’achat, vente d’objets de seconde main et de bonnes affaires, pensée pour soutenir tous les athlètes de haut niveau peu médiatisés — qu’ils soient valides, féminins ou en situation de handicap.
-    </h3>    
-    <div class="d-flex justify-content-center flex-column flex-md-row align-items-center gap-3">
-      <input type="text" class="form-control form-control-lg w-75 w-md-50 rounded-pill" placeholder="Ex : paire de chaussures, vélo, kimono...">
-      <a href="#vendre" class="btn btn-warning btn-lg rounded-pill px-4">Vendre un objet</a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- Rêves mis en avant -->
-  <section id="dreams" class="py-5 text-white" style="background-color: #000;">
-  <div class="container">
-    <h2 class="text-center text-warning mb-5" style="font-size: 2rem; color: #facc15 !important;">Découvrez les sportifs soutenus</h2>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card dream-card bg-white text-dark">
-          <img src="img/sportif1.jpg" class="card-img-top" alt="Lisa - lutteuse">
-          <div class="card-body">
-            <h5 class="card-title text-warning fw-bold">Lisa, 14 ans - Lutte</h5>
-            <p class="card-text">Objectif : financer des chaussures de compétition. Chaque vente l’aide à avancer !</p>
-            <a href="#" class="btn btn-outline-dark">Soutenir Lisa</a>
+  <!-- SPORTIFS / RÊVES -->
+  <section id="dreams" class="section-pad reveal">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="jp-kicker mb-2"><span class="jp-rule"></span>Sportifs soutenus</div>
+        <h2 class="jp-title" style="font-size:26px; letter-spacing:.18em;">Des objectifs concrets</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card jp-card hover-rise h-100">
+            <img src="img/sportif1.jpg" class="card-img-top" alt="Lisa – Lutte">
+            <div class="card-body">
+              <h5 class="fw-bold" style="letter-spacing:.04em;">Lisa, 14 ans — Lutte</h5>
+              <p class="text-muted mb-3">Chaussures de compétition.</p>
+              <a href="#" class="btn btn-ink">Soutenir Lisa</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card jp-card hover-rise h-100">
+            <img src="img/sportif2.jpg" class="card-img-top" alt="Yanis – Escrime">
+            <div class="card-body">
+              <h5 class="fw-bold" style="letter-spacing:.04em;">Yanis, 17 ans — Escrime</h5>
+              <p class="text-muted mb-3">Nouveau fleuret. Cap sur Paris 2028.</p>
+              <a href="#" class="btn btn-ink">Soutenir Yanis</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card jp-card hover-rise h-100">
+            <img src="img/spotfif3.jpg" class="card-img-top" alt="Maya – Trail">
+            <div class="card-body">
+              <h5 class="fw-bold" style="letter-spacing:.04em;">Maya, 22 ans — Trail</h5>
+              <p class="text-muted mb-3">Première course internationale.</p>
+              <a href="#" class="btn btn-ink">Soutenir Maya</a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card dream-card bg-white text-dark">
-          <img src="img/sportif2.jpg" class="card-img-top" alt="Yanis - escrime">
-          <div class="card-body">
-            <h5 class="card-title text-warning fw-bold">Yanis, 17 ans - Escrime</h5>
-            <p class="card-text">Objectif : acheter un nouveau fleuret. Une vente = un pas vers Paris 2028.</p>
-            <a href="#" class="btn btn-outline-dark">Soutenir Yanis</a>
+    </div>
+  </section>
+
+  <!-- PARTENAIRES -->
+  <section id="partenaires" class="section-pad-sm jp-band reveal">
+    <div class="container">
+      <div class="text-center mb-3">
+        <div class="jp-kicker"><span class="jp-rule"></span>Partenaires</div>
+      </div>
+      <div class="overflow-auto">
+        <div class="d-flex justify-content-start align-items-center gap-5"
+             style="min-width:max-content;animation:defilement 30s linear infinite;">
+          <img src="img/partenaire1.png" alt="Partenaire 1" class="logo-partenaire">
+          <img src="img/partenaire2.png" alt="Partenaire 2" class="logo-partenaire">
+          <img src="img/partenaire3.png" alt="Partenaire 3" class="logo-partenaire">
+          <img src="img/partenaire4.png" alt="Partenaire 4" class="logo-partenaire">
+          <img src="img/partenaire5.png" alt="Partenaire 5" class="logo-partenaire">
+          <img src="img/partenaire6.png" alt="Partenaire 6" class="logo-partenaire">
+          <img src="img/partenaire1.png" alt="Partenaire 1" class="logo-partenaire">
+          <img src="img/partenaire2.png" alt="Partenaire 2" class="logo-partenaire">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENDRE -->
+  <section id="vendre" class="section-pad text-center reveal">
+    <div class="container">
+      <div class="jp-kicker mb-2"><span class="jp-rule"></span>Vendre</div>
+      <h2 class="jp-title mb-3" style="font-size:26px;">Vendre mieux, plus vite</h2>
+      <p class="lead">Annonce claire, belles photos, bon timing : suivez nos conseils pour booster vos ventes et votre impact.</p>
+      <div class="d-flex justify-content-center gap-3 flex-column flex-sm-row mt-3">
+        <a href="#conseils" class="btn btn-ink btn-lg">Nos conseils</a>
+        <a href="#expert" class="btn btn-ink-fill btn-lg">Devenir expert</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COULISSES -->
+  <section id="coulisses" class="section-pad reveal">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="jp-kicker mb-2"><span class="jp-rule"></span>Dans les coulisses</div>
+        <h2 class="jp-title" style="font-size:26px;">Histoires inspirantes</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="jp-card p-4 h-100 hover-rise">
+            <h5 class="fw-bold">Léna — Judo</h5>
+            <p class="text-muted mb-0">Un stage intensif au Japon rendu possible par vos ventes.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="jp-card p-4 h-100 hover-rise">
+            <h5 class="fw-bold">Yacine — Athlétisme</h5>
+            <p class="text-muted mb-0">Équipement de rééducation financé. Un retour pas à pas.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="jp-card p-4 h-100 hover-rise">
+            <h5 class="fw-bold">Chloé — Natation</h5>
+            <p class="text-muted mb-0">Première compétition nationale, cap 2026.</p>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card dream-card bg-white text-dark">
-          <img src="img/spotfif3.jpg" class="card-img-top" alt="Maya - trail">
-          <div class="card-body">
-            <h5 class="card-title text-warning fw-bold">Maya, 22 ans - Trail</h5>
-            <p class="card-text">Elle rêve de participer à sa première course internationale en Espagne.</p>
-            <a href="#" class="btn btn-outline-dark">Soutenir Maya</a>
-          </div>
+    </div>
+  </section>
+
+  <!-- BONNES AFFAIRES -->
+  <section id="bonnes-affaires" class="section-pad text-center reveal">
+    <div class="container">
+      <div class="jp-kicker mb-2"><span class="jp-rule"></span>Avantages</div>
+      <h2 class="jp-title mb-3" style="font-size:26px;">Le coin des bonnes affaires</h2>
+      <p class="lead">Utilisez vos points YUME chez nos partenaires. Des offres exclusives pour récompenser votre soutien.</p>
+      <a href="#offres-partenaires" class="btn btn-ink-fill btn-lg mt-3">Voir les offres</a>
+    </div>
+  </section>
+
+  <!-- INSPIRATIONS / MÉDIA -->
+  <section id="inspirations" class="section-pad text-center reveal">
+    <div class="container">
+      <div class="jp-kicker mb-2"><span class="jp-rule"></span>Le média</div>
+      <h2 class="jp-title mb-3" style="font-size:26px;">Coulisses & témoignages</h2>
+      <p class="lead">Articles, vidéos, voix d’athlètes : le sport de haut niveau vu de l’intérieur.</p>
+      <a href="media.html" class="btn btn-ink btn-lg mt-3">Explorer</a>
+    </div>
+  </section>
+
+  <!-- VŒU -->
+  <section id="voeu" class="section-pad text-center reveal">
+    <div class="container">
+      <div class="jp-kicker mb-2"><span class="jp-rule"></span>Expérience</div>
+      <h2 class="jp-title mb-3" style="font-size:26px;">Faites un vœu</h2>
+      <p class="lead">Offrez une expérience symbolique à quelqu’un que vous aimez (ex. observation d’un <em>météore</em> référencé par Vigie-Ciel) et associez-la à un geste solidaire.</p>
+      <a href="#faire-un-voeu" class="btn btn-ink-fill btn-lg px-5 mt-3">Faire un vœu</a>
+    </div>
+  </section>
+
+  <!-- FOOTER + FORMULAIRE -->
+  <footer class="section-pad-sm text-center jp-band">
+    <div class="container">
+      <p class="mb-2"><a href="#" style="color:#111;text-decoration:underline;">Mentions légales</a></p>
+
+      <div class="d-flex justify-content-center align-items-center mb-3" style="gap:1rem;">
+        <a href="mailto:contact@yu-me.fr" style="color:#111;text-decoration:underline;">📧 loic@yu-me.fr</a>
+        <span>– Pour vous servir 💛</span>
+        <img src="img/loic.png" alt="Portrait YUME" style="width:2cm;height:2cm;border-radius:50%;">
+      </div>
+
+      <p class="fst-italic">⚠️ Application YUME en cours de développement.</p>
+      <p class="fw-bold">TOUT DROIT RÉSERVÉ © YUME</p>
+    </div>
+
+    <div class="text-center my-4">
+      <a href="index.html" class="btn btn-outline-primary btn-sm">📘 Découvrir le projet YUME</a>
+    </div>
+
+    <div class="alert alert-info text-center mb-4" role="alert" style="font-size:1.05rem;">
+      💬 Partenariats, actus, date de lancement : laissez-nous un message 👇
+    </div>
+
+    <!-- Formulaire d'inscription -->
+    <div class="container mt-4 mb-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form id="formulaire-inscription" method="POST" action="https://luigileouf.pythonanywhere.com/submit">
+            <div class="mb-3">
+              <label for="nom" class="form-label">Prénom Nom</label>
+              <input type="text" class="form-control" id="nom" name="nom" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Adresse email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-ink-fill">Envoyer</button>
+            <div id="confirmation" class="mt-3 text-success fw-bold d-none">
+              ✅ Merci, votre message a bien été envoyé !
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-  <!-- Sections à venir -->
-  <!-- Les partenaires -->
-<section id="partenaires" class="py-5 bg-white border-top">
-  <div class="container">
-    <h2 class="text-center mb-4">Ils soutiennent les rêves sportifs</h2>
-    <div class="overflow-auto">
-      <div class="d-flex justify-content-start align-items-center gap-5" style="min-width: max-content; animation: defilement 30s linear infinite;">
-        <img src="img/partenaire1.png" alt="Partenaire 1" class="logo-partenaire">
-        <img src="img/partenaire2.png" alt="Partenaire 2" class="logo-partenaire">
-        <img src="img/partenaire3.png" alt="Partenaire 3" class="logo-partenaire">
-        <img src="img/partenaire4.png" alt="Partenaire 4" class="logo-partenaire">
-        <img src="img/partenaire5.png" alt="Partenaire 5" class="logo-partenaire">
-        <img src="img/partenaire6.png" alt="Partenaire 6" class="logo-partenaire">
-        <img src="img/partenaire1.png" alt="Partenaire 1" class="logo-partenaire">
-        <img src="img/partenaire2.png" alt="Partenaire 2" class="logo-partenaire">
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
 
-<style>
-@keyframes defilement {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-</style>
-  <!-- Vendre un objet -->
-<section id="vendre" class="py-5 text-white" style="background-color: #000;">
-  <div class="container text-center">
-    <h2 class="text-warning mb-4" style="font-size: 2rem;">Vendez vos objets vite et bien</h2>
-    <p class="mb-4" style="max-width: 700px; margin: auto; font-size: 1.2rem;">
-      Apprenez à valoriser vos objets, à écrire une annonce efficace et à choisir le bon moment pour vendre. Maximisez vos ventes et vos dons avec nos conseils pratiques.
-    </p>
-    <div class="d-flex justify-content-center gap-3 flex-column flex-sm-row">
-      <a href="#conseils" class="btn btn-outline-light btn-lg rounded-pill">Nos meilleurs conseils</a>
-      <a href="#expert" class="btn btn-warning btn-lg rounded-pill">Deviens un expert</a>
-    </div>
-  </div>
-</section>
-  <!-- Dans les coulisses -->
-<section id="coulisses" class="py-5 text-dark" style="background-color: #fff;">
-  <div class="container">
-    <h2 class="text-center text-warning mb-5" style="font-size: 2rem;">Dans les coulisses : les aventures des athlètes soutenus sur YUME</h2>
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <div class="bg-white border p-4 rounded-4 h-100">
-          <h5 class="fw-bold" style="color: #facc15;">Léna - 19 ans, judo</h5>
-          <p>Grâce à vos ventes, Léna a pu financer un stage intensif au Japon, au cœur de la culture du judo. Elle nous partage son expérience unique.</p>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="bg-white border p-4 rounded-4 h-100">
-          <h5 class="fw-bold" style="color: #facc15;">Yacine - 23 ans, athlétisme</h5>
-          <p>Yacine revient de blessure. Les dons ont permis l’achat d’un équipement spécialisé pour sa rééducation. Il partage son parcours de résilience.</p>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="bg-white border p-4 rounded-4 h-100">
-          <h5 class="text-warning fw-bold">Chloé - 16 ans, natation</h5>
-          <p>Issue d’un petit village, Chloé a pu participer à une compétition nationale grâce à YUME. Elle raconte son défi personnel et ses rêves pour 2026.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-  <!-- Faites un vœu -->
-<section id="voeu" class="py-5 text-white" style="background-color: #000;">
-  <div class="container">
-    <h2 class="text-center text-warning mb-4" style="font-size: 2rem;">Faites un vœu pour une personne que vous aimez</h2>
-    <h3 class="text-center text-warning mb-3" style="font-size: 1.5rem;">Elle vivra une expérience inoubliable, offerte par les partenaires de YUME.</h3>
-    <p class="text-center mb-5" style="max-width: 700px; margin: auto; font-size: 1.2rem;">
-    Pour que ton vœu se réalise, prédis le passage d’un bolide céleste : un météore très brillant qui explose dans l'atmosphère terrestre. Ces phénomènes sont observés par des observatoires astronomiques, tels que ceux référencés sur Vigie-Ciel.
-    </p>
-    <div class="text-center">
-      <a href="#faire-un-voeu" class="btn btn-warning btn-lg rounded-pill px-5">Faire un vœu</a>
-    </div>
-  </div>
-</section>
-  <!-- Faire une affaire -->
-<section id="bonnes-affaires" class="py-5 text-dark" style="background-color: #fff;">
-  <div class="container text-center">
-    <h2 class="text-warning mb-4" style="font-size: 2rem;">Le coin des bonnes affaires</h2>
-    <p class="mb-4" style="max-width: 750px; margin: auto; font-size: 1.2rem; color: #000;">
-      Utilisez vos points YUME et profitez d’avantages exclusifs sur les offres de nos partenaires… Parce qu’eux aussi soutiennent nos sportifs !
-    </p>
-    <a href="#offres-partenaires" class="btn btn-warning btn-lg rounded-pill">Voir les offres disponibles</a>
-  </div>
-</section>
-  <!-- Contenu inspirant -->
-<section id="inspirations" class="py-5 text-white" style="background-color: #000;">
-  <div class="container text-center">
-    <h2 class="text-warning mb-4" style="font-size: 2rem;">Inspirez, Expirez</h2>
-    <p class="mb-5" style="max-width: 800px; margin: auto; font-size: 1.2rem;">
-      Entrez dans les coulisses du monde palpitant du sport de haut niveau. Articles, conseils, vidéos, témoignages : découvrez tous nos contenus, Inspirez, expirez.
-    </p>
-    <a href="#contenu" class="btn btn-outline-light btn-lg rounded-pill">Explorer le média</a>
-  </div>
-</section>
-
-  <!-- Footer -->
-<footer class="text-center py-5" style="background-color: #fff;">
-  <div class="container">
-    <!-- Première ligne : Mentions légales -->
-    <p class="mb-2" style="color: #111110;">
-      <a href="#" style="color: #111110; text-decoration: underline;">Mentions légales</a>
-    </p>
-
-    <!-- Deuxième ligne : Email + Pour vous servir + Image -->
-    <div class="d-flex justify-content-center align-items-center mb-3" style="gap: 1rem;">
-      <a href="mailto:contact@yu-me.fr" style="color: #111110; text-decoration: underline;">📧 loic@yu-me.fr</a>
-      <span style="color: #111110;">– Pour vous servir 💛</span>
-      <img src="img/loic.png" alt="Petite icône YUME" style="width:2cm; height:2cm; border-radius: 50%;">
-    </div>
-
-    <p class="fst-italic" style="color: #111110;"> ⚠️ Ceci est la page d'accueil de l'application Yume en cours de développement.</p> 
-    <p class="fw-bold" style="color: #111110;">TOUT DROIT RÉSERVÉ © YUME</p>
-  </div>
-
-  <div class="text-center my-4">
-    <a href="index.html" class="btn btn-outline-primary btn-sm">
-      📘 Découvrir le projet YUME en détail
-    </a>
-  </div>  
-
-  <div class="alert alert-info text-center mb-4" role="alert" style="font-size: 1.1rem;">
-    💬 Pour toutes demandes de partenariat, recevoir des news et être informé de la date de lancement de <strong>YUME</strong>, utilise le formulaire
-  </div>  
-
-  <!-- Formulaire d'inscription -->
-<div class="container mt-5 mb-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <form id="formulaire-inscription" method="POST" action="https://luigileouf.pythonanywhere.com/submit">
-        <div class="mb-3">
-          <label for="nom" class="form-label">Prénom Nom</label>
-          <input type="text" class="form-control" id="nom" name="nom" required>
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Adresse email</label>
-          <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <div class="mb-3">
-          <label for="message" class="form-label">Message</label>
-          <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-        <div id="confirmation" class="mt-3 text-success fw-bold d-none">
-          ✅ Merci, votre message a bien été envoyé !
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-</footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+  <!-- Modale auto -->
   <script>
-    // Affiche automatiquement la modale dès que la page est chargée
     window.addEventListener('DOMContentLoaded', () => {
       const devModal = new bootstrap.Modal(document.getElementById('devModal'));
       devModal.show();
     });
   </script>
 
+  <!-- Submit AJAX -->
   <script>
     const form = document.getElementById("formulaire-inscription");
     const confirmation = document.getElementById("confirmation");
-  
-    form.addEventListener("submit", function (e) {
-      e.preventDefault(); // Empêche le rechargement immédiat
-  
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
       const formData = new FormData(form);
-  
-      fetch(form.action, {
-        method: "POST",
-        body: formData
-      })
-      .then(response => {
-        if (response.ok) {
-          form.reset();
-          confirmation.classList.remove("d-none");
-          confirmation.scrollIntoView({ behavior: "smooth" });
-        } else {
-          alert("Une erreur est survenue. Veuillez réessayer.");
-        }
-      })
-      .catch(error => {
-        console.error("Erreur :", error);
-        alert("Une erreur réseau est survenue.");
-      });
+      try {
+        const res = await fetch(form.action, { method:"POST", body:formData });
+        if(res.ok){ form.reset(); confirmation.classList.remove("d-none"); confirmation.scrollIntoView({behavior:"smooth"}); }
+        else { alert("Une erreur est survenue. Veuillez réessayer."); }
+      } catch(err){ alert("Une erreur réseau est survenue."); }
     });
-  </script>  
+  </script>
 
+  <!-- Reveal on scroll -->
+  <script>
+    const io = new IntersectionObserver((entries)=>entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+    }),{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
 </body>
 </html>

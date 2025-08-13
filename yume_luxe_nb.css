@@ -1,0 +1,60 @@
+/* YUME — Noir & Blanc Luxe (CSS3 only) */
+:root{
+  --bg:#ffffff; --fg:#111111; --muted:#666; --border:rgba(0,0,0,.14);
+  --gold-100:#fbf3d2; --gold-400:#d9c571; --gold-600:#b39545;
+  --radius:22px; --radius-pill:999px; --shadow:0 8px 24px rgba(0,0,0,.08);
+  --ease:cubic-bezier(.2,.65,.2,1); --dur:.32s;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--fg);font-family:var(--font-sans);text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+.container{max-width:1120px}
+/* Typography */
+.yume-title{font-family:var(--font-serif);letter-spacing:.02em}
+.yume-eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#9a9a9a;display:inline-flex;align-items:center;gap:8px}
+.yume-rule{width:24px;height:1px;background:var(--border);display:inline-block}
+.muted{color:var(--muted)}
+
+/* Cards */
+.yume-card,.card{border:1px solid var(--border)!important;border-radius:var(--radius)!important;background:#fff!important;box-shadow:var(--shadow)!important}
+
+/* Buttons */
+.btn{font-weight:600;border-radius:18px;transition:transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease)}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-warning,.btn-primary{color:#111!important;border:1px solid color-mix(in oklab, var(--gold-600) 30%, #000 10%)!important;
+  background:linear-gradient(90deg,var(--gold-100),var(--gold-400))!important;}
+.btn-outline-light{color:#111!important;border-color:var(--border)!important;background:transparent!important}
+.btn-outline-light:hover{background:rgba(0,0,0,.06)!important}
+.btn-outline-dark{color:#111!important;border-color:var(--border)!important}
+.btn-outline-dark:hover{background:rgba(0,0,0,.06)!important}
+
+/* Forms */
+.form-control{border-radius:18px;border:1px solid var(--border)}
+.form-control:focus{border-color:var(--gold-400);box-shadow:0 0 0 6px color-mix(in oklab, var(--gold-100) 35%, transparent)}
+
+/* Nav / header */
+.navbar{border-bottom:1px solid var(--border);backdrop-filter:saturate(140%) blur(6px)}
+.nav-link{color:#333}.nav-link:hover{color:#000}
+.navbar-brand strong{letter-spacing:.25em;text-transform:uppercase;font-family:var(--font-serif);font-size:13px}
+
+/* Accent overrides */
+.text-warning{color:var(--gold-400)!important}
+.bg-light{background:#f7f7f7!important}
+
+/* Tiles (media) */
+.yume-tile{position:relative;overflow:hidden;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow)}
+.yume-tile>img,.yume-tile>video{display:block;width:100%;height:100%;object-fit:cover}
+.yume-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(255,255,255,.6),transparent);pointer-events:none}
+
+/* Sections previously dark → now light */
+section[style*="background-color: #000"]{background:#fff!important;color:#111!important}
+.text-white{color:#111!important}
+.border{border-color:var(--border)!important}
+.rounded-4{border-radius:22px!important}
+
+/* Hero helper */
+.hero-text h1{background:rgba(255,255,255,.7)!important;color:#111!important;border:1px solid var(--border)!important;border-radius:22px!important}
+.card-img-top{object-fit:cover;object-position:center}
+/* Footer */
+footer{border-top:1px solid var(--border)}
