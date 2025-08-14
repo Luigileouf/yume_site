@@ -39,6 +39,50 @@
     .nav a{color:#333;text-decoration:none;font-size:14px;margin-left:14px}
     .nav a:hover{color:#000}
 
+    /* ===== Nav mobile ===== */
+.menu-toggle{
+  display:none;
+  width:42px;height:42px;
+  border:1px solid var(--border);
+  border-radius:10px;background:#fff;cursor:pointer;
+  align-items:center;justify-content:center;gap:4px;
+}
+.menu-toggle span{
+  display:block;width:18px;height:2px;background:#111;border-radius:2px;
+}
+.menu-toggle span:nth-child(2){width:14px}
+.menu-toggle span:nth-child(3){width:18px}
+
+@media (max-width: 900px){
+  /* Conteneur header stable et respirant */
+  .nav{height:64px;gap:10px}
+  .brand-name{font-size:12px;letter-spacing:.22em}
+
+  /* Bouton burger visible, liens cachés par défaut */
+  .menu-toggle{display:inline-flex}
+  header .nav > nav{
+    position:fixed; inset:64px 0 auto 0;   /* sous le header */
+    background:#fff; border-top:1px solid var(--border);
+    display:none; flex-direction:column; padding:10px 14px 16px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+  }
+  header .nav > nav a{
+    margin:0; padding:14px 8px; font-size:16px; border-radius:10px;
+  }
+  header .nav > nav a:active{background:rgba(0,0,0,.04)}
+
+  /* État ouvert */
+  header .nav > nav.open{display:flex}
+
+  /* Le CTA reste à droite sans chevaucher */
+  .nav .btn.btn-primary{
+    padding:10px 12px; white-space:nowrap; font-size:13px;
+  }
+}
+
+/* Empêcher le scroll de la page quand le menu est ouvert */
+body.no-scroll{overflow:hidden}
+
     /* buttons */
     .btn{appearance:none;border:1px solid var(--border);border-radius:18px;padding:12px 16px;background:#fff;color:#111;cursor:pointer;font-weight:600}
     .btn:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
@@ -68,6 +112,7 @@
     @media(prefers-reduced-motion:reduce){
       .reveal,.hover-rise{transition:none}
     }
+
   </style>
 </head>
 <body>
@@ -78,6 +123,12 @@
         <div class="brand-mark" aria-hidden="true"></div>
         <a href="#" class="brand-name" aria-label="YUME">YUME</a>
       </div>
+
+      <!-- Bouton burger (mobile) -->
+      <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+
       <nav aria-label="Navigation principale">
         <a href="#mission">Mission</a>
         <a href="#solution">Solution</a>
@@ -317,6 +368,25 @@
       for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target);}}
     },{threshold:.18});
     revealEls.forEach(el=>io.observe(el));
-  </script>
+
+  // Toggle menu mobile
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.getElementById('site-nav');
+  if (toggle && nav){
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      document.body.classList.toggle('no-scroll', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Ferme le menu quand on clique un lien
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      toggle.setAttribute('aria-expanded','false');
+    }));
+  }
+</script>
+
 </body>
 </html>
