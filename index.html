@@ -129,7 +129,7 @@ body.no-scroll{overflow:hidden}
         <span></span><span></span><span></span>
       </button>
 
-      <nav aria-label="Navigation principale">
+      <nav id="site-nav" aria-label="Navigation principale">
         <a href="#mission">Mission</a>
         <a href="#solution">Solution</a>
         <a href="#modele">Modèle</a>
@@ -368,7 +368,8 @@ body.no-scroll{overflow:hidden}
       for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target);}}
     },{threshold:.18});
     revealEls.forEach(el=>io.observe(el));
-
+</script>
+    <script>
   // Toggle menu mobile
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.getElementById('site-nav');
