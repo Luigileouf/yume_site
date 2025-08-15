@@ -73,7 +73,14 @@ document.addEventListener("DOMContentLoaded", function () {
       window.scrollTo({ top: y, behavior: "smooth" });
       // Ferme le menu mobile si ouvert
       const c = document.getElementById("mainNavbar");
-      if (c?.classList.contains("show")) new bootstrap.Collapse(c).hide();
+      if (c?.classList.contains("show")) {
+        if (window.bootstrap && typeof window.bootstrap.Collapse === "function") {
+          new bootstrap.Collapse(c).hide();
+        } else {
+          c.classList.remove("show");
+          console.warn("Bootstrap non chargé : fermeture manuelle du menu.");
+        }
+      }
     });
     // Harmonise l'URL (facultatif)
     nlLink.setAttribute("href", "#newsletter");
