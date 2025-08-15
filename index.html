@@ -134,6 +134,22 @@ footer .footer-links {
 footer .footer-links a {
   text-decoration: none;
 }
+
+    @media (max-width: 600px) {
+      .title{font-size:24px}
+      .lead{font-size:16px}
+      .section{padding:48px 0}
+      .grid-2{grid-template-columns:1fr;gap:16px}
+      .container{padding:0 16px}
+    }
+
+    @media (min-width: 1200px) {
+      :root{--maxw:1280px}
+      .title{font-size:32px}
+      .lead{font-size:20px}
+      .section{padding:96px 0}
+      .grid-2{grid-template-columns:4fr 8fr;gap:32px}
+    }
   </style>
 </head>
 <body>
