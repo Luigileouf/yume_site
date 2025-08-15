@@ -52,7 +52,13 @@
   .lux-hero{ position:relative; isolation:isolate; }
   .lux-hero .lux-media{ position:absolute; inset:0; z-index:-1; overflow:hidden; }
   .lux-hero .lux-media video,
-  .lux-hero .lux-media img{ width:100%; height:92vh; object-fit:cover; display:block; }
+  .lux-hero .lux-media img{
+    width:100%;
+    height:100vh;
+    height:100dvh;
+    object-fit:cover;
+    display:block;
+  }
   /* voile luxueux (blanc vers transparent) */
   .lux-hero::after{
     content:""; position:absolute; inset:0;
@@ -61,7 +67,8 @@
   }
 
   .lux-hero .container{
-    min-height:calc(86vh - var(--navbar-h,90px));
+    min-height:calc(100vh - var(--navbar-h,90px));
+    min-height:calc(100dvh - var(--navbar-h,90px));
     display:flex; flex-direction:column; justify-content:center;
   }
   /* micro système typographique */
@@ -82,7 +89,10 @@
 
   /* responsive */
   @media (max-width: 991.98px){
-    .lux-hero .lux-media video, .lux-hero .lux-media img{ height:84vh; }
+    .lux-hero .lux-media video, .lux-hero .lux-media img{
+      height:100vh;
+      height:100dvh;
+    }
   }
 </style>
 <style>
