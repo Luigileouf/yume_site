@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm py-3 fixed-top yume-nav">
         <div class="container">
           <a class="navbar-brand d-flex align-items-center gap-2" href="accueil.html">
-            <img src="img/logo-yume-solidarite.png" alt="YUME" width="44" height="44" class="rounded-circle">
+            <img src="img/logo-yume-solidarite.png" alt="YUME" width="44" height="44" class="rounded-circle" loading="lazy">
             <span class="yume-brand d-none d-md-inline" style="letter-spacing:.25em;text-transform:uppercase;font-family:'Playfair Display',serif;font-size:13px">YUME</span>
           </a>
 
