@@ -16,3 +16,4 @@ Ces pages déclinent la skin luxe blanc/noir (inspirations JPG/YSL/LV) :
 - Conservez votre `js/header.js` et `newsletter.html` existants.
 - Les pages référencent `./yume_luxe_nb.css` (copie fournie ici).
 - Remplacez les chemins `img/...` par vos vraies images si besoin.
+
