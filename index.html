@@ -2,240 +2,363 @@
 
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>YUME — Objets vendus Athlétes soutenus</title>
-  <meta name="description" content="YUME : plateforme solidaire digitale. Seconde main, dons aux sportifs, partenaires, cadre éthique." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.min.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>YUME — Objets vendus Athlétes soutenus</title>
+<meta content="YUME : plateforme solidaire digitale. Seconde main, dons aux sportifs, partenaires, cadre éthique." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root{
+      --bg:#ffffff; --fg:#111111; --muted:#666; --border:rgba(0,0,0,.14);
+      --gold-1:#fbf3d2; --gold-2:#d9c571; --gold-3:#b39545;
+      --radius:22px; --shadow:0 8px 24px rgba(0,0,0,.08); --maxw:1120px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+    .container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    .stack-xs{margin-top:.5rem}.stack-s{margin-top:.75rem}.stack-m{margin-top:1rem}.stack-l{margin-top:1.5rem}.stack-xl{margin-top:2rem}
+    .muted{color:var(--muted)}
+    .rule{display:inline-block;width:24px;height:1px;background:var(--border);margin-right:8px}
+    .eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#9a9a9a;display:flex;align-items:center;gap:8px}
+    .title{font-family:"Playfair Display",ui-serif,Georgia,serif;letter-spacing:.02em}
+    .lead{color:#222;max-width:780px}
+    .section{padding:64px 0}
+    .grid{display:grid;gap:24px}
+    .grid-2{grid-template-columns:1fr}
+    @media(min-width:900px){.grid-2{grid-template-columns:5fr 7fr}}
+
+    /* header */
+    header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.75);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--border)}
+    .nav{height:64px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand-mark{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e8e8e8,#bdbdbd)}
+    .brand-name{font-family:"Playfair Display",ui-serif,Georgia,serif;letter-spacing:.25em;text-transform:uppercase;font-size:13px}
+    .nav a{color:#333;text-decoration:none;font-size:14px;margin-left:14px}
+    .nav a:hover{color:#000}
+
+    /* ===== Nav mobile ===== */
+.menu-toggle{
+  display:none;
+  width:42px;height:42px;
+  border:1px solid var(--border);
+  border-radius:10px;background:#fff;cursor:pointer;
+  align-items:center;justify-content:center;gap:4px;
+}
+.menu-toggle span{
+  display:block;width:18px;height:2px;background:#111;border-radius:2px;
+}
+.menu-toggle span:nth-child(2){width:14px}
+.menu-toggle span:nth-child(3){width:18px}
+
+@media (max-width: 900px){
+  /* Conteneur header stable et respirant */
+  .nav{height:64px;gap:10px}
+  .brand-name{font-size:12px;letter-spacing:.22em}
+
+  /* Bouton burger visible, liens cachés par défaut */
+  .menu-toggle{display:inline-flex}
+  header .nav > nav{
+    position:fixed; inset:64px 0 auto 0;   /* sous le header */
+    background:#fff; border-top:1px solid var(--border);
+    display:none; flex-direction:column; padding:10px 14px 16px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+  }
+  header .nav > nav a{
+    margin:0; padding:14px 8px; font-size:16px; border-radius:10px;
+  }
+  header .nav > nav a:active{background:rgba(0,0,0,.04)}
+
+  /* État ouvert */
+  header .nav > nav.open{display:flex}
+
+  /* Le CTA reste à droite sans chevaucher */
+  .nav .btn.btn-primary{
+    padding:10px 12px; white-space:nowrap; font-size:13px;
+  }
+}
+
+/* Empêcher le scroll de la page quand le menu est ouvert */
+body.no-scroll{overflow:hidden}
+
+    /* buttons */
+    .btn{appearance:none;border:1px solid var(--border);border-radius:18px;padding:12px 16px;background:#fff;color:#111;cursor:pointer;font-weight:600}
+    .btn:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+    .btn-primary{border-color:color-mix(in oklab, var(--gold-3) 30%, #000 10%);
+      background:linear-gradient(90deg,var(--gold-1),var(--gold-2));color:#111}
+    .btn-link{border:0;background:transparent;padding:0;color:#111}
+
+    /* cards / tiles */
+    .card{border:1px solid var(--border);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow)}
+    .card .p{padding:28px}
+    .tile{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .tile>img{display:block;width:100%;height:220px;object-fit:cover}
+    .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(255,255,255,.6),transparent)}
+
+    /* lists */
+    .list{margin:0;padding-left:1.2rem}
+    .list li{margin:.35rem 0}
+
+    /* subtle motion */
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.in-view{opacity:1;transform:none}
+    .hover-rise{transition:transform .35s ease}.hover-rise:hover{transform:translateY(-4px)}
+
+    /* footer */
+    footer{border-top:1px solid var(--border)}
+
+    @media(prefers-reduced-motion:reduce){
+      .reveal,.hover-rise{transition:none}
+    }
+
+    footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px; /* espace entre les lignes */
+}
+
+footer .footer-brand {
+  font-weight: bold;
+}
+
+footer .footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+footer .footer-links a {
+  text-decoration: none;
+}
+
+    @media (max-width: 600px) {
+      .title{font-size:24px}
+      .lead{font-size:16px}
+      .section{padding:48px 0}
+      .grid-2{grid-template-columns:1fr;gap:16px}
+      .container{padding:0 16px}
+    }
+
+    @media (min-width: 1200px) {
+      :root{--maxw:1280px}
+      .title{font-size:32px}
+      .lead{font-size:20px}
+      .section{padding:96px 0}
+      .grid-2{grid-template-columns:4fr 8fr;gap:32px}
+    }
+  </style>
 </head>
 <body>
-
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true"></div>
-        <a href="#" class="brand-name" aria-label="YUME">YUME</a>
-      </div>
-
-      <!-- Bouton burger (mobile) -->
-      <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav id="site-nav" aria-label="Navigation principale">
-        <a href="#mission">Mission</a>
-        <a href="#solution">Solution</a>
-        <a href="#modele">Modèle</a>
-        <a href="#ethique">Éthique</a>
-        <a href="#structure">Structure</a>
-        <a href="#developpement">Dév.</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div><a href="accueil.html" class="btn btn-primary">Voir l’aperçu</a></div>
-    </div>
-  </header>
-
-  <main>
-    <section class="section">
-      <div class="container">
-        <h1 class="title" style="font-size:clamp(32px, 6vw, 54px); text-transform:uppercase; letter-spacing:.2em;">YUME</h1>
-        <p class="lead stack-s">Plateforme solidaire de seconde main — au service des athlètes peu médiatisés et des associations.</p>
-      </div>
-    </section>
-
-    <!-- Mission d'intérêt général -->
-    <section id="mission" class="section">
-      <div class="container card reveal">
-        <div class="p">
-          <div class="eyebrow"><span class="rule"></span>Mission d’intérêt général</div>
-          <h2 class="title stack-xs" style="font-size:28px">Soutenir des sportifs engagés, loin des projecteurs.</h2>
-          <p class="muted stack-s"><em>« Yume » signifie rêve en japonais.</em></p>
-          <ul class="list stack-s">
-            <li>Athlètes valides</li>
-            <li>Athlètes féminines</li>
-            <li>Athlètes handisports</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Solution simple et vertueuse -->
-    <section id="solution" class="section">
-      <div class="container grid grid-2">
-        <div class="card reveal">
-          <div class="p">
-            <div class="eyebrow"><span class="rule"></span>Solution simple & vertueuse</div>
-            <h2 class="title stack-xs" style="font-size:28px">La revente qui finance.</h2>
-            <p class="stack-s">Plateforme d’achat/vente de seconde main et de bonnes affaires. Chaque transaction génère un don pour les sportifs.</p>
-            <ul class="list stack-s">
-              <li>Une famille vend un objet → <strong>1% à 100%</strong> du prix reversé aux sportifs.</li>
-              <li><strong>1 € de don = 1 point d’avantage</strong> (valeur 1 €) chez les partenaires YUME.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tile hover-rise reveal">
-          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1600&auto=format&fit=crop" alt="Objets seconde main, sélection soignée" loading="lazy" width="1600" height="1067">
-        </div>
-      </div>
-    </section>
-
-    <!-- Modèle participatif -->
-    <section id="modele" class="section">
-      <div class="container grid" style="grid-template-columns:1fr;gap:24px">
-        <article class="card reveal">
-          <div class="p">
-            <div class="eyebrow"><span class="rule"></span>Modèle participatif</div>
-            <h2 class="title stack-xs" style="font-size:28px">Un écosystème où tout le monde gagne.</h2>
-            <ul class="list stack-s">
-              <li><strong>Familles</strong> : avantages exclusifs, économies, solidarité.</li>
-              <li><strong>Entreprises & associations</strong> : visibilité, engagement, sans mobiliser de trésorerie.</li>
-              <li><strong>Sportifs</strong> : financement durable et nouveau média.</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="card reveal">
-          <div class="p">
-            <div class="eyebrow"><span class="rule"></span>Communauté & événements</div>
-            <h2 class="title stack-xs" style="font-size:24px">Des rendez‑vous qui rassemblent.</h2>
-            <p class="muted">Des événements innovants pour engager les familles, valoriser les sportifs et les partenaires.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Transparence et cadre éthique -->
-    <section id="ethique" class="section">
-      <div class="container grid grid-2">
-        <div class="card reveal">
-          <div class="p">
-            <div class="eyebrow"><span class="rule"></span>Transparence & éthique</div>
-            <ul class="list">
-              <li>Comptes publiés et consultables.</li>
-              <li>Respect total des associations loi 1901 (aucune filiation juridique ou financière).</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tile hover-rise reveal">
-          <img src="https://images.unsplash.com/photo-1523359346063-d879354c0ea5?q=80&w=1600&auto=format&fit=crop" alt="Transparence et confiance" loading="lazy" width="1600" height="1067">
-        </div>
-      </div>
-    </section>
-
-    <!-- Structure légale & engagements -->
-    <section id="structure" class="section">
-      <div class="container grid grid-2">
-        <div class="card reveal">
-          <div class="p">
-            <div class="eyebrow"><span class="rule"></span>Structure & mission</div>
-            <h2 class="title stack-xs" style="font-size:26px">SAS / association loi 1901 — société à mission (Loi PACTE).</h2>
-            <ul class="list stack-s">
-              <li>Raison d’être et objectifs RSE inscrits dans les statuts.</li>
-              <li>Comité de mission indépendant.</li>
-              <li>Rapport annuel public.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card reveal">
-          <div class="p">
-            <div class="eyebrow"><span class="rule"></span>Répartition des revenus</div>
-            <h2 class="title stack-xs" style="font-size:26px">70% / 30% — clair et durable.</h2>
-            <ul class="list stack-s">
-              <li><strong>1€</strong>c'est :</li>
-              <li><strong>0,70 €</strong> pour les athlètes et les structures associatives.</li>
-              <li><strong>0,30 €</strong> pour le fonctionnement de YUME.</li>
-            </ul>
-            <p class="muted stack-xs">Un modèle transparent, pérenne et engagé.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Transparence financière & Préservation du cadre associatif -->
-    <section class="section">
-      <div class="container grid grid-2">
-        <div class="card reveal">
-          <div class="p">
-            <div class="eyebrow"><span class="rule"></span>Transparence financière</div>
-            <p>Tous les comptes (résultats & bilans) sont publiés et accessibles à tous.</p>
-            <p class="muted">Gestion responsable et ouverte.</p>
-          </div>
-        </div>
-        <div class="card reveal">
-          <div class="p">
-            <div class="eyebrow"><span class="rule"></span>Cadre associatif préservé</div>
-            <ul class="list">
-              <li>Aucune filiation juridique ou financière entre YUME et les associations partenaires.</li>
-              <li>Respect de leur but non lucratif (loi 1901).</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Origine de YUME (simplifiée, sens préservé) -->
-    <section class="section">
-      <div class="container card reveal">
-        <div class="p">
-          <div class="eyebrow"><span class="rule"></span>Origine</div>
-          <h2 class="title stack-xs" style="font-size:26px">Une intuition de terrain.</h2>
-          <p class="stack-s"><em>« Je m’appelle Loïc Métivier. Issu du monde associatif et pratiquant de karaté, j’ai vu des athlètes se battre chaque jour pour continuer leur passion, faute de moyens et de visibilité. »</em></p>
-          <p class="stack-s">La seconde main a un potentiel solidaire immense : transformer des objets qui dorment chez nous en trajectoires soutenues.</p>
-          <p class="stack-s">De cette rencontre entre sport et économie circulaire est née <strong>YUME</strong> — un projet profondément solidaire qui met la responsabilité au cœur de chaque transaction.</p>
-          <ul class="list stack-s">
-            <li>Faire de l’achat/vente de seconde main un réflexe solidaire.</li>
-            <li>Offrir aux entreprises une association au sport **sans mobiliser de trésorerie**.</li>
-            <li>Donner aux associations sportives un levier éthique, transparent et pérenne — et un nouveau média.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Plateforme en développement -->
-    <section id="developpement" class="section">
-      <div class="container card reveal">
-        <div class="p">
-          <div class="eyebrow"><span class="rule"></span>Plateforme en développement</div>
-          <p>La plateforme arrive bientôt pour acheter, vendre et soutenir les sportifs peu médiatisés.</p>
-          <p class="stack-s">Phase actuelle : communication & mobilisation pour :</p>
-          <ul class="list">
-            <li>faire connaître le projet,</li>
-            <li>fédérer des soutiens (sportifs, partenaires, collectivités),</li>
-            <li>co‑construire la plateforme avec les retours du terrain.</li>
-          </ul>
-          <p class="muted stack-s">On construit YUME avec vous.</p>
-          <div class="stack-m">
-            <a href="accueil.html" class="btn btn-primary">Accéder à la page d’accueil</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Call to explore -->
-    <section class="section">
-      <div class="container" style="text-align:center">
-        <p class="title" style="font-size:20px">Envie de voir l’aperçu ?</p>
-        <a href="accueil.html" class="btn btn-primary">Ouvrir la page YUME</a>
-      </div>
-    </section>
-  
-  <!-- Newsletter embed -->
-<section id="newsletter" class="section">
-  <div class="container">
-    <p class="title" style="font-size:20px; text-align:center; margin-bottom: 16px;">
+<header>
+<div class="container nav">
+<div class="brand">
+<div aria-hidden="true" class="brand-mark"></div>
+<a aria-label="YUME" class="brand-name" href="#">YUME</a>
+</div>
+<!-- Bouton burger (mobile) -->
+<button aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu" class="menu-toggle">
+<span></span><span></span><span></span>
+</button>
+<nav aria-label="Navigation principale" id="site-nav">
+<a href="#mission">Mission</a>
+<a href="#solution">Solution</a>
+<a href="#modele">Modèle</a>
+<a href="#ethique">Éthique</a>
+<a href="#structure">Structure</a>
+<a href="#developpement">Dév.</a>
+<a href="#contact">Contact</a><a href="index_dossier_de_press_7_fixed.html">Dossier de presse</a>
+</nav>
+<div><a class="btn btn-primary" href="accueil.html">Voir l’aperçu</a></div>
+</div>
+</header>
+<main>
+<section class="section">
+<div class="container">
+<h1 class="title" style="font-size:clamp(32px, 6vw, 54px); text-transform:uppercase; letter-spacing:.2em;">YUME</h1>
+<p class="lead stack-s">Plateforme solidaire de seconde main — au service des athlètes peu médiatisés et des associations.</p>
+</div>
+</section>
+<!-- Mission d'intérêt général -->
+<section class="section" id="mission">
+<div class="container card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Mission d’intérêt général</div>
+<h2 class="title stack-xs" style="font-size:28px">Soutenir des sportifs engagés, loin des projecteurs.</h2>
+<p class="muted stack-s"><em>« Yume » signifie rêve en japonais.</em></p>
+<ul class="list stack-s">
+<li>Athlètes valides</li>
+<li>Athlètes féminines</li>
+<li>Athlètes handisports</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Solution simple et vertueuse -->
+<section class="section" id="solution">
+<div class="container grid grid-2">
+<div class="card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Solution simple &amp; vertueuse</div>
+<h2 class="title stack-xs" style="font-size:28px">La revente qui finance.</h2>
+<p class="stack-s">Plateforme d’achat/vente de seconde main et de bonnes affaires. Chaque transaction génère un don pour les sportifs.</p>
+<ul class="list stack-s">
+<li>Une famille vend un objet → <strong>1% à 100%</strong> du prix reversé aux sportifs.</li>
+<li><strong>1 € de don = 1 point d’avantage</strong> (valeur 1 €) chez les partenaires YUME.</li>
+</ul>
+</div>
+</div>
+<div class="tile hover-rise reveal">
+<img alt="Objets seconde main, sélection soignée" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&amp;w=1600&amp;auto=format&amp;fit=crop"/>
+</div>
+</div>
+</section>
+<!-- Modèle participatif -->
+<section class="section" id="modele">
+<div class="container grid" style="grid-template-columns:1fr;gap:24px">
+<article class="card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Modèle participatif</div>
+<h2 class="title stack-xs" style="font-size:28px">Un écosystème où tout le monde gagne.</h2>
+<ul class="list stack-s">
+<li><strong>Familles</strong> : avantages exclusifs, économies, solidarité.</li>
+<li><strong>Entreprises &amp; associations</strong> : visibilité, engagement, sans mobiliser de trésorerie.</li>
+<li><strong>Sportifs</strong> : financement durable et nouveau média.</li>
+</ul>
+</div>
+</article>
+<article class="card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Communauté &amp; événements</div>
+<h2 class="title stack-xs" style="font-size:24px">Des rendez‑vous qui rassemblent.</h2>
+<p class="muted">Des événements innovants pour engager les familles, valoriser les sportifs et les partenaires.</p>
+</div>
+</article>
+</div>
+</section>
+<!-- Transparence et cadre éthique -->
+<section class="section" id="ethique">
+<div class="container grid grid-2">
+<div class="card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Transparence &amp; éthique</div>
+<ul class="list">
+<li>Comptes publiés et consultables.</li>
+<li>Respect total des associations loi 1901 (aucune filiation juridique ou financière).</li>
+</ul>
+</div>
+</div>
+<div class="tile hover-rise reveal">
+<img alt="Transparence et confiance" src="https://images.unsplash.com/photo-1523359346063-d879354c0ea5?q=80&amp;w=1600&amp;auto=format&amp;fit=crop"/>
+</div>
+</div>
+</section>
+<!-- Structure légale & engagements -->
+<section class="section" id="structure">
+<div class="container grid grid-2">
+<div class="card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Structure &amp; mission</div>
+<h2 class="title stack-xs" style="font-size:26px">SAS / association loi 1901 — société à mission (Loi PACTE).</h2>
+<ul class="list stack-s">
+<li>Raison d’être et objectifs RSE inscrits dans les statuts.</li>
+<li>Comité de mission indépendant.</li>
+<li>Rapport annuel public.</li>
+</ul>
+</div>
+</div>
+<div class="card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Répartition des revenus</div>
+<h2 class="title stack-xs" style="font-size:26px">70% / 30% — clair et durable.</h2>
+<ul class="list stack-s">
+<li><strong>1€</strong>c'est :</li>
+<li><strong>0,70 €</strong> pour les athlètes et les structures associatives.</li>
+<li><strong>0,30 €</strong> pour le fonctionnement de YUME.</li>
+</ul>
+<p class="muted stack-xs">Un modèle transparent, pérenne et engagé.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Transparence financière & Préservation du cadre associatif -->
+<section class="section">
+<div class="container grid grid-2">
+<div class="card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Transparence financière</div>
+<p>Tous les comptes (résultats &amp; bilans) sont publiés et accessibles à tous.</p>
+<p class="muted">Gestion responsable et ouverte.</p>
+</div>
+</div>
+<div class="card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Cadre associatif préservé</div>
+<ul class="list">
+<li>Aucune filiation juridique ou financière entre YUME et les associations partenaires.</li>
+<li>Respect de leur but non lucratif (loi 1901).</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Origine de YUME (simplifiée, sens préservé) -->
+<section class="section">
+<div class="container card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Origine</div>
+<h2 class="title stack-xs" style="font-size:26px">Une intuition de terrain.</h2>
+<p class="stack-s"><em>« Je m’appelle Loïc Métivier. Issu du monde associatif et pratiquant de karaté, j’ai vu des athlètes se battre chaque jour pour continuer leur passion, faute de moyens et de visibilité. »</em></p>
+<p class="stack-s">La seconde main a un potentiel solidaire immense : transformer des objets qui dorment chez nous en trajectoires soutenues.</p>
+<p class="stack-s">De cette rencontre entre sport et économie circulaire est née <strong>YUME</strong> — un projet profondément solidaire qui met la responsabilité au cœur de chaque transaction.</p>
+<ul class="list stack-s">
+<li>Faire de l’achat/vente de seconde main un réflexe solidaire.</li>
+<li>Offrir aux entreprises une association au sport **sans mobiliser de trésorerie**.</li>
+<li>Donner aux associations sportives un levier éthique, transparent et pérenne — et un nouveau média.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Plateforme en développement -->
+<section class="section" id="developpement">
+<div class="container card reveal">
+<div class="p">
+<div class="eyebrow"><span class="rule"></span>Plateforme en développement</div>
+<p>La plateforme arrive bientôt pour acheter, vendre et soutenir les sportifs peu médiatisés.</p>
+<p class="stack-s">Phase actuelle : communication &amp; mobilisation pour :</p>
+<ul class="list">
+<li>faire connaître le projet,</li>
+<li>fédérer des soutiens (sportifs, partenaires, collectivités),</li>
+<li>co‑construire la plateforme avec les retours du terrain.</li>
+</ul>
+<p class="muted stack-s">On construit YUME avec vous.</p>
+<div class="stack-m">
+<a class="btn btn-primary" href="accueil.html">Accéder à la page d’accueil</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Call to explore -->
+<section class="section">
+<div class="container" style="text-align:center">
+<p class="title" style="font-size:20px">Envie de voir l’aperçu ?</p>
+<a class="btn btn-primary" href="accueil.html">Ouvrir la page YUME</a>
+</div>
+</section>
+<!-- Newsletter embed -->
+<section class="section" id="newsletter">
+<div class="container">
+<p class="title" style="font-size:20px; text-align:center; margin-bottom: 16px;">
       Inscrivez-vous à la newsletter
     </p>
-    <div style="border:1px solid var(--border); border-radius: var(--radius); overflow:hidden;">
-      <iframe
-        src="newsletter.html"
-        title="Formulaire d'inscription à la newsletter"
-        style="width:100%; height: 430px; border:0; display:block;" loading="lazy">
-      </iframe>
-    </div>
-  </div>
+<div style="border:1px solid var(--border); border-radius: var(--radius); overflow:hidden;">
+<iframe src="newsletter.html" style="width:100%; height: 430px; border:0; display:block;" title="Formulaire d'inscription à la newsletter">
+</iframe>
+</div>
+</div>
 </section>
 </main>
 <footer id="contact">
