@@ -33,91 +33,7 @@
   <!-- Fonts & skin luxe -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="yume_luxe_nb.css">
-  <style>
-  /* hauteur de navbar pilotée par variable */
-  :root { --navbar-h: 90px; }
-
-  /* applique l’offset à la page + aux ancres */
-  body { padding-top: var(--navbar-h); }
-  .hero, .hero-text, [id] { scroll-margin-top: calc(var(--navbar-h) + 16px); }
-
-  /* Option UX : éviter la nav trop haute sur mobile */
-  .navbar-brand small { line-height: 1.1; }
-  @media (max-width: 991.98px) { /* < lg */
-    .navbar-brand small { display: none; }  /* masque la 2e ligne quand l’espace est réduit */
-  }
-</style>
-<style>
-  /* ——— HERO LUXE (inspirations JPG / YSL / LV / Rolls) ——— */
-  .lux-hero{ position:relative; isolation:isolate; }
-  .lux-hero .lux-media{ position:absolute; inset:0; z-index:-1; overflow:hidden; }
-  .lux-hero .lux-media video,
-  .lux-hero .lux-media img{
-    width:100%;
-    height:100vh;
-    height:100dvh;
-    object-fit:cover;
-    display:block;
-  }
-  /* voile luxueux (blanc vers transparent) */
-  .lux-hero::after{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,.55) 22%, rgba(255,255,255,.15) 60%, rgba(255,255,255,.0) 100%);
-    pointer-events:none;
-  }
-
-  .lux-hero .container{
-    min-height:calc(100vh - var(--navbar-h,90px));
-    min-height:calc(100dvh - var(--navbar-h,90px));
-    display:flex; flex-direction:column; justify-content:center;
-  }
-  /* micro système typographique */
-  .lux-eyebrow{ font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:#8a8a8a; display:inline-flex; align-items:center; gap:10px; }
-  .lux-rule{ width:28px; height:1px; background:rgba(0,0,0,.14); display:inline-block; }
-  .lux-title{ font-family:"Playfair Display", ui-serif, Georgia, serif; text-transform:uppercase; letter-spacing:.22em; line-height:1.1; font-size:clamp(28px, 6vw, 56px); margin:.25rem 0 .75rem; }
-  .lux-lead{ max-width:880px; color:#222; font-size:clamp(16px, 2.2vw, 18px); }
-  .lux-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; }
-  /* boutons pilules sobres */
-  .btn-ink{ border-radius:999px; border:1px solid rgba(0,0,0,.18); background:#fff; color:#111; font-weight:600; padding:.85rem 1.2rem; }
-  .btn-ink:hover{ box-shadow:0 10px 30px rgba(0,0,0,.06); transform:translateY(-1px); }
-  .btn-ink-fill{ border-radius:999px; border:1px solid #111; background:#111; color:#fff; font-weight:600; padding:.95rem 1.35rem; }
-  .btn-ink-fill:hover{ filter:contrast(1.08); }
-
-  /* invite à scroller */
-  .lux-scroll{ position:absolute; left:0; right:0; bottom:18px; text-align:center;
-    font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:#7a7a7a; }
-
-  /* responsive */
-  @media (max-width: 991.98px){
-    .lux-hero .lux-media video, .lux-hero .lux-media img{
-      height:100vh;
-      height:100dvh;
-    }
-  }
-</style>
-<style>
-/* Player CTA (luxe, sobre) */
-.player-cta{ display:flex; align-items:center; gap:10px; }
-.btn-play{
-  position:relative; width:46px; height:46px; border-radius:999px;
-  border:1px solid rgba(0,0,0,.18); background:#fff; color:#111;
-  display:grid; place-items:center; transition:transform .25s ease, box-shadow .25s ease;
-}
-.btn-play:hover{ transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,0,0,.06); }
-.btn-play .icon-pause{ position:absolute; opacity:0; transition:opacity .18s ease; }
-.btn-play .icon-play{ opacity:1; transition:opacity .18s ease; }
-.btn-play.is-playing .icon-play{ opacity:0; }
-.btn-play.is-playing .icon-pause{ opacity:1; }
-
-.player-link{
-  font-weight:600; color:#111; text-decoration:none; border-bottom:1px solid rgba(0,0,0,.22);
-  padding-bottom:2px;
-}
-.player-link:hover{ color:#000; border-bottom-color:#000; }
-
-/* s’assure que tout reste sur une seule ligne si la place le permet */
-.lux-actions{ align-items:center; }
-</style>
+    <link rel="stylesheet" href="css/main.min.css">
 </head>
 
 <body>
@@ -126,7 +42,7 @@
 <nav class="navbar navbar-expand-lg bg-white fixed-top shadow-sm">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="accueil.html">
-      <img src="img/logo-yume-solidarite.png" alt="Logo YUME" class="me-2 rounded-circle" width="40">
+      <img src="img/logo-yume-solidarite.png" alt="Logo YUME" class="me-2 rounded-circle" width="40" height="38">
       <div>
         <strong>YUME</strong><br>
         <small>Objets vendus<br> Athlètes soutenus</small>
@@ -201,7 +117,7 @@
   <h2 class="text-center mb-4">Épisode en vedette</h2>
   <div class="row align-items-center">
     <div class="col-md-6">
-      <img src="img/episode5.png" alt="Épisode 5 - Delphine - Alliance Locale" class="img-fluid rounded">
+      <img src="img/episode5.png" alt="Épisode 5 - Delphine - Alliance Locale" class="img-fluid rounded" loading="lazy" width="3000" height="3000">
       <audio controls preload="none" class="w-100 mt-3">
         <source src="audio/Episode 5_Delphine_Alliance locale_YUME.mp3" type="audio/mpeg">
         Ton navigateur ne supporte pas l'audio HTML5.
@@ -226,7 +142,7 @@
   <h2 class="text-center mb-4">Épisode 4 - Véronique (Life Cover)</h2>
   <div class="row align-items-center">
     <div class="col-md-6">
-      <img src="img/episode4.png" alt="Épisode 4 - Véronique - Life Cover" class="img-fluid rounded">
+      <img src="img/episode4.png" alt="Épisode 4 - Véronique - Life Cover" class="img-fluid rounded" loading="lazy" width="3000" height="3000">
       <audio controls preload="none" class="w-100 mt-3">
         <source src="audio/Episode 4_Véronique_Life Cover_YUME.mp3" type="audio/mpeg">
         Ton navigateur ne supporte pas l'audio HTML5.
@@ -249,7 +165,7 @@
   <h2 class="text-center mb-4">Épisode 3- Ella Bassler</h2>
   <div class="row align-items-center">
     <div class="col-md-6">
-      <img src="img/episode3.png" alt="Episode 3" class="img-fluid rounded">
+      <img src="img/episode3.png" alt="Episode 3" class="img-fluid rounded" loading="lazy" width="3000" height="3000">
       <audio controls preload="none" class="w-100 mt-3">
         <source src="audio/Episode 3_Ella Bassler_Incroyable Territoire_YUME.mp3" type="audio/mpeg">
         Ton navigateur ne supporte pas l'audio HTML5.
@@ -274,7 +190,7 @@
   <h2 class="text-center mb-4">Épisode 2 - Ermanno Di Miceli</h2>
   <div class="row align-items-center">
     <div class="col-md-6">
-      <img src="img/episode2.png" alt="Episode 2" class="img-fluid rounded">
+      <img src="img/episode2.png" alt="Episode 2" class="img-fluid rounded" loading="lazy" width="3000" height="3000">
       <audio controls preload="none" class="w-100 mt-3">
         <source src="audio/Episode 2_Ermanno Di Miceli_Ton rêve Ton combat_YUME.mp3" type="audio/mpeg">
         Ton navigateur ne supporte pas l'audio HTML5.
@@ -307,7 +223,7 @@
   <h2 class="text-center mb-4">Épisode 1 – Yannick Matejicek</h2>
   <div class="row align-items-center">
     <div class="col-md-6">
-      <img src="img/episode1.png" alt="Episode" class="img-fluid rounded">
+      <img src="img/episode1.png" alt="Episode" class="img-fluid rounded" loading="lazy" width="3000" height="3000">
       <audio controls preload="none" class="w-100 mt-3">
         <source src="audio/Episode 1_Yannick Matejicek_Ton rêve Ton combat_YUME.mp3" type="audio/mpeg">
         Ton navigateur ne supporte pas l'audio HTML5.
@@ -334,7 +250,7 @@
 <section id="newsletter" class="bg-light py-5">
   <div class="container text-center">
     <h2 class="text-center mb-4">Inscris-toi à notre newsletter</h2>
-    <iframe src="newsletter.html" style="width: 100%; height: 320px; border: none;" title="Formulaire d'inscription à la newsletter" class="rounded"></iframe>
+    <iframe src="newsletter.html" style="width: 100%; height: 320px; border: none;" title="Formulaire d'inscription à la newsletter" class="rounded" loading="lazy"></iframe>
   </div>
 </section>
 

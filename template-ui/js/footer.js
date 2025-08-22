@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const footer = document.createElement("footer");
   footer.id = "yume-footer";
   footer.className = "yume-footer";
+  const isTemplatePage = window.location.pathname.endsWith("index_ui_luxe.html");
+  const templateLink = isTemplatePage ? "" : '<a class="jp-link" href="index_ui_luxe.html">Templates UI</a>';
   footer.innerHTML = `
     <div class="inner text-center">
       <div class="brand mb-2">YUME</div>
@@ -28,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <a class="jp-link" href="accueil.html">Accueil</a>
         <a class="jp-link" href="media.html">Média</a>
         <a class="jp-link" href="newsletter.html">Newsletter</a>
+        ${templateLink}
       </nav>
       <small>© ${year} YUME · Tous droits réservés</small>
     </div>
