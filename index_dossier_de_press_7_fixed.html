@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YUME — Dossier Presse (Maquette Luxe)</title>
+  <!-- <head> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous">
+
+  <!-- Webfonts : serif d'affichage + sans moderne -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ivory:#f6f4f0;
+      --porcelain:#fbfaf8;
+      --onyx:#0e0e10;
+      --graphite:#2a2a2e;
+      --smoke:#76767a;
+      --gold:#bfa06a; /* champagne */
+      --gold-10: rgba(191,160,106,.10);
+      --border: rgba(14,14,16,.08);
+      --cover-piste: url('img/cover_piste.jpg'); /* sprinteur / piste athlé */
+      --cover-eau: url('img/cover_eau.jpg');     /* nageur / plongée / eau */
+      --cover-indoor: url('img/cover_indoor.jpg'); /* gym / escrime / indoor */
+      --cover-image: var(--cover-piste); /* valeur par défaut */
+    }
+    @page{ size: A4; margin: 16mm; }
+    @media print{
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      html, body{ background: white !important; }
+      body{ counter-reset: page; padding: 0 !important; }
+      .wrap{ max-width: none !important; margin: 0 !important; }
+      .page{ width: 210mm !important; min-height: 297mm !important; box-shadow: none !important; margin: 0 auto !important; break-after: page; page-break-after: always; break-inside: avoid; }
+      .page:last-child{ break-after: auto; page-break-after: auto; }
+      .screen-only{ display:none !important; }
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0; padding:24px; background: var(--ivory); color: var(--onyx);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      counter-reset: page;
+    }
+    .wrap{ max-width: 920px; margin: 0 auto; }
+    .toolbar.screen-only{ position: sticky; top: 0; z-index: 10; display:flex; gap:8px; align-items:center; justify-content:space-between; padding:12px 0 20px; background: linear-gradient(180deg,var(--ivory),rgba(246,244,240,0)); }
+    .toolbar .hint{ font-size: 12px; color: var(--smoke); display:block; }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border:1px solid var(--border); border-radius:999px; background:white; cursor:pointer; font-weight:500; text-decoration:none; color:var(--onyx);
+    }
+    .btn:hover{ box-shadow: 0 4px 18px rgba(14,14,16,.06); border-color: var(--gold-10); }
+
+    .page{
+      width: 210mm; min-height: 297mm; margin: 0 auto 28px; background: white; position: relative; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(14,14,16,.08), 0 4px 12px rgba(14,14,16,.04);
+    }
+    .p{ padding: 22mm 18mm; }
+
+    /* Typo scale */
+    .eyebrow{ font-variant: all-small-caps; letter-spacing: .14em; color: var(--smoke); font-weight:600; }
+    .display{ font-family: "Playfair Display", serif; font-weight:700; line-height:1.07; }
+    .h1{ font-size: 44px; }
+    .h2{ font-family: "Playfair Display", serif; font-size: 32px; line-height:1.14; font-weight:600; }
+    .h3{ font-size: 18px; font-weight:600; letter-spacing:.02em; }
+    .lead{ font-size: 16px; line-height: 1.7; color: var(--graphite); }
+    .body{ font-size: 13.5px; line-height: 1.75; color: var(--graphite); }
+    .quote{ font-family: "Playfair Display", serif; font-size: 20px; line-height:1.6; }
+
+    /* Luxe accents */
+    .hairline{ height:1px; background: linear-gradient(90deg,transparent, var(--gold) 12%, var(--gold) 88%, transparent); opacity:.5; }
+    .accent{ color: var(--gold); }
+    .chip{ border:1px solid var(--gold); color: var(--onyx); padding:6px 10px; border-radius:999px; font-size:12px; letter-spacing:.06em; background: linear-gradient(180deg, #fff, #fff5e8); }
+
+    /* Grid */
+    .grid{ display:grid; gap:16px; }
+    .g-2{ grid-template-columns: 1fr 1fr; }
+    .g-3{ grid-template-columns: repeat(3,1fr); }
+    .g-4{ grid-template-columns: repeat(4,1fr); }
+
+    /* Cover */
+    .cover.is-piste{ --cover-image: var(--cover-piste); }
+    .cover.is-eau{ --cover-image: var(--cover-eau); }
+    .cover.is-indoor{ --cover-image: var(--cover-indoor); }
+    .cover .hero{ position:absolute; inset:0; background:
+      radial-gradient(1200px 500px at 80% 20%, rgba(191,160,106,.18), transparent 60%),
+      linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.0) 40%),
+      var(--cover-image) center/cover no-repeat; filter: saturate(.9) contrast(.98);
+    }
+    .cover .veil{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(14,14,16,.55), rgba(14,14,16,.25) 35%, rgba(14,14,16,0) 60%); }
+    .cover .branding{ position:absolute; inset:0; padding: 22mm 18mm; display:flex; flex-direction:column; justify-content:flex-end; color: white; }
+    .logo{ font-family: "Playfair Display", serif; letter-spacing:.22em; font-weight:700; font-size: 15px; }
+    .logo b{ letter-spacing: .3em; }
+    .title{ font-size: 56px; line-height:1.02; margin: 6px 0 12px; }
+    .subtitle{ font-size: 16px; color: #fff; max-width: 520px; background: rgba(14,14,16,.82); padding: 10px 14px; border-radius: 12px; display:inline-block; line-height:1.45; box-shadow: 0 8px 24px rgba(14,14,16,.28); }
+    .tagline{ margin-top: 14px; display:inline-block; color: #fff; border:1px solid rgba(255,255,255,.25); padding:8px 12px; border-radius:999px; letter-spacing:.08em; font-size: 12px; backdrop-filter: blur(4px); }
+
+    /* Footer band */
+    .footer-band{ position:absolute; bottom:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:10px 18mm; color:#e9e8e5; font-size:11px; background: linear-gradient(180deg, transparent, rgba(14,14,16,.55)); }
+    .footer-band .bullet{ width:6px; height:6px; border-radius:50%; background:var(--gold); display:inline-block; margin: 0 10px; }
+
+    /* Running footer */
+    .running{ position:absolute; bottom:12mm; left:18mm; right:18mm; display:flex; align-items:center; justify-content:space-between; font-size:11px; color: var(--smoke); }
+    .running .page-no::before{ content: counter(page); counter-increment: page; }
+
+    /* Card */
+    .card{ border:1px solid var(--border); border-radius: 14px; padding:16px 16px 14px; background: white; }
+
+    /* Table */
+    table{ width:100%; border-collapse:collapse; }
+    th,td{ text-align:left; padding:10px 0; border-bottom:1px solid var(--border); font-size:13px; }
+    th{ font-weight:600; }
+
+    .kpis{ display:flex; gap:24px; flex-wrap:wrap; }
+    .kpi{ flex: 1 1 160px; border:1px solid var(--border); border-radius: 14px; padding:14px; }
+    .kpi .num{ font-family:"Playfair Display", serif; font-weight:700; font-size: 26px; }
+    .kpi .lbl{ font-size: 12px; letter-spacing:.06em; color: var(--smoke); text-transform: uppercase; }
+
+    .note{ font-size: 11.5px; color: var(--smoke); }
+
+    .poster{ font-family:"Playfair Display",serif; font-size: 46px; line-height:1.1; }
+
+    .aside{ font-size: 12px; color: var(--smoke); }
+
+    /* Utilities */
+    .mt-0{ margin-top:0; } .mt-6{ margin-top:6px; } .mt-8{ margin-top:8px; } .mt-12{ margin-top:12px; } .mt-16{ margin-top:16px; } .mt-20{ margin-top:20px; }
+    .mb-0{ margin-bottom:0; } .mb-8{ margin-bottom:8px; } .mb-12{ margin-bottom:12px; } .mb-16{ margin-bottom:16px; } .mb-20{ margin-bottom:20px; } .mb-28{ margin-bottom:28px; }
+    .pt-0{ padding-top:0; }
+    .center{ text-align:center; }
+    .right{ text-align:right; }
+    .cols{ columns: 2; column-gap: 20px; }
+    .break{ break-before: page; }
+    .goldbox{ background: var(--gold-10); border:1px solid var(--gold); border-radius: 12px; padding:14px; }
+    .toc a{ color: inherit; text-decoration:none; }
+
+    /* VISUAL BANDS (mosaïques images) */
+    .visual-band{ margin-top: 10mm; height: 90mm; display:grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: repeat(6, 1fr); gap: 6px; }
+    .visual-band .tile{ position: relative; overflow: hidden; border-radius: 14px; background:#f7f6f3; border:1px solid var(--border); }
+    .visual-band img{ width:100%; height:100%; object-fit: cover; display:block; filter: brightness(1.25) contrast(1.08); }
+    .span-2{ grid-column: span 2; } .span-3{ grid-column: span 3; } .span-4{ grid-column: span 4; }
+    .row-2{ grid-row: span 2; } .row-3{ grid-row: span 3; } .row-4{ grid-row: span 4; }
+
+    /* variantes */
+    .visual-band.damier .tile{ box-shadow: 0 2px 10px rgba(14,14,16,.06); }
+    .visual-band .tile::after{ content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; box-shadow: inset 0 0 0 1px rgba(191,160,106,.15), inset 0 -40px 80px rgba(14,14,16,.18); }
+    /* N&B prestige pour pages valeurs */
+    #valeurs .visual-band img{ filter: grayscale(1) brightness(1.22) contrast(1.08); }
+
+    /* Dispositions par page (évite la monotonie) */
+    /* Préface : grand strip + vignettes */
+    #fondateur .visual-band .tile:nth-child(1){grid-column: span 6; grid-row: span 6;}
+    #fondateur .visual-band .tile:nth-child(2){grid-column: span 3; grid-row: span 3;}
+    #fondateur .visual-band .tile:nth-child(3){grid-column: span 3; grid-row: span 3;}
+    #fondateur .visual-band .tile:nth-child(4){grid-column: span 2; grid-row: span 2; border-radius:22px;}
+    #fondateur .visual-band .tile:nth-child(5){grid-column: span 2; grid-row: span 2;}
+    #fondateur .visual-band .tile:nth-child(6){grid-column: span 2; grid-row: span 2;}
+
+    /* Pourquoi : puzzle éditorial */
+    #pourquoi .visual-band .tile:nth-child(1){grid-column: span 4; grid-row: span 4;}
+    #pourquoi .visual-band .tile:nth-child(2){grid-column: span 4; grid-row: span 2;}
+    #pourquoi .visual-band .tile:nth-child(3){grid-column: span 2; grid-row: span 2; border-radius: 28px;}
+    #pourquoi .visual-band .tile:nth-child(4){grid-column: span 2; grid-row: span 2;}
+    #pourquoi .visual-band .tile:nth-child(5){grid-column: span 3; grid-row: span 3;}
+    #pourquoi .visual-band .tile:nth-child(6){grid-column: span 3; grid-row: span 3;}
+
+    /* Marché : damier équilibré */
+    #marche .visual-band .tile:nth-child(1){grid-column: span 3; grid-row: span 3;}
+    #marche .visual-band .tile:nth-child(2){grid-column: span 3; grid-row: span 3;}
+    #marche .visual-band .tile:nth-child(3){grid-column: span 3; grid-row: span 3;}
+    #marche .visual-band .tile:nth-child(4){grid-column: span 3; grid-row: span 3;}
+    #marche .visual-band .tile:nth-child(5){grid-column: span 6; grid-row: span 3;}
+    #marche .visual-band .tile:nth-child(6){grid-column: span 6; grid-row: span 3;}
+
+    /* YUME : hero central */
+    #yume .visual-band .tile:nth-child(1){grid-column: span 8; grid-row: span 4;}
+    #yume .visual-band .tile:nth-child(2){grid-column: span 4; grid-row: span 2;}
+    #yume .visual-band .tile:nth-child(3){grid-column: span 4; grid-row: span 2;}
+    #yume .visual-band .tile:nth-child(4){grid-column: span 3; grid-row: span 2;}
+    #yume .visual-band .tile:nth-child(5){grid-column: span 3; grid-row: span 2;}
+    #yume .visual-band .tile:nth-child(6){grid-column: span 6; grid-row: span 2;}
+
+    /* Offre : bandeau horizontal */
+    #offre .visual-band .tile:nth-child(1){grid-column: span 12; grid-row: span 3;}
+    #offre .visual-band .tile:nth-child(2){grid-column: span 4; grid-row: span 3;}
+    #offre .visual-band .tile:nth-child(3){grid-column: span 4; grid-row: span 3;}
+    #offre .visual-band .tile:nth-child(4){grid-column: span 4; grid-row: span 3;}
+    #offre .visual-band .tile:nth-child(5){display:none;}
+    #offre .visual-band .tile:nth-child(6){display:none;}
+
+    /* Fonctionnement : damier dynamique */
+    #fonctionnement .visual-band .tile:nth-child(1){grid-column: span 5; grid-row: span 3;}
+    #fonctionnement .visual-band .tile:nth-child(2){grid-column: span 4; grid-row: span 3;}
+    #fonctionnement .visual-band .tile:nth-child(3){grid-column: span 3; grid-row: span 6; border-radius:30px;}
+    #fonctionnement .visual-band .tile:nth-child(4){grid-column: span 3; grid-row: span 3;}
+    #fonctionnement .visual-band .tile:nth-child(5){grid-column: span 3; grid-row: span 3;}
+    #fonctionnement .visual-band .tile:nth-child(6){grid-column: span 6; grid-row: span 3;}
+
+    /* Audience : mosaïque verticale */
+    #cibles .visual-band .tile:nth-child(1){grid-column: span 4; grid-row: span 6;}
+    #cibles .visual-band .tile:nth-child(2){grid-column: span 4; grid-row: span 3;}
+    #cibles .visual-band .tile:nth-child(3){grid-column: span 4; grid-row: span 3;}
+    #cibles .visual-band .tile:nth-child(4){grid-column: span 3; grid-row: span 2;}
+    #cibles .visual-band .tile:nth-child(5){grid-column: span 3; grid-row: span 2;}
+    #cibles .visual-band .tile:nth-child(6){grid-column: span 6; grid-row: span 2;}
+
+    /* Média : mosaïque édito */
+    #media .visual-band .tile:nth-child(1){grid-column: span 7; grid-row: span 4;}
+    #media .visual-band .tile:nth-child(2){grid-column: span 5; grid-row: span 2;}
+    #media .visual-band .tile:nth-child(3){grid-column: span 5; grid-row: span 2;}
+    #media .visual-band .tile:nth-child(4){grid-column: span 4; grid-row: span 2;}
+    #media .visual-band .tile:nth-child(5){grid-column: span 4; grid-row: span 2;}
+    #media .visual-band .tile:nth-child(6){grid-column: span 4; grid-row: span 2;}
+
+    /* Réseau : damier simple */
+    #reseau .visual-band .tile:nth-child(1),
+    #reseau .visual-band .tile:nth-child(2),
+    #reseau .visual-band .tile:nth-child(3),
+    #reseau .visual-band .tile:nth-child(4),
+    #reseau .visual-band .tile:nth-child(5),
+    #reseau .visual-band .tile:nth-child(6){grid-column: span 4; grid-row: span 3;}
+
+    /* Revenus & Lancement : alternance */
+    #revenus .visual-band .tile:nth-child(1){grid-column: span 6; grid-row: span 3;}
+    #revenus .visual-band .tile:nth-child(2){grid-column: span 6; grid-row: span 3;}
+    #revenus .visual-band .tile:nth-child(3){grid-column: span 4; grid-row: span 3;}
+    #revenus .visual-band .tile:nth-child(4){grid-column: span 4; grid-row: span 3;}
+    #revenus .visual-band .tile:nth-child(5){grid-column: span 4; grid-row: span 3;}
+    #revenus .visual-band .tile:nth-child(6){display:none;}
+
+    #lancement .visual-band .tile:nth-child(1){grid-column: span 12; grid-row: span 2;}
+    #lancement .visual-band .tile:nth-child(2){grid-column: span 6; grid-row: span 4;}
+    #lancement .visual-band .tile:nth-child(3){grid-column: span 6; grid-row: span 4;}
+    #lancement .visual-band .tile:nth-child(4),
+    #lancement .visual-band .tile:nth-child(5),
+    #lancement .visual-band .tile:nth-child(6){display:none;}
+
+    /* Contact : bande finale plus fine */
+    #soutien .visual-band{ height: 70mm; }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="toolbar screen-only">
+      <div class="hint">Astuces : imprime en PDF (Ctrl/Cmd+P) → Format A4. Marges par défaut. Les pages se calent automatiquement.</div>
+      <div>
+        <button class="btn" id="btn-print" onclick="window.print()">Exporter PDF</button>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <!-- COVER -->
+    <section class="page cover">
+      <div class="hero" aria-hidden="true"></div>
+      <div class="veil" aria-hidden="true"></div>
+      <div class="branding">
+        <div class="logo">Y<b>U</b>M<b>E</b></div>
+        <div class="title display">Objets vendus.<br/> Athlètes soutenus.</div>
+        <div class="subtitle">Une plateforme solidaire qui finance les rêves sportifs grâce à la seconde main.</div>
+        <div class="tagline">Dossier de presse</div>
+      </div>
+      <div class="footer-band">
+        <div>Plateforme solidaire • Économie circulaire • Sport</div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span>yu-me.fr</span> <span class="bullet"></span> <span>2025</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOC -->
+    <section class="page p">
+      <div class="eyebrow">Sommaire</div>
+      <div class="hairline mt-8 mb-16"></div>
+      <div class="grid g-2 toc">
+        <div>
+          <div class="h2">01. Vision & Contexte</div>
+          <div class="body mt-8">
+            <a href="#fondateur">Lettre du fondateur</a><br/>
+            <a href="#pourquoi">Pourquoi YUME aujourd'hui</a><br/>
+            <a href="#marche">Le marché de la seconde main</a>
+          </div>
+        </div>
+        <div>
+          <div class="h2">02. La Plateforme</div>
+          <div class="body mt-8">
+            <a href="#yume">Qu'est-ce que YUME ?</a><br/>
+            <a href="#offre">Ce qu'on trouve sur YUME</a><br/>
+            <a href="#fonctionnement">Fonctionnement (CtoC & BtoC)</a><br/>
+            <a href="#valeurs">Valeurs & engagements</a>
+          </div>
+        </div>
+        <div>
+          <div class="h2">03. Audience & Media</div>
+          <div class="body mt-8">
+            <a href="#cibles">À qui s'adresse YUME</a><br/>
+            <a href="#media">YUME, marque média</a><br/>
+            <a href="#reseau">Réseau & présence</a>
+          </div>
+        </div>
+        <div>
+          <div class="h2">04. Modèle & Lancement</div>
+          <div class="body mt-8">
+            <a href="#revenus">Revenus & financements</a><br/>
+            <a href="#lancement">Lancement & objectifs</a><br/>
+            <a href="#soutien">Appel à partenaires</a><br/>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- FOUNDER LETTER -->
+    <section id="fondateur" class="page p">
+      <div class="eyebrow">Préface</div>
+      <div class="h1 display mt-6">Quand les rêves sportifs rencontrent la solidarité circulaire</div>
+      <div class="hairline mt-12 mb-16"></div>
+      <div class="cols body">
+        <p>Je m'appelle Loïc Métivier, passionné de sport et fondateur de YUME. Les arts martiaux m'ont appris l'endurance et la persévérance. En 2022, au contact d'athlètes peu médiatisés, une idée simple s'est imposée : et si chaque achat de seconde main pouvait aider concrètement un sportif à poursuivre sa carrière ?</p>
+        <p>YUME — « rêve » en japonais — transforme la seconde main en soutien tangible pour les sportifs de haut niveau peu médiatisés et les associations locales. Derrière chaque vente, les utilisateurs donne un coup de pouce pour réaliser un rêve.</p>
+      </div>
+      <div class="goldbox mt-16">
+        <div class="h3">Manifeste</div>
+        <div class="body mt-6">Moins de gaspillage, plus de solidarité. Une plateforme pensée pour répondre à une mission d'intérêt général : utile, durable, locale.</div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- WHY NOW -->
+    <section id="pourquoi" class="page p">
+      <div class="eyebrow">Contexte</div>
+      <div class="h2">Pourquoi YUME est indispensable aujourd'hui</div>
+      <div class="kpis mt-16">
+        <div class="kpi"><div class="num">1/2</div><div class="lbl">Athlètes jugent leur situation difficile</div></div>
+        <div class="kpi"><div class="num">9/10</div><div class="lbl">Cumulent études ou emploi</div></div>
+        <div class="kpi"><div class="num">40%</div><div class="lbl">Sous le seuil de pauvreté (2015)</div></div>
+      </div>
+      <div class="body mt-16 cols">
+        <p>Le sport est un pilier d'intérêt général : santé, cohésion sociale, éducation, économie locale. Pourtant, des centaines d'athlètes prometteurs renoncent chaque année, faute de moyens pour le matériel, les déplacements et l'entraînement.</p>
+        <p>Les associations, pépinières de talents, opèrent avec des budgets serrés et un recours massif au bénévolat. YUME offre une solution nouvellle et innovante pour combler ces besoins avec un modèle vertueux et transparent.</p>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- MARKET -->
+    <section id="marche" class="page p">
+      <div class="eyebrow">Marché</div>
+      <div class="h2">La seconde main, un marché en pleine expansion</div>
+      <div class="body mt-12 cols">
+        <p>Le marché français dépasse 7 Mds € (2023) et pourrait franchir 10 Mds € d'ici 2027. Plus de 60 % des Français ont déjà acheté d'occasion. Une dynamique idéale pour associer économie circulaire et impact social positif.</p>
+      </div>
+      <div class="kpis mt-20">
+        <div class="kpi"><div class="num">60 %</div><div class="lbl">Français acheteurs d'occasion</div></div>
+        <div class="kpi"><div class="num">10 Mds €</div><div class="lbl">Potentiel 2027</div></div>
+        <div class="kpi"><div class="num">+</div><div class="lbl">Toutes générations concernées</div></div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- WHAT IS YUME -->
+    <section id="yume" class="page p">
+      <div class="eyebrow">Plateforme</div>
+      <div class="h2">YUME — Objets vendus. Athlètes soutenus.</div>
+      <div class="body mt-12">Une plateforme digitale solidaire qui soutient les athlètes de haut niveau peu médiatisés et les associations locales via la vente et l'achat d'objets de seconde main (CtoC) et des offres de partenaires (BtoC).</div>
+      <div class="grid g-3 mt-16">
+        <div class="card">
+          <div class="h3">Mission</div>
+          <div class="body mt-6">Assurer une mission d'intérêt général : financer des talents sportifs peu médiatisés et renforcer les associations locales.</div>
+        </div>
+        <div class="card">
+          <div class="h3">Vision</div>
+          <div class="body mt-6">Créer un cercle vertueux entre économie circulaire, solidarité locale et excellence sportive.</div>
+        </div>
+        <div class="card">
+          <div class="h3">Objectif 2030</div>
+          <div class="body mt-6">1 M€ reversés aux athlètes et aux associations et un programme « Objets seconde main luxe certifiés ».</div>
+        </div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- CATALOGUE -->
+    <section id="offre" class="page p">
+      <div class="eyebrow">Offre</div>
+      <div class="h2">Que trouve‑t‑on sur YUME ?</div>
+      <div class="grid g-3 mt-16">
+        <div class="card"><div class="h3">Ameublement</div><div class="body mt-6">Sélection de qualité, état vérifié, style durable.</div></div>
+        <div class="card"><div class="h3">Sport & loisirs</div><div class="body mt-6">Équipement, mobilité douce, matériel d'entraînement.</div></div>
+        <div class="card"><div class="h3">Jouets & jeux</div><div class="body mt-6">Transmission & seconde vie pour les familles.</div></div>
+        <div class="card"><div class="h3">Mobilité</div><div class="body mt-6">Vélos & mobilité urbaine reconditionnée.</div></div>
+        <div class="card"><div class="h3">Textile</div><div class="body mt-6">Vêtements & chaussures, sélection responsable.</div></div>
+        <div class="card"><div class="h3">Électronique</div><div class="body mt-6">Appareils vérifiés, durables et utiles.</div></div>
+      </div>
+      <div class="note mt-16">+ Offres partenaires : services culturels & loisirs, produits neufs écoresponsables, ventes événementielles.</div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="fonctionnement" class="page p">
+      <div class="eyebrow">Fonctionnement</div>
+      <div class="h2">Simple, vertueux et traçable</div>
+      <div class="grid g-2 mt-16">
+        <div>
+          <div class="h3">Pour les particuliers (CtoC)</div>
+          <div class="body mt-6">
+            À chaque vente/achat, un don libre (≥ 1 %) finance les athlètes et associations. <br/>
+            <span class="chip mt-8">1 € de don = 1 point avantage partenaire</span>
+          </div>
+          <div class="goldbox mt-12">
+            <div class="h3">Exemple</div>
+            <div class="body mt-6">Vente d'une armoire 100 € : vendeur donne 1 €, acheteur ajoute 1 €. 70 % vont aux athlètes soutenus soit 1,40€, 30 % à la plateforme soit 0,70€.</div>
+          </div>
+        </div>
+        <div>
+          <div class="h3">Pour les professionnels (BtoC)</div>
+          <div class="body mt-6">Contribution solidaire à partir de 4 % par vente. Option : ajouter des points avantages pour booster l'offre.</div>
+          <div class="goldbox mt-12">
+            <div class="h3">Exemple</div>
+            <div class="body mt-6">Vente d'un vélo d'occasion 110 € : 4,4 € reversés, dont 3,08 € aux athlètes et 1,32€ pour le fonctionnement de la plateforme. L'acheteur gagne 4,4 points avantages.</div>
+          </div>
+        </div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- VALUES -->
+    <section id="valeurs" class="page p">
+      <div class="eyebrow">Valeurs</div>
+      <div class="h2">Notre cadre éthique</div>
+      <div class="grid g-2 mt-16">
+        <div>
+          <ul class="body">
+            <li><b>Solidarité</b> — chaque transaction soutient une mission d'intérêt général.</li>
+            <li><b>Développement durable</b> — allonger la vie des objets.</li>
+            <li><b>Économie circulaire</b> — rien ne se perd, tout se transforme.</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="body">
+            <li><b>ESS</b> — mettre l'économie au service de l'humain.</li>
+            <li><b>Transparence</b> — modèle clair, traçabilité des dons.</li>
+            <li><b>Exigence</b> — expérience premium, sélection qualitative.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- AUDIENCE -->
+    <section id="cibles" class="page p">
+      <div class="eyebrow">Audience</div>
+      <div class="h2">À qui s'adresse YUME</div>
+      <div class="grid g-2 mt-16">
+        <div class="card">
+          <div class="h3">Sportifs de haut niveau peu médiatisés</div>
+          <div class="body mt-6">Nouvelle source de financement, plus humaine et solidaire. Mise en lumière de leurs récits.</div>
+        </div>
+        <div class="card">
+          <div class="h3">Partenaires engagés</div>
+          <div class="body mt-6">Marques, distributeurs, commerces locaux : visibilité et impact dans un écosystème vertueux.</div>
+        </div>
+      </div>
+      <div class="card mt-16">
+        <div class="h3">Familles</div>
+        <div class="body mt-6">Parents de la génération Y, enfants 0–21 ans : consommer autrement, soutenir les valeurs du sport et de la solidarité.</div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- MEDIA BRAND -->
+    <section id="media" class="page p">
+      <div class="eyebrow">Marque média</div>
+      <div class="h2">Donner la parole à celles et ceux qui s'engagent</div>
+      <div class="body mt-12">Podcast audio en 5 séries thématiques : « Ton rêve, ton combat », « Changer les règles du jeu », « Et si on pouvait tous gagner ? », « Un objet, une histoire », « Rêves croisés ». Première diffusion à partir de septembre 2025.</div>
+      <div class="grid g-3 mt-16">
+        <div class="card"><div class="h3">Format</div><div class="body mt-6">Épisodes 25–40 min, voix et sound design soignés, esthétique premium.</div></div>
+        <div class="card"><div class="h3">Rôle</div><div class="body mt-6">Nourrir la communauté, inspirer, créer du lien entre sportifs, citoyens et partenaires.</div></div>
+        <div class="card"><div class="h3">Canaux</div><div class="body mt-6">Site, plateformes d'écoute, réseaux sociaux, événements.</div></div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- PRESENCE -->
+    <section id="reseau" class="page p">
+      <div class="eyebrow">Réseau</div>
+      <div class="h2">Où trouver YUME ?</div>
+      <div class="body mt-12">Réseau de partenaires locaux en Vendée et partout en France. Certification qualité des objets en boutique, dépôt/retrait chez des partenaires de confiance, ventes événementielles.</div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- MODEL -->
+    <section id="revenus" class="page p">
+      <div class="eyebrow">Modèle</div>
+      <div class="h2">Revenus & financements</div>
+      <div class="grid g-2 mt-16">
+        <div>
+          <div class="h3">Piliers de revenus</div>
+          <ul class="body mt-6">
+            <li>Dons CtoC (≥ 1 %)</li>
+            <li>Contribution partenaires (≥ 4 %/vente)</li>
+            <li>Ventes événementielles à forte valeur</li>
+            <li>Options & abonnements premium</li>
+          </ul>
+        </div>
+        <div>
+          <div class="h3">Financement et modéle économique</div>
+          <div class="body mt-6">Campagne de financement participatif adossée à des événements sportifs. Viabilité économique recherchée pour assurer la mission d'intérêt général durablement.</div>
+        </div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- LAUNCH -->
+    <section id="lancement" class="page p">
+      <div class="eyebrow">Feuille de route</div>
+      <div class="h2">Lancement & objectifs</div>
+      <div class="grid g-2 mt-16">
+        <div class="card">
+          <div class="h3">Calendrier</div>
+          <div class="body mt-6">Lancement officiel : 1er semestre 2026. Phase bêta avec partenaires pilotes, montée en puissance progressive.</div>
+        </div>
+        <div class="card">
+          <div class="h3">Objectif 2030</div>
+          <div class="body mt-6">1 000 000 € reversés, 714 285 transactions, don moyen 2 € (acheteur + vendeur).</div>
+        </div>
+      </div>
+      <div class="visual-band damier">
+        <figure class="tile span-4 row-4"><img src="img/runner_blocks.jpg" alt="Sprint — blocs de départ"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/fencing_mask.jpg" alt="Escrime — masque"/></figure>
+        <figure class="tile span-3 row-3"><img src="img/swim_splash.jpg" alt="Natation — eau"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/tennis_lines.jpg" alt="Tennis — lignes du court"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/gym_grips.jpg" alt="Gym — anneaux"/></figure>
+        <figure class="tile span-2 row-2"><img src="img/track_close.jpg" alt="Athlé — virage de piste"/></figure>
+      </div>
+      <div class="running"><div>YUME — Dossier de presse</div><div class="page-no"></div></div>
+    </section>
+
+    <!-- CALL TO ACTION / CONTACT -->
+    <section id="soutien" class="page p">
+      <div class="eyebrow">Partenariats</div>
+      <div class="poster mt-6">Rejoindre un projet utile, local, durable.</div>
+      <div class="body mt-12">YUME recherche : utilisatrices et utilisateurs réguliers de plateforme de seconde main, athlètes peu médiatisés, partenaires locaux &amp; nationaux, associations sportives, collectivités intéressées par la démarche, professionnels souhaitant s'engager.</div>
+      <div class="hairline mt-16 mb-16"></div>
+
+      <!-- Grille responsive Bootstrap : 1 col mobile / 2 cols ≥ md -->
+      <div id="contact" class="row g-4">
+        <div class="col-12 col-md-6">
+          <div class="h3">Contact</div>
+          <div class="body mt-6">
+            Loïc Métivier<br>
+            <a href="mailto:loic@yu-me.fr">loic@yu-me.fr</a><br>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="h3">Devenir partenaire</div>
+          <div class="body mt-6">
+            Intéressé pour collaborer ? Écris‑moi et on regarde le meilleur format.
+          </div>
+          <a class="btn btn-outline-dark mt-3" href="mailto:loic@yu-me.fr?subject=Devenir%20partenaire%20YUME">
+            Je contacte YUME
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- /.wrap -->
+
+  <!-- Bootstrap JS bundle placé juste avant </body> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+          crossorigin="anonymous"></script>
+</body>
+</html>
