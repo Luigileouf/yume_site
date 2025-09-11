@@ -11,159 +11,158 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
 <style>
     :root{
-      --bg:#ffffff; --fg:#111111; --muted:#666; --border:rgba(0,0,0,.14);
-      --gold-1:#fbf3d2; --gold-2:#d9c571; --gold-3:#b39545;
-      --radius:22px; --shadow:0 8px 24px rgba(0,0,0,.08); --maxw:1120px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
-    .container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
-    .stack-xs{margin-top:.5rem}.stack-s{margin-top:.75rem}.stack-m{margin-top:1rem}.stack-l{margin-top:1.5rem}.stack-xl{margin-top:2rem}
-    .muted{color:var(--muted)}
-    .rule{display:inline-block;width:24px;height:1px;background:var(--border);margin-right:8px}
-    .eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#9a9a9a;display:flex;align-items:center;gap:8px}
-    .title{font-family:"Playfair Display",ui-serif,Georgia,serif;letter-spacing:.02em}
-    .lead{color:#222;max-width:780px}
-    .section{padding:64px 0}
-    .grid{display:grid;gap:24px}
-    .grid-2{grid-template-columns:1fr}
-    @media(min-width:900px){.grid-2{grid-template-columns:5fr 7fr}}
+  --bg:#ffffff; --fg:#111111; --muted:#666; --border:rgba(0,0,0,.14);
+  --gold-1:#fbf3d2; --gold-2:#d9c571; --gold-3:#b39545;
+  --radius:22px; --shadow:0 8px 24px rgba(0,0,0,.08); --maxw:1120px;
+}
 
-    /* header */
-    header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.75);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--border)}
-    .nav{height:64px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand-mark{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e8e8e8,#bdbdbd)}
-    .brand-name{font-family:"Playfair Display",ui-serif,Georgia,serif;letter-spacing:.25em;text-transform:uppercase;font-size:13px}
-    .nav a{color:#333;text-decoration:none;font-size:14px;margin-left:14px}
-    .nav a:hover{color:#000}
+/* Base */
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;
+  scroll-behavior:smooth;
+}
+.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.stack-xs{margin-top:.5rem}.stack-s{margin-top:.75rem}.stack-m{margin-top:1rem}.stack-l{margin-top:1.5rem}.stack-xl{margin-top:2rem}
+.muted{color:var(--muted)}
+.rule{display:inline-block;width:24px;height:1px;background:var(--border);margin-right:8px}
+.eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#9a9a9a;display:flex;align-items:center;gap:8px}
+.title{font-family:"Playfair Display",ui-serif,Georgia,serif;letter-spacing:.02em}
+.lead{color:#222;max-width:780px}
+.section{padding:64px 0}
+.grid{display:grid;gap:24px}
+.grid-2{grid-template-columns:1fr}
 
-    /* ===== Nav mobile ===== */
+/* Header */
+header{
+  position:sticky; top:0; z-index:20;
+  background:rgba(255,255,255,.75);
+  backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid var(--border);
+}
+.nav{height:64px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+
+/* Ancien rond (utilisé au footer), on garde. */
+.brand-mark{width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#e8e8e8,#bdbdbd)}
+
+/* Logo image — FIX: règle globale, pas imbriquée dans un @media */
+.brand-logo{
+  display:block; height:28px; width:auto; object-fit:contain;
+}
+/* Nom */
+.brand-name{
+  font-family:"Playfair Display",ui-serif,Georgia,serif;
+  letter-spacing:.25em; text-transform:uppercase; font-size:13px
+}
+
+/* Liens de nav (desktop par défaut) */
+.nav a{color:#333;text-decoration:none;font-size:14px;margin-left:14px}
+.nav a:hover{color:#000}
+
+/* Burger (caché par défaut) */
 .menu-toggle{
-  display:none;
-  width:42px;height:42px;
-  border:1px solid var(--border);
-  border-radius:10px;background:#fff;cursor:pointer;
-  align-items:center;justify-content:center;gap:4px;
+  display:none; width:42px; height:42px;
+  border:1px solid var(--border); border-radius:10px;
+  background:#fff; cursor:pointer; align-items:center; justify-content:center; gap:4px;
 }
-.menu-toggle span{
-  display:block;width:18px;height:2px;background:#111;border-radius:2px;
-}
+.menu-toggle span{display:block;width:18px;height:2px;background:#111;border-radius:2px}
 .menu-toggle span:nth-child(2){width:14px}
 .menu-toggle span:nth-child(3){width:18px}
 
-@media (max-width: 900px){
-  /* Conteneur header stable et respirant */
+/* Boutons */
+.btn{appearance:none;border:1px solid var(--border);border-radius:18px;padding:12px 16px;background:#fff;color:#111;cursor:pointer;font-weight:600}
+.btn:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+.btn-primary{
+  border-color:color-mix(in oklab, var(--gold-3) 30%, #000 10%);
+  background:linear-gradient(90deg,var(--gold-1),var(--gold-2)); color:#111
+}
+.btn-link{border:0;background:transparent;padding:0;color:#111}
+
+/* Cards / tiles */
+.card{border:1px solid var(--border);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow)}
+.card .p{padding:28px}
+.tile{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.tile>img{display:block;width:100%;height:220px;object-fit:cover}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(255,255,255,.6),transparent)}
+
+/* Lists */
+.list{margin:0;padding-left:1.2rem}
+.list li{margin:.35rem 0}
+
+/* Motion */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in-view{opacity:1;transform:none}
+.hover-rise{transition:transform .35s ease}.hover-rise:hover{transform:translateY(-4px)}
+
+/* Footer */
+footer{border-top:1px solid var(--border)}
+footer{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+footer .footer-brand{font-weight:bold}
+footer .footer-links{display:flex;flex-direction:column;gap:4px}
+footer .footer-links a{text-decoration:none}
+
+/* ====== Breakpoints ====== */
+@media (max-width:900px){
+  .grid-2{grid-template-columns:1fr}
   .nav{height:64px;gap:10px}
   .brand-name{font-size:12px;letter-spacing:.22em}
 
-  /* Bouton burger visible, liens cachés par défaut */
+  /* Burger visible, nav en panneau */
   .menu-toggle{display:inline-flex}
   header .nav > nav{
-    position:fixed; inset:64px 0 auto 0;   /* sous le header */
+    position:fixed; inset:64px 0 auto 0; /* sous le header */
     background:#fff; border-top:1px solid var(--border);
     display:none; flex-direction:column; padding:10px 14px 16px;
     box-shadow:0 8px 24px rgba(0,0,0,.08);
   }
-  header .nav > nav a{
-    margin:0; padding:14px 8px; font-size:16px; border-radius:10px;
-  }
+  header .nav > nav a{margin:0;padding:14px 8px;font-size:16px;border-radius:10px}
   header .nav > nav a:active{background:rgba(0,0,0,.04)}
-
-  /* État ouvert */
   header .nav > nav.open{display:flex}
 
-  /* Le CTA reste à droite sans chevaucher */
-  .nav .btn.btn-primary{
-    padding:10px 12px; white-space:nowrap; font-size:13px;
-  }
+  .nav .btn.btn-primary{padding:10px 12px;white-space:nowrap;font-size:13px}
 }
 
-/* Empêcher le scroll de la page quand le menu est ouvert */
+@media (min-width:900px){
+  .grid-2{grid-template-columns:5fr 7fr}
+  .brand-logo{height:32px}
+}
+
+@media (min-width:1200px){
+  :root{--maxw:1280px}
+  .title{font-size:32px}
+  .lead{font-size:20px}
+  .section{padding:96px 0}
+  .grid-2{grid-template-columns:4fr 8fr;gap:32px}
+  .brand-logo{height:34px}
+}
+
+/* Accessibilité: bloquer le scroll quand menu ouvert */
 body.no-scroll{overflow:hidden}
 
-    /* buttons */
-    .btn{appearance:none;border:1px solid var(--border);border-radius:18px;padding:12px 16px;background:#fff;color:#111;cursor:pointer;font-weight:600}
-    .btn:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
-    .btn-primary{border-color:color-mix(in oklab, var(--gold-3) 30%, #000 10%);
-      background:linear-gradient(90deg,var(--gold-1),var(--gold-2));color:#111}
-    .btn-link{border:0;background:transparent;padding:0;color:#111}
-
-    /* cards / tiles */
-    .card{border:1px solid var(--border);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow)}
-    .card .p{padding:28px}
-    .tile{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
-    .tile>img{display:block;width:100%;height:220px;object-fit:cover}
-    .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(255,255,255,.6),transparent)}
-
-    /* lists */
-    .list{margin:0;padding-left:1.2rem}
-    .list li{margin:.35rem 0}
-
-    /* subtle motion */
-    .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
-    .reveal.in-view{opacity:1;transform:none}
-    .hover-rise{transition:transform .35s ease}.hover-rise:hover{transform:translateY(-4px)}
-
-    /* footer */
-    footer{border-top:1px solid var(--border)}
-
-    @media(prefers-reduced-motion:reduce){
-      .reveal,.hover-rise{transition:none}
-    }
-
-    footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 6px; /* espace entre les lignes */
+/* Préférence utilisateur: réduire mouvements */
+@media (prefers-reduced-motion:reduce){
+  .reveal,.hover-rise{transition:none}
 }
 
-footer .footer-brand {
-  font-weight: bold;
-}
-
-footer .footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-footer .footer-links a {
-  text-decoration: none;
-}
-
-    @media (max-width: 600px) {
-      .title{font-size:24px}
-      .lead{font-size:16px}
-      .section{padding:48px 0}
-      .grid-2{grid-template-columns:1fr;gap:16px}
-      .container{padding:0 16px}
-    }
-
-    @media (min-width: 1200px) {
-      :root{--maxw:1280px}
-      .title{font-size:32px}
-      .lead{font-size:20px}
-      .section{padding:96px 0}
-      .grid-2{grid-template-columns:4fr 8fr;gap:32px}
-    }
   </style>
 </head>
 <body>
 <header>
 <div class="container nav">
 <div class="brand">
-<div aria-hidden="true" class="brand-mark"></div>
-<a aria-label="YUME" class="brand-name" href="#">YUME</a>
+<img src="img/logo-yume-solidarite.png" alt="Logo YUME" class="brand-logo">
+<a aria-label="Accueil YUME" class="brand-name" href="#">YUME</a>
 </div>
 <!-- Bouton burger (mobile) -->
 <button aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu" class="menu-toggle">
 <span></span><span></span><span></span>
 </button>
 <nav aria-label="Navigation principale" id="site-nav">
+<a href="media.html">Média</a>
 <a href="#mission">Mission</a>
 <a href="#solution">Solution</a>
 <a href="#modele">Modèle</a>
@@ -172,7 +171,7 @@ footer .footer-links a {
 <a href="#developpement">Dév.</a>
 <a href="#contact">Contact</a><a href="index_dossier_de_press_7_fixed.html">Dossier de presse</a>
 </nav>
-<div><a class="btn btn-primary" href="accueil.html">Voir l’aperçu</a></div>
+<div><a class="btn btn-primary" href="accueil.html">Accueil application</a></div>
 </div>
 </header>
 <main>
@@ -336,7 +335,7 @@ footer .footer-links a {
 </ul>
 <p class="muted stack-s">On construit YUME avec vous.</p>
 <div class="stack-m">
-<a class="btn btn-primary" href="accueil.html">Accéder à la page d’accueil</a>
+<a class="btn btn-primary" href="accueil.html">Accéder à la page d’accueil de l'app</a>
 </div>
 </div>
 </div>
@@ -345,7 +344,7 @@ footer .footer-links a {
 <section class="section">
 <div class="container" style="text-align:center">
 <p class="title" style="font-size:20px">Envie de voir l’aperçu ?</p>
-<a class="btn btn-primary" href="accueil.html">Ouvrir la page YUME</a>
+<a class="btn btn-primary" href="accueil.html">Ouvrir la page d'accueil de l'app YUME</a>
 </div>
 </section>
 <!-- Newsletter embed -->

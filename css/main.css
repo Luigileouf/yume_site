@@ -70,6 +70,27 @@
   }
 }
 
+/* Logos partenaires : garder les proportions, taille cohérente */
+.logo-partenaire{
+  display:block;
+  height:42px;         /* ajuste si tu veux 36–60px */
+  width:auto;
+  object-fit:contain;  /* jamais étiré */
+  flex:0 0 auto;       /* ne pas s’étirer dans le flex */
+}
+
+/* Un peu plus grand sur écrans + larges */
+@media (min-width: 768px){
+  .logo-partenaire{ height:50px; }
+}
+@media (min-width: 1200px){
+  .logo-partenaire{ height:58px; }
+}
+
+/* Option: rendu plus net pendant l’anim */
+#partenaires .d-flex{ will-change: transform; }
+
+
 /* Empêcher le scroll de la page quand le menu est ouvert */
 body.no-scroll{overflow:hidden}
 
