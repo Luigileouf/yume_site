@@ -9,13 +9,13 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
 <style>
-  :root{
+    :root{
   --bg:#ffffff; --fg:#111111; --muted:#666; --border:rgba(0,0,0,.14);
   --gold-1:#fbf3d2; --gold-2:#d9c571; --gold-3:#b39545;
   --radius:22px; --shadow:0 8px 24px rgba(0,0,0,.08); --maxw:1120px;
 }
 
-/* ===== Base ===== */
+/* Base */
 *{box-sizing:border-box}
 body{
   margin:0; background:var(--bg); color:var(--fg);
@@ -34,7 +34,7 @@ body{
 .grid{display:grid;gap:24px}
 .grid-2{grid-template-columns:1fr}
 
-/* ===== Header / Nav ===== */
+/* Header */
 header{
   position:sticky; top:0; z-index:20;
   background:rgba(255,255,255,.75);
@@ -43,97 +43,36 @@ header{
 }
 .nav{height:64px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:10px}
+
+/* Ancien rond (utilisé au footer), on garde. */
 .brand-mark{width:28px;height:28px;border-radius:50%;
   background:linear-gradient(135deg,#e8e8e8,#bdbdbd)}
-.brand-logo{display:block;height:28px;width:auto;object-fit:contain}
-.brand-name{font-family:"Playfair Display",ui-serif,Georgia,serif;letter-spacing:.25em;text-transform:uppercase;font-size:13px}
+
+/* Logo image — FIX: règle globale, pas imbriquée dans un @media */
+.brand-logo{
+  display:block; height:28px; width:auto; object-fit:contain;
+}
+/* Nom */
+.brand-name{
+  font-family:"Playfair Display",ui-serif,Georgia,serif;
+  letter-spacing:.25em; text-transform:uppercase; font-size:13px
+}
+
+/* Liens de nav (desktop par défaut) */
 .nav a{color:#333;text-decoration:none;font-size:14px;margin-left:14px}
 .nav a:hover{color:#000}
+
+/* Burger (caché par défaut) */
 .menu-toggle{
-  display:none;width:42px;height:42px;border:1px solid var(--border);border-radius:10px;
-  background:#fff;cursor:pointer;align-items:center;justify-content:center;gap:4px;
+  display:none; width:42px; height:42px;
+  border:1px solid var(--border); border-radius:10px;
+  background:#fff; cursor:pointer; align-items:center; justify-content:center; gap:4px;
 }
 .menu-toggle span{display:block;width:18px;height:2px;background:#111;border-radius:2px}
 .menu-toggle span:nth-child(2){width:14px}
 .menu-toggle span:nth-child(3){width:18px}
 
-/* ===== HERO — Halo néon (gauche) ===== */
-.hero-neon{
-  position:relative; background:#fff; border-bottom:1px solid var(--border);
-  overflow:hidden;
-}
-.hero-left{ padding: clamp(48px, 10vh, 120px) 0 64px; }
-.hero-left .container{ position:relative; }
-.hero-stack{ max-width:980px; }
-
-.hero-title{
-  color:#111;
-  font-family:"Playfair Display",ui-serif,Georgia,serif;
-  text-transform:uppercase; letter-spacing:.2em;
-  font-size:clamp(36px, 6vw, 64px);
-  line-height:1.15; margin:0 0 18px 0;
-}
-
-/* Sous-titre */
-.hero-left .lead{ color:#222; }
-
-/* Triple halo punchy & élargi (cyan + magenta/jaune + bleu) */
-.hero-glow{ position:relative; display:inline-block; z-index:0; }
-.hero-glow::before,
-.hero-glow::after,
-.hero-glow span::before{
-  content:"";
-  position:absolute; top:50%; left:0;
-  width:480px; height:480px;                     /* large */
-  transform:translate(-40%, -50%);
-  border-radius:50%;
-  filter:blur(130px);                             /* glow diffus et puissant */
-  pointer-events:none; z-index:-1; opacity:.9;
-}
-
-/* Cyan électrique */
-.hero-glow::before{
-  background:radial-gradient(circle, rgba(0,255,255,0.8) 0%, rgba(0,255,255,0) 75%);
-  animation:glowCyan 6s ease-in-out infinite;
-}
-
-/* Magenta <-> Jaune (alterne) */
-.hero-glow::after{
-  background:radial-gradient(circle, rgba(255,0,150,0.7) 0%, rgba(255,0,150,0) 75%);
-  animation:glowAlt 8s ease-in-out infinite alternate;
-  transform:translate(25%, -45%) scale(1.1);
-}
-
-/* Bleu électrique (troisième halo) */
-.hero-glow span::before{
-  background:radial-gradient(circle, rgba(0,90,255,0.75) 0%, rgba(0,90,255,0) 75%);
-  animation:glowBlue 10s ease-in-out infinite alternate;
-  transform:translate(-10%, -30%) scale(1.2);
-}
-
-/* Animations halos */
-@keyframes glowCyan{
-  0%,100%{ transform:translate(-40%, -50%) scale(1);   opacity:.8; }
-  50%    { transform:translate(-40%, -50%) scale(1.35); opacity:1;   }
-}
-@keyframes glowAlt{
-  0%  { background:radial-gradient(circle, rgba(255,0,150,0.7) 0%, rgba(255,0,150,0) 75%); }
-  50% { background:radial-gradient(circle, rgba(255,220,0,0.75) 0%, rgba(255,220,0,0) 75%); }
-  100%{ background:radial-gradient(circle, rgba(255,0,150,0.7) 0%, rgba(255,0,150,0) 75%); }
-}
-@keyframes glowBlue{
-  0%,100%{ transform:translate(-10%, -30%) scale(1.2); opacity:.7; }
-  50%    { transform:translate(-10%, -30%) scale(1.4); opacity:1;  }
-}
-
-/* Accessibilité : réduire les mouvements */
-@media (prefers-reduced-motion:reduce){
-  .hero-glow::before,
-  .hero-glow::after,
-  .hero-glow span::before{ animation:none; opacity:.5; }
-}
-
-/* ===== UI ===== */
+/* Boutons */
 .btn{appearance:none;border:1px solid var(--border);border-radius:18px;padding:12px 16px;background:#fff;color:#111;cursor:pointer;font-weight:600}
 .btn:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
 .btn-primary{
@@ -142,12 +81,14 @@ header{
 }
 .btn-link{border:0;background:transparent;padding:0;color:#111}
 
+/* Cards / tiles */
 .card{border:1px solid var(--border);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow)}
 .card .p{padding:28px}
 .tile{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
 .tile>img{display:block;width:100%;height:220px;object-fit:cover}
 .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(255,255,255,.6),transparent)}
 
+/* Lists */
 .list{margin:0;padding-left:1.2rem}
 .list li{margin:.35rem 0}
 
@@ -156,31 +97,31 @@ header{
 .reveal.in-view{opacity:1;transform:none}
 .hover-rise{transition:transform .35s ease}.hover-rise:hover{transform:translateY(-4px)}
 
-/* ===== Parallax sections ===== */
-.parallax{
-  height:400px;
-  background-attachment:fixed;
-  background-position:center;
-  background-repeat:no-repeat;
-  background-size:cover;
-}
-
-/* ===== Footer ===== */
+/* Footer */
 footer{border-top:1px solid var(--border)}
 footer{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
 footer .footer-brand{font-weight:bold}
 footer .footer-links{display:flex;flex-direction:column;gap:4px}
 footer .footer-links a{text-decoration:none}
 
-/* ===== Breakpoints ===== */
+.parallax {
+  height: 400px; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* ====== Breakpoints ====== */
 @media (max-width:900px){
   .grid-2{grid-template-columns:1fr}
   .nav{height:64px;gap:10px}
   .brand-name{font-size:12px;letter-spacing:.22em}
-  .menu-toggle{display:inline-flex}
 
+  /* Burger visible, nav en panneau */
+  .menu-toggle{display:inline-flex}
   header .nav > nav{
-    position:fixed; inset:64px 0 auto 0;
+    position:fixed; inset:64px 0 auto 0; /* sous le header */
     background:#fff; border-top:1px solid var(--border);
     display:none; flex-direction:column; padding:10px 14px 16px;
     box-shadow:0 8px 24px rgba(0,0,0,.08);
@@ -190,14 +131,6 @@ footer .footer-links a{text-decoration:none}
   header .nav > nav.open{display:flex}
 
   .nav .btn.btn-primary{padding:10px 12px;white-space:nowrap;font-size:13px}
-
-  /* Halos plus petits en mobile pour éviter la saturation */
-  .hero-glow::before,
-  .hero-glow::after,
-  .hero-glow span::before{
-    width:320px; height:320px; filter:blur(110px);
-    transform:translate(-30%, -50%);
-  }
 }
 
 @media (min-width:900px){
@@ -214,10 +147,10 @@ footer .footer-links a{text-decoration:none}
   .brand-logo{height:34px}
 }
 
-/* Bloquer le scroll quand menu mobile ouvert */
+/* Accessibilité: bloquer le scroll quand menu ouvert */
 body.no-scroll{overflow:hidden}
 
-/* Réduire autres transitions si préférence */
+/* Préférence utilisateur: réduire mouvements */
 @media (prefers-reduced-motion:reduce){
   .reveal,.hover-rise{transition:none}
 }
@@ -249,20 +182,17 @@ body.no-scroll{overflow:hidden}
 </div>
 </header>
 <main>
-<section class="hero-neon hero-left">
-  <div class="container">
-    <div class="hero-stack">
-      <h1 class="title hero-title hero-glow">YUME</h1>
-      <p class="lead stack-s">
-        Plateforme de seconde main solidaire — au service des athlètes peu médiatisés et des associations.
-      </p>
-    </div>
-  </div>
+<section class="section">
+<div class="container">
+<h1 class="title" style="font-size:clamp(32px, 6vw, 54px); text-transform:uppercase; letter-spacing:.2em;">YUME</h1>
+<p class="lead stack-s">Plateforme de seconde main solidaire — au service des athlètes peu médiatisés et des associations.</p>
+</div>
 </section>
 
-<!--paralax-->
+
+<!-- Effet parallax -->
 <section class="parallax" style="
-  background-image: url('https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?w=1600&auto=format&fit=crop');
+  background-image: url('img/sportif_paralax.png');
 ">
 </section>
 
