@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav ms-4">
-              <li class="nav-item"><a class="nav-link yume-link" href="media.html">Média</a></li>
+              <li class="nav-item"><a class="nav-link yume-link" href="media.html">Podcast</a></li>
               <li class="nav-item"><a class="nav-link yume-link" href="accueil.html#vendre">Vendre</a></li>
               <li class="nav-item"><a class="nav-link yume-link" href="accueil.html#bonnes-affaires">Acheter</a></li>
               <li class="nav-item"><a class="nav-link yume-link" href="accueil.html#voeu">Je fais un vœu</a></li>
