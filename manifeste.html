@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manifeste – YUME • Narration + Images</title>
+  <meta name="description" content="Le manifeste YUME en split‑screen : narration sticky à gauche, images immersives à droite. Lisible, rapide, impactant." />
+  <meta name="theme-color" content="#111" />
+  <style>
+    :root {
+      --bg:#0b0b0b;         /* fond global */
+      --fg:#ffffff;         /* texte principal */
+      --muted:#cfd8dc;      /* texte secondaire */
+      --gold:#f6d743;       /* accent YUME */
+      --accent:#00acc1;     /* accent dynamique */
+      --maxw: 1200px;       /* largeur max du contenu */
+      --g: clamp(16px, 2vw, 28px); /* gouttière */
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+
+    /* ===== Split layout ===== */
+    .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: var(--g); max-width: var(--maxw); margin: 0 auto; padding: 0 var(--g); }
+
+    .left {
+      position: sticky; top: 0; align-self: start; height: 100vh; display: grid; align-content: center; gap: 18px;
+    }
+    .badge { text-transform: uppercase; letter-spacing: .18em; font-weight: 700; color: var(--gold); font-size: .85rem; }
+    h1 { font-size: clamp(2.2rem, 4.4vw, 4rem); line-height: 1.05; margin: 0; }
+    .cursor { color: var(--gold); animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+    .lede { color: var(--muted); font-size: clamp(1.05rem, 1.2vw + .8rem, 1.3rem); margin: 4px 0 10px; }
+    .cta { display:inline-block; background: var(--gold); color:#111; text-decoration:none; font-weight:800; border-radius:999px; padding:12px 22px; box-shadow:0 10px 24px rgba(246,215,67,.25); }
+    .cta:hover{ transform: translateY(-2px); }
+
+    .right { position: relative; }
+
+    /* ===== Frames (one per section) ===== */
+    .frames { position: relative; }
+    .frame { position: relative; min-height: 100vh; scroll-margin-top: 10vh; display: grid; align-items: end; }
+
+    /* Image full-height with gradient for text contrast */
+    .media {
+      position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #0e0e0e;
+    }
+    .media::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.15) 0, rgba(0,0,0,.35) 40%, rgba(0,0,0,.55) 100%); }
+    
+    /* Photo credit */
+    .photo-credit {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+      background: rgba(0,0,0,0.4);
+      padding: 4px 8px;
+      border-radius: 4px;
+      z-index: 1;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Text card on each frame (optional) */
+    .card { backdrop-filter: blur(2px); background: color-mix(in srgb, #000 50%, transparent); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding: clamp(14px, 2.2vw, 22px); margin: clamp(12px, 2vw, 24px); }
+    .card h2 { margin: 0 0 6px; font-size: clamp(1.4rem, 2.2vw, 2rem); line-height: 1.15; }
+    .card p { margin: 0; color: var(--muted); }
+
+    /* Active frame fade-in */
+    .frame { opacity: .25; transform: translate3d(0, 8px, 0); transition: opacity .6s ease, transform .6s ease; }
+    .frame.is-active { opacity: 1; transform: none; }
+
+    /* Fit modes */
+    .frame[data-fit="contain"] .media::before{ background-size: contain; background-color:#0e0e0e; }
+    .frame[data-fit="cover"] .media::before{ background-size: cover; }
+
+    /* ===== Header & Footer (simple) ===== */
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(6px); background: color-mix(in srgb, var(--bg) 55%, transparent); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav { max-width: var(--maxw); margin: 0 auto; padding: 10px var(--g); display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-weight: 900; letter-spacing: .04em; }
+    .brand b{ color: var(--gold); }
+    .small { font-size: .95rem; color: var(--muted); }
+    footer { max-width: var(--maxw); margin: 0 auto; padding: 40px var(--g); border-top: 1px solid rgba(255,255,255,.06); color: var(--muted); }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px){ .wrap { grid-template-columns: 1fr; gap: 16px; } .left { position: static; height: auto; padding: 18px 0 0; } .frames .frame { min-height: 70vh; } }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){ .frame, .card, .media::before { transition: none !important; transform: none !important; }
+      .media::before{ transform:none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">YUME <b>Manifeste</b></div>
+      <a class="small" href="index.html">Retour au site</a>
+    </div>
+  </header>
+
+  <main class="wrap" aria-label="Manifeste YUME — narration à gauche, images à droite">
+    <!-- Left: sticky narrative -->
+    <section class="left" aria-label="Narration">
+      <span class="badge">Manifeste</span>
+      <h1><span id="prefix">POUR QU'ILS CONTINUENT À NOUS FAIRE </span><span id="typewriter"></span><span class="cursor">|</span></h1>
+      <p class="lede">Le sport de haut niveau mérite mieux qu’un système à bout de souffle. Ensemble, réécrivons les règles.</p>
+      <a class="cta" href="index.html">Découvrir</a>
+    </section>
+
+    <!-- Right: frames that advance as you scroll -->
+    <section class="right frames" aria-label="Images du manifeste">
+      <!-- Frame 1 -->
+      <article id="f1" class="frame is-active">
+        <div class="media" style="--img:url('assets/images/hero.jpg')">
+          <div class="photo-credit">Crédit : © Bizzi Team</div>
+        </div>
+        <div class="card">
+          <h2>Le sport de haut niveau est enfermé dans une boucle sans fin.</h2>
+          <p><strong>Sans visibilité, pas de sponsors. Sans sponsors, pas de rêve.</strong></p>
+        </div>
+      </article>
+
+      <!-- Frame 2 -->
+      <article id="f2" class="frame">
+        <div class="media" style="--img:url('assets/images/section-1.jpg')">
+          <div class="photo-credit">Crédit : © Bizzi Team</div>
+        </div>
+        <div class="card">
+          <h2>Mais le rêve mérite mieux qu'un système à bout de souffle.</h2>
+          <p>Nous avons le pouvoir de réécrire les règles.</p>
+        </div>
+      </article>
+
+      <!-- Frame 3 -->
+      <article id="f3" class="frame">
+        <div class="media" style="--img:url('assets/images/section-2.jpg')"></div>
+        <div class="card">
+          <h2>Choisir <span style="color:var(--gold)">YUME</span>, rêve en japonais, c’est choisir la révolution.</h2>
+          <p>Un sport plus juste, plus humain, plus solidaire.</p>
+        </div>
+      </article>
+
+      <!-- Frame 4 -->
+      <article id="f4" class="frame">
+        <div class="media" style="--img:url('assets/images/section-3.jpg')"></div>
+        <div class="card">
+          <h2>Chaque vente, chaque geste, chaque partage devient un acte d’espoir.</h2>
+          <p>Le changement ne viendra pas d’en haut. Il viendra de nous.</p>
+        </div>
+      </article>
+
+      <!-- Frame 5 (CTA) -->
+      <article id="f5" class="frame" data-fit="contain">
+        <div class="media" style="--img:url('assets/images/cta.jpg')"></div>
+        <div class="card">
+          <h2>Le sport mérite une nouvelle ère. <strong>Elle commence maintenant.</strong></h2>
+          <p><a class="cta" href="newsletter.html">Rejoindre le mouvement</a></p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    YUME — Objets Vendus, Athlètes Soutenus • © <span id="y"></span>
+  </footer>
+
+  <script>
+    // Typewriter effect with phrase change
+    const phases = [
+      { prefix: 'POUR QU\'ILS CONTINUENT À NOUS FAIRE ', words: ['RÊVER', 'VIBRER', 'ESPÉRER'] },
+      { prefix: '', words: ['PARCE QU\'ILS LE MÉRITENT'] }
+    ];
+    
+    let phaseIndex = 0;
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    const typewriterEl = document.getElementById('typewriter');
+    const prefixEl = document.getElementById('prefix');
+    const typingSpeed = 150;
+    const deletingSpeed = 100;
+    const pauseAfterWord = 2000;
+    const pauseBeforeType = 500;
+    const pauseBeforePhaseChange = 1000;
+
+    function typeWriter() {
+      const currentPhase = phases[phaseIndex];
+      const currentWord = currentPhase.words[wordIndex];
+      
+      if (isDeleting) {
+        // Delete character
+        typewriterEl.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+        
+        if (charIndex === 0) {
+          isDeleting = false;
+          wordIndex++;
+          
+          // Check if we've completed all words in current phase
+          if (wordIndex >= currentPhase.words.length) {
+            wordIndex = 0;
+            phaseIndex = (phaseIndex + 1) % phases.length;
+            
+            // Update prefix for next phase
+            setTimeout(() => {
+              prefixEl.textContent = phases[phaseIndex].prefix;
+              setTimeout(typeWriter, pauseBeforeType);
+            }, pauseBeforePhaseChange);
+            return;
+          }
+          
+          setTimeout(typeWriter, pauseBeforeType);
+          return;
+        }
+        setTimeout(typeWriter, deletingSpeed);
+      } else {
+        // Type character
+        typewriterEl.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+        
+        if (charIndex === currentWord.length) {
+          isDeleting = true;
+          setTimeout(typeWriter, pauseAfterWord);
+          return;
+        }
+        setTimeout(typeWriter, typingSpeed);
+      }
+    }
+
+    // Start typewriter effect
+    setTimeout(typeWriter, pauseBeforeType);
+
+    // Inject background images from CSS var for cleaner markup
+    document.querySelectorAll('.media').forEach(m => {
+      const cssVar = getComputedStyle(m).getPropertyValue('--img').trim();
+      if (cssVar) {
+        // Remove 'url(' and ')' and any quotes
+        const url = cssVar.replace(/^url\(['"]?|['"]?\)$/g, '');
+        m.style.backgroundImage = `url('${url}')`;
+        m.style.backgroundSize = 'contain';
+        m.style.backgroundPosition = 'center';
+        m.style.backgroundRepeat = 'no-repeat';
+        m.style.backgroundColor = '#0e0e0e';
+      }
+    });
+
+    // Observe frames to toggle active state (for opacity/animations)
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('is-active'); }
+        else { e.target.classList.remove('is-active'); }
+      });
+    }, { threshold: 0.35 });
+    document.querySelectorAll('.frame').forEach(f=>io.observe(f));
+
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Optional: light parallax on media for depth
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!prefersReduced){
+      const onScroll = ()=>{
+        document.querySelectorAll('.frame').forEach(f=>{
+          const rect = f.getBoundingClientRect();
+          const vh = window.innerHeight;
+          const progress = (vh - rect.top) / (vh + rect.height); // 0..1 approx
+          const y = (progress - 0.5) * 24; // px shift
+          const m = f.querySelector('.media');
+          if(m) m.style.transform = `translateY(${y.toFixed(1)}px)`;
+        });
+      };
+      document.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+    }
+  </script>
+</body>
+</html>
