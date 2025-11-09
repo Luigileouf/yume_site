@@ -1,0 +1,958 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════
+ * YUME DESIGN SYSTEM
+ * Version 1.0
+ * ═══════════════════════════════════════════════════════════════════
+ * 
+ * Système de design cohérent pour l'ensemble du projet YUME
+ * Plateforme solidaire de seconde main pour soutenir les athlètes
+ * 
+ * Structure:
+ * 1. Variables & Tokens
+ * 2. Base & Reset
+ * 3. Typography
+ * 4. Layout & Containers
+ * 5. Components
+ * 6. Utilities
+ * 7. Animations
+ * 8. Responsive
+ */
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   1. VARIABLES & DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── Couleurs ─── */
+  --yume-bg: #ffffff;
+  --yume-fg: #111111;
+  --yume-muted: #666666;
+  --yume-border: rgba(0, 0, 0, 0.14);
+  
+  /* Palette Dorée (Accent principal) */
+  --yume-gold-100: #fbf3d2;
+  --yume-gold-200: #f9edb8;
+  --yume-gold-400: #d9c571;
+  --yume-gold-600: #b39545;
+  
+  /* Dégradés */
+  --yume-gradient-gold: linear-gradient(90deg, var(--yume-gold-100), var(--yume-gold-400));
+  --yume-gradient-light: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+  
+  /* ─── Typographie ─── */
+  --yume-font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --yume-font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Tailles de police fluides */
+  --yume-text-xs: 10px;
+  --yume-text-sm: 13px;
+  --yume-text-base: 15px;
+  --yume-text-md: 16px;
+  --yume-text-lg: 18px;
+  --yume-text-xl: 20px;
+  
+  /* Titres fluides */
+  --yume-title-sm: clamp(20px, 3vw, 28px);
+  --yume-title-md: clamp(28px, 4vw, 40px);
+  --yume-title-lg: clamp(32px, 5vw, 56px);
+  --yume-title-xl: clamp(36px, 6vw, 64px);
+  
+  /* ─── Espacements ─── */
+  --yume-space-xs: 0.5rem;
+  --yume-space-sm: 0.75rem;
+  --yume-space-md: 1rem;
+  --yume-space-lg: 1.5rem;
+  --yume-space-xl: 2rem;
+  --yume-space-2xl: 3rem;
+  --yume-space-3xl: 4rem;
+  
+  /* ─── Bordures & Radius ─── */
+  --yume-radius-sm: 10px;
+  --yume-radius-md: 16px;
+  --yume-radius: 22px;
+  --yume-radius-lg: 28px;
+  --yume-radius-pill: 999px;
+  
+  /* ─── Ombres ─── */
+  --yume-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --yume-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --yume-shadow-md: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --yume-shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+  
+  /* ─── Layout ─── */
+  --yume-max-width: 1120px;
+  --yume-max-width-narrow: 920px;
+  --yume-max-width-text: 780px;
+  --yume-max-width-form: 680px;
+  
+  --yume-header-height: 64px;
+  
+  /* ─── Animations ─── */
+  --yume-ease: cubic-bezier(0.2, 0.65, 0.2, 1);
+  --yume-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --yume-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --yume-duration-fast: 0.15s;
+  --yume-duration: 0.3s;
+  --yume-duration-slow: 0.6s;
+  
+  /* ─── Z-index ─── */
+  --yume-z-base: 0;
+  --yume-z-dropdown: 10;
+  --yume-z-sticky: 20;
+  --yume-z-modal: 50;
+  --yume-z-toast: 100;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   2. BASE & RESET
+   ═══════════════════════════════════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--yume-bg);
+  color: var(--yume-fg);
+  font-family: var(--yume-font-sans);
+  font-size: var(--yume-text-base);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   3. TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Titres ─── */
+.yume-title {
+  font-family: var(--yume-font-serif);
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.yume-title-xl {
+  font-size: var(--yume-title-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.yume-title-lg {
+  font-size: var(--yume-title-lg);
+  letter-spacing: 0.08em;
+}
+
+.yume-title-md {
+  font-size: var(--yume-title-md);
+  letter-spacing: 0.05em;
+}
+
+.yume-title-sm {
+  font-size: var(--yume-title-sm);
+  letter-spacing: 0.05em;
+}
+
+/* ─── Eyebrow / Kicker ─── */
+.yume-eyebrow,
+.yume-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--yume-text-xs);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  font-weight: 600;
+}
+
+.yume-rule {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--yume-border);
+}
+
+/* ─── Paragraphes ─── */
+.yume-lead {
+  font-size: var(--yume-text-xl);
+  line-height: 1.6;
+  color: #222;
+  max-width: var(--yume-max-width-text);
+}
+
+.yume-body {
+  font-size: var(--yume-text-base);
+  line-height: 1.6;
+  color: var(--yume-fg);
+}
+
+.yume-text-sm {
+  font-size: var(--yume-text-sm);
+}
+
+.yume-muted,
+.yume-hint {
+  color: var(--yume-muted);
+}
+
+/* ─── Highlight texte doré ─── */
+.yume-highlight {
+  background: var(--yume-gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   4. LAYOUT & CONTAINERS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Containers ─── */
+.yume-container {
+  width: 100%;
+  max-width: var(--yume-max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.yume-container-narrow {
+  max-width: var(--yume-max-width-narrow);
+}
+
+.yume-container-text {
+  max-width: var(--yume-max-width-text);
+}
+
+/* ─── Sections ─── */
+.yume-section {
+  padding: clamp(48px, 8vh, 80px) 0;
+}
+
+.yume-section-lg {
+  padding: clamp(60px, 12vh, 120px) 0;
+}
+
+/* ─── Grid System ─── */
+.yume-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.yume-grid-2 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .yume-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.yume-grid-3 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .yume-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.yume-grid-4 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .yume-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .yume-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ─── Stack (espacement vertical) ─── */
+.yume-stack-xs { margin-top: var(--yume-space-xs); }
+.yume-stack-sm { margin-top: var(--yume-space-sm); }
+.yume-stack-md { margin-top: var(--yume-space-md); }
+.yume-stack-lg { margin-top: var(--yume-space-lg); }
+.yume-stack-xl { margin-top: var(--yume-space-xl); }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   5. COMPONENTS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────
+   5.1 HEADER & NAVIGATION
+   ───────────────────────────────────────────────────────────────── */
+
+.yume-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--yume-z-sticky);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--yume-border);
+}
+
+.yume-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--yume-header-height);
+  max-width: var(--yume-max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.yume-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--yume-font-serif);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.yume-nav-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 14px;
+  transition: color var(--yume-duration) var(--yume-ease);
+}
+
+.yume-nav-link:hover {
+  color: var(--yume-fg);
+}
+
+/* Menu burger mobile */
+.yume-menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--yume-border);
+  border-radius: var(--yume-radius-sm);
+  background: #fff;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.yume-menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--yume-fg);
+  border-radius: 2px;
+  transition: all var(--yume-duration) var(--yume-ease);
+}
+
+.yume-menu-toggle span:nth-child(2) {
+  width: 14px;
+}
+
+@media (max-width: 767px) {
+  .yume-menu-toggle {
+    display: flex;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   5.2 HERO SECTIONS
+   ───────────────────────────────────────────────────────────────── */
+
+.yume-hero {
+  position: relative;
+  padding: clamp(60px, 12vh, 120px) 20px clamp(48px, 10vh, 100px);
+  overflow: hidden;
+  border-bottom: 1px solid var(--yume-border);
+  background: var(--yume-gradient-light);
+}
+
+.yume-hero-content {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero avec effet néon (page index) */
+.yume-hero-neon {
+  background: #fff;
+  border-bottom: 1px solid var(--yume-border);
+  overflow: hidden;
+}
+
+.yume-hero-glow {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+}
+
+.yume-hero-glow::before,
+.yume-hero-glow::after,
+.yume-hero-glow span::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 480px;
+  height: 480px;
+  transform: translate(-40%, -50%);
+  border-radius: 50%;
+  filter: blur(130px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+.yume-hero-glow::before {
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, rgba(0, 255, 255, 0) 75%);
+  animation: yume-glow-cyan 6s ease-in-out infinite;
+}
+
+.yume-hero-glow::after {
+  background: radial-gradient(circle, rgba(255, 0, 150, 0.7) 0%, rgba(255, 0, 150, 0) 75%);
+  animation: yume-glow-alt 8s ease-in-out infinite alternate;
+  transform: translate(25%, -45%) scale(1.1);
+}
+
+.yume-hero-glow span::before {
+  background: radial-gradient(circle, rgba(0, 90, 255, 0.75) 0%, rgba(0, 90, 255, 0) 75%);
+  animation: yume-glow-blue 10s ease-in-out infinite alternate;
+  transform: translate(-10%, -30%) scale(1.2);
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   5.3 CARDS & TILES
+   ───────────────────────────────────────────────────────────────── */
+
+.yume-card {
+  background: #fff;
+  border: 1px solid var(--yume-border);
+  border-radius: var(--yume-radius);
+  box-shadow: var(--yume-shadow);
+  overflow: hidden;
+}
+
+.yume-card-padding {
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.yume-card-hover {
+  transition: transform var(--yume-duration) var(--yume-ease),
+              box-shadow var(--yume-duration) var(--yume-ease);
+}
+
+.yume-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--yume-shadow-md);
+}
+
+/* Tile pour images */
+.yume-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--yume-radius);
+  border: 1px solid var(--yume-border);
+  box-shadow: var(--yume-shadow);
+}
+
+.yume-tile img,
+.yume-tile video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.yume-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.6), transparent);
+  pointer-events: none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   5.4 BUTTONS
+   ───────────────────────────────────────────────────────────────── */
+
+.yume-btn {
+  appearance: none;
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid var(--yume-border);
+  border-radius: 18px;
+  background: #fff;
+  color: var(--yume-fg);
+  font-family: var(--yume-font-sans);
+  font-size: var(--yume-text-base);
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: transform var(--yume-duration) var(--yume-ease),
+              box-shadow var(--yume-duration) var(--yume-ease),
+              background var(--yume-duration) var(--yume-ease);
+}
+
+.yume-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--yume-shadow);
+}
+
+.yume-btn:active {
+  transform: translateY(0);
+}
+
+.yume-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Variantes */
+.yume-btn-primary,
+.yume-btn-gold {
+  border-color: color-mix(in oklab, var(--yume-gold-600) 30%, #000 10%);
+  background: var(--yume-gradient-gold);
+  color: var(--yume-fg);
+}
+
+.yume-btn-primary:hover,
+.yume-btn-gold:hover {
+  box-shadow: var(--yume-shadow-md);
+}
+
+.yume-btn-dark,
+.yume-btn-ink {
+  border-color: var(--yume-fg);
+  background: var(--yume-fg);
+  color: #fff;
+}
+
+.yume-btn-dark:hover,
+.yume-btn-ink:hover {
+  filter: contrast(1.08);
+}
+
+.yume-btn-outline {
+  background: transparent;
+  border-color: var(--yume-border);
+  color: var(--yume-fg);
+}
+
+.yume-btn-outline:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Tailles */
+.yume-btn-sm {
+  padding: 8px 16px;
+  font-size: var(--yume-text-sm);
+}
+
+.yume-btn-lg {
+  padding: 14px 32px;
+  font-size: var(--yume-text-md);
+}
+
+/* Pill (bordures arrondies) */
+.yume-btn-pill {
+  border-radius: var(--yume-radius-pill);
+}
+
+/* Pleine largeur */
+.yume-btn-block {
+  display: block;
+  width: 100%;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   5.5 FORMS
+   ───────────────────────────────────────────────────────────────── */
+
+.yume-form-group {
+  margin-bottom: var(--yume-space-lg);
+}
+
+.yume-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: var(--yume-text-sm);
+  font-weight: 600;
+  color: var(--yume-fg);
+}
+
+.yume-input,
+.yume-textarea,
+.yume-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--yume-border);
+  border-radius: 18px;
+  background: #fff;
+  color: var(--yume-fg);
+  font-family: var(--yume-font-sans);
+  font-size: var(--yume-text-base);
+  transition: border-color var(--yume-duration) var(--yume-ease),
+              box-shadow var(--yume-duration) var(--yume-ease);
+}
+
+.yume-input:focus,
+.yume-textarea:focus,
+.yume-select:focus {
+  outline: none;
+  border-color: var(--yume-gold-400);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--yume-gold-100) 35%, transparent);
+}
+
+.yume-textarea {
+  border-radius: var(--yume-radius);
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Variante pill */
+.yume-input-pill {
+  border-radius: var(--yume-radius-pill);
+  padding: 14px 20px;
+}
+
+/* Messages d'aide */
+.yume-form-hint,
+.yume-form-text {
+  display: block;
+  margin-top: 6px;
+  font-size: var(--yume-text-sm);
+  color: var(--yume-muted);
+}
+
+/* Messages de validation */
+.yume-form-error {
+  color: #dc2626;
+}
+
+.yume-form-success {
+  color: #16a34a;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   5.6 FOOTER
+   ───────────────────────────────────────────────────────────────── */
+
+.yume-footer {
+  padding: clamp(40px, 6vh, 60px) 20px;
+  border-top: 1px solid var(--yume-border);
+  background: #fff;
+}
+
+.yume-footer-content {
+  max-width: var(--yume-max-width);
+  margin: 0 auto;
+}
+
+.yume-footer-brand {
+  font-family: var(--yume-font-serif);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: var(--yume-space-md);
+}
+
+.yume-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--yume-space-md);
+  margin-bottom: var(--yume-space-md);
+}
+
+.yume-footer-link {
+  color: var(--yume-muted);
+  text-decoration: none;
+  font-size: var(--yume-text-sm);
+  transition: color var(--yume-duration) var(--yume-ease);
+}
+
+.yume-footer-link:hover {
+  color: var(--yume-fg);
+}
+
+.yume-footer-text {
+  color: var(--yume-muted);
+  font-size: var(--yume-text-sm);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   6. UTILITIES
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Alignement texte ─── */
+.yume-text-left { text-align: left; }
+.yume-text-center { text-align: center; }
+.yume-text-right { text-align: right; }
+
+/* ─── Couleurs ─── */
+.yume-text-primary { color: var(--yume-fg); }
+.yume-text-muted { color: var(--yume-muted); }
+.yume-text-gold { color: var(--yume-gold-600); }
+
+.yume-bg-white { background: #fff; }
+.yume-bg-light { background: #fafafa; }
+.yume-bg-gold { background: var(--yume-gradient-gold); }
+
+/* ─── Bordures ─── */
+.yume-border { border: 1px solid var(--yume-border); }
+.yume-border-top { border-top: 1px solid var(--yume-border); }
+.yume-border-bottom { border-bottom: 1px solid var(--yume-border); }
+
+.yume-rounded { border-radius: var(--yume-radius); }
+.yume-rounded-sm { border-radius: var(--yume-radius-sm); }
+.yume-rounded-lg { border-radius: var(--yume-radius-lg); }
+.yume-rounded-pill { border-radius: var(--yume-radius-pill); }
+
+/* ─── Ombres ─── */
+.yume-shadow-sm { box-shadow: var(--yume-shadow-sm); }
+.yume-shadow { box-shadow: var(--yume-shadow); }
+.yume-shadow-md { box-shadow: var(--yume-shadow-md); }
+.yume-shadow-lg { box-shadow: var(--yume-shadow-lg); }
+
+/* ─── Display ─── */
+.yume-block { display: block; }
+.yume-inline-block { display: inline-block; }
+.yume-flex { display: flex; }
+.yume-grid { display: grid; }
+.yume-hidden { display: none; }
+
+/* ─── Flex utilities ─── */
+.yume-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yume-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.yume-flex-col {
+  flex-direction: column;
+}
+
+.yume-gap-sm { gap: var(--yume-space-sm); }
+.yume-gap { gap: var(--yume-space-md); }
+.yume-gap-lg { gap: var(--yume-space-lg); }
+
+/* ─── Marges ─── */
+.yume-m-0 { margin: 0; }
+.yume-mt-sm { margin-top: var(--yume-space-sm); }
+.yume-mt { margin-top: var(--yume-space-md); }
+.yume-mt-lg { margin-top: var(--yume-space-lg); }
+.yume-mt-xl { margin-top: var(--yume-space-xl); }
+
+.yume-mb-sm { margin-bottom: var(--yume-space-sm); }
+.yume-mb { margin-bottom: var(--yume-space-md); }
+.yume-mb-lg { margin-bottom: var(--yume-space-lg); }
+.yume-mb-xl { margin-bottom: var(--yume-space-xl); }
+
+.yume-mx-auto { margin-left: auto; margin-right: auto; }
+
+/* ─── Paddings ─── */
+.yume-p-sm { padding: var(--yume-space-sm); }
+.yume-p { padding: var(--yume-space-md); }
+.yume-p-lg { padding: var(--yume-space-lg); }
+.yume-p-xl { padding: var(--yume-space-xl); }
+
+/* ─── Largeurs maximales ─── */
+.yume-max-w-text { max-width: var(--yume-max-width-text); }
+.yume-max-w-form { max-width: var(--yume-max-width-form); }
+.yume-max-w-narrow { max-width: var(--yume-max-width-narrow); }
+.yume-max-w-full { max-width: var(--yume-max-width); }
+
+/* ─── Cursor ─── */
+.yume-cursor-pointer { cursor: pointer; }
+.yume-cursor-not-allowed { cursor: not-allowed; }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   7. ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Blink (pour curseur typewriter) ─── */
+@keyframes yume-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.yume-blink {
+  animation: yume-blink 1s step-end infinite;
+}
+
+/* ─── Fade In Up ─── */
+@keyframes yume-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.yume-fade-in {
+  animation: yume-fade-in-up 0.6s var(--yume-ease) forwards;
+}
+
+/* ─── Reveal on scroll ─── */
+.yume-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--yume-duration-slow) var(--yume-ease),
+              transform var(--yume-duration-slow) var(--yume-ease);
+}
+
+.yume-reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── Hero glows ─── */
+@keyframes yume-glow-cyan {
+  0%, 100% {
+    transform: translate(-40%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-40%, -50%) scale(1.35);
+    opacity: 1;
+  }
+}
+
+@keyframes yume-glow-alt {
+  0% {
+    background: radial-gradient(circle, rgba(255, 0, 150, 0.7) 0%, rgba(255, 0, 150, 0) 75%);
+  }
+  50% {
+    background: radial-gradient(circle, rgba(255, 220, 0, 0.75) 0%, rgba(255, 220, 0, 0) 75%);
+  }
+  100% {
+    background: radial-gradient(circle, rgba(255, 0, 150, 0.7) 0%, rgba(255, 0, 150, 0) 75%);
+  }
+}
+
+@keyframes yume-glow-blue {
+  0%, 100% {
+    transform: translate(-10%, -30%) scale(1.2);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-10%, -30%) scale(1.4);
+    opacity: 1;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   8. RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Mobile First Breakpoints ─── */
+/* xs: < 640px (default) */
+/* sm: 640px */
+/* md: 768px */
+/* lg: 1024px */
+/* xl: 1280px */
+
+@media (max-width: 767px) {
+  .yume-container {
+    padding: 0 16px;
+  }
+  
+  .yume-section {
+    padding: clamp(32px, 6vh, 48px) 0;
+  }
+  
+  .yume-hero {
+    padding: clamp(48px, 10vh, 80px) 16px clamp(32px, 8vh, 60px);
+  }
+  
+  .yume-title-xl {
+    font-size: clamp(28px, 8vw, 48px);
+    letter-spacing: 0.15em;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .yume-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Utilitaires responsive */
+@media (max-width: 767px) {
+  .yume-hide-mobile { display: none !important; }
+}
+
+@media (min-width: 768px) {
+  .yume-hide-desktop { display: none !important; }
+  .yume-show-mobile { display: none !important; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FIN DU DESIGN SYSTEM YUME
+   ═══════════════════════════════════════════════════════════════════ */
+

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YUME Design System — Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="yume-design-system.css">
+  
+  <style>
+    .demo-section {
+      padding: var(--yume-space-xl) 0;
+      border-bottom: 1px solid var(--yume-border);
+    }
+    
+    .demo-grid {
+      display: grid;
+      gap: var(--yume-space-lg);
+      margin-top: var(--yume-space-lg);
+    }
+    
+    .color-swatch {
+      display: flex;
+      align-items: center;
+      gap: var(--yume-space-md);
+      padding: var(--yume-space-md);
+      border: 1px solid var(--yume-border);
+      border-radius: var(--yume-radius-sm);
+    }
+    
+    .color-box {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--yume-radius-sm);
+      border: 1px solid var(--yume-border);
+    }
+    
+    .token-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--yume-space-lg);
+    }
+    
+    .token-table th,
+    .token-table td {
+      padding: var(--yume-space-sm) var(--yume-space-md);
+      text-align: left;
+      border-bottom: 1px solid var(--yume-border);
+    }
+    
+    .token-table th {
+      font-weight: 600;
+      background: #fafafa;
+    }
+    
+    .token-table code {
+      background: #f5f5f5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="yume-header">
+    <nav class="yume-nav">
+      <div class="yume-brand">YUME <span style="color: var(--yume-gold-600);">Design System</span></div>
+      <a href="index.html" class="yume-nav-link">Retour au site</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="yume-hero">
+    <div class="yume-hero-content">
+      <div class="yume-eyebrow yume-mb">
+        <span class="yume-rule"></span>
+        Documentation
+      </div>
+      <h1 class="yume-title yume-title-xl yume-mb">Design System YUME</h1>
+      <p class="yume-lead yume-mx-auto">
+        Système de design cohérent pour l'ensemble de la plateforme solidaire YUME. 
+        Composants, tokens, et guidelines pour construire des interfaces élégantes et accessibles.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <main class="yume-container" style="padding-top: var(--yume-space-3xl); padding-bottom: var(--yume-space-3xl);">
+    
+    <!-- 1. Introduction -->
+    <section class="demo-section">
+      <h2 class="yume-title yume-title-md yume-mb">Introduction</h2>
+      <p class="yume-body">
+        Le Design System YUME est une collection de composants réutilisables, de tokens de design 
+        et de guidelines pour créer des expériences cohérentes à travers toute la plateforme.
+      </p>
+      <p class="yume-body yume-mt">
+        <strong>Philosophie :</strong> Luxe minimaliste, noir & blanc avec accents dorés, 
+        typographie élégante, espacements généreux, animations subtiles.
+      </p>
+    </section>
+
+    <!-- 2. Couleurs -->
+    <section class="demo-section">
+      <h2 class="yume-title yume-title-md yume-mb">Couleurs</h2>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-lg yume-mb">Palette principale</h3>
+      <div class="demo-grid">
+        <div class="color-swatch">
+          <div class="color-box" style="background: var(--yume-bg);"></div>
+          <div>
+            <strong>Background</strong><br>
+            <code>--yume-bg</code><br>
+            <span class="yume-muted">#ffffff</span>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background: var(--yume-fg);"></div>
+          <div>
+            <strong>Foreground</strong><br>
+            <code>--yume-fg</code><br>
+            <span class="yume-muted">#111111</span>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background: var(--yume-muted);"></div>
+          <div>
+            <strong>Muted</strong><br>
+            <code>--yume-muted</code><br>
+            <span class="yume-muted">#666666</span>
+          </div>
+        </div>
+      </div>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-xl yume-mb">Palette dorée (accent)</h3>
+      <div class="demo-grid">
+        <div class="color-swatch">
+          <div class="color-box" style="background: var(--yume-gold-100);"></div>
+          <div>
+            <strong>Gold 100</strong><br>
+            <code>--yume-gold-100</code><br>
+            <span class="yume-muted">#fbf3d2</span>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background: var(--yume-gold-400);"></div>
+          <div>
+            <strong>Gold 400</strong><br>
+            <code>--yume-gold-400</code><br>
+            <span class="yume-muted">#d9c571</span>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background: var(--yume-gold-600);"></div>
+          <div>
+            <strong>Gold 600</strong><br>
+            <code>--yume-gold-600</code><br>
+            <span class="yume-muted">#b39545</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Typographie -->
+    <section class="demo-section">
+      <h2 class="yume-title yume-title-md yume-mb">Typographie</h2>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-lg yume-mb">Polices</h3>
+      <table class="token-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Variable</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-family: var(--yume-font-serif);">Playfair Display</td>
+            <td><code>--yume-font-serif</code></td>
+            <td>Titres, marque</td>
+          </tr>
+          <tr>
+            <td style="font-family: var(--yume-font-sans);">Inter</td>
+            <td><code>--yume-font-sans</code></td>
+            <td>Corps de texte, UI</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-xl yume-mb">Titres</h3>
+      <div style="padding: var(--yume-space-lg); border: 1px solid var(--yume-border); border-radius: var(--yume-radius);">
+        <h1 class="yume-title yume-title-xl yume-mb">Titre XL — Playfair Display</h1>
+        <h2 class="yume-title yume-title-lg yume-mb">Titre LG — Playfair Display</h2>
+        <h3 class="yume-title yume-title-md yume-mb">Titre MD — Playfair Display</h3>
+        <h4 class="yume-title yume-title-sm">Titre SM — Playfair Display</h4>
+      </div>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-xl yume-mb">Corps de texte</h3>
+      <div style="padding: var(--yume-space-lg); border: 1px solid var(--yume-border); border-radius: var(--yume-radius);">
+        <p class="yume-lead">Lead — Texte d'introduction plus large et espacé pour captiver l'attention.</p>
+        <p class="yume-body">Body — Texte standard pour le contenu principal. Lisible et confortable pour une lecture prolongée.</p>
+        <p class="yume-text-sm yume-muted">Small muted — Texte secondaire pour les informations complémentaires ou les notes.</p>
+      </div>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-xl yume-mb">Eyebrow / Kicker</h3>
+      <div style="padding: var(--yume-space-lg); border: 1px solid var(--yume-border); border-radius: var(--yume-radius);">
+        <div class="yume-eyebrow">
+          <span class="yume-rule"></span>
+          Section Label
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Boutons -->
+    <section class="demo-section">
+      <h2 class="yume-title yume-title-md yume-mb">Boutons</h2>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-lg yume-mb">Variantes</h3>
+      <div class="yume-flex-center yume-gap-lg" style="flex-wrap: wrap; justify-content: flex-start;">
+        <button class="yume-btn yume-btn-primary yume-btn-pill">Primary Button</button>
+        <button class="yume-btn yume-btn-dark yume-btn-pill">Dark Button</button>
+        <button class="yume-btn yume-btn-outline yume-btn-pill">Outline Button</button>
+        <button class="yume-btn yume-btn-primary yume-btn-pill" disabled>Disabled</button>
+      </div>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-xl yume-mb">Tailles</h3>
+      <div class="yume-flex-center yume-gap-lg" style="flex-wrap: wrap; justify-content: flex-start; align-items: center;">
+        <button class="yume-btn yume-btn-primary yume-btn-pill yume-btn-sm">Small</button>
+        <button class="yume-btn yume-btn-primary yume-btn-pill">Default</button>
+        <button class="yume-btn yume-btn-primary yume-btn-pill yume-btn-lg">Large</button>
+      </div>
+    </section>
+
+    <!-- 5. Forms -->
+    <section class="demo-section">
+      <h2 class="yume-title yume-title-md yume-mb">Formulaires</h2>
+      
+      <div class="yume-card yume-card-padding" style="max-width: 600px;">
+        <div class="yume-form-group">
+          <label class="yume-label">Label du champ</label>
+          <input type="text" class="yume-input yume-input-pill" placeholder="Placeholder">
+          <span class="yume-form-hint">Texte d'aide pour guider l'utilisateur</span>
+        </div>
+        
+        <div class="yume-form-group">
+          <label class="yume-label">Email</label>
+          <input type="email" class="yume-input yume-input-pill" placeholder="votre@email.fr">
+        </div>
+        
+        <div class="yume-form-group">
+          <label class="yume-label">Message</label>
+          <textarea class="yume-textarea" placeholder="Votre message..."></textarea>
+        </div>
+        
+        <button class="yume-btn yume-btn-primary yume-btn-pill">Envoyer</button>
+      </div>
+    </section>
+
+    <!-- 6. Cards -->
+    <section class="demo-section">
+      <h2 class="yume-title yume-title-md yume-mb">Cartes</h2>
+      
+      <div class="yume-grid-3">
+        <div class="yume-card yume-card-hover yume-card-padding">
+          <h3 class="yume-title yume-title-sm yume-mb">Card avec hover</h3>
+          <p class="yume-body yume-muted">
+            Cette carte a un effet hover qui la soulève légèrement au survol.
+          </p>
+        </div>
+        
+        <div class="yume-card yume-card-padding">
+          <div style="width: 48px; height: 48px; border-radius: var(--yume-radius-sm); background: var(--yume-gradient-gold); margin-bottom: var(--yume-space-md);"></div>
+          <h3 class="yume-title yume-title-sm yume-mb">Avec icône</h3>
+          <p class="yume-body yume-muted">
+            Carte avec un élément visuel en haut.
+          </p>
+        </div>
+        
+        <div class="yume-card yume-card-padding" style="background: var(--yume-gradient-light);">
+          <h3 class="yume-title yume-title-sm yume-mb">Fond dégradé</h3>
+          <p class="yume-body yume-muted">
+            Variante avec fond en dégradé subtil.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Grid System -->
+    <section class="demo-section">
+      <h2 class="yume-title yume-title-md yume-mb">Système de grille</h2>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-lg yume-mb">Grid 2 colonnes</h3>
+      <div class="yume-grid-2">
+        <div class="yume-card yume-card-padding yume-text-center">Colonne 1</div>
+        <div class="yume-card yume-card-padding yume-text-center">Colonne 2</div>
+      </div>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-xl yume-mb">Grid 3 colonnes</h3>
+      <div class="yume-grid-3">
+        <div class="yume-card yume-card-padding yume-text-center">Col 1</div>
+        <div class="yume-card yume-card-padding yume-text-center">Col 2</div>
+        <div class="yume-card yume-card-padding yume-text-center">Col 3</div>
+      </div>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-xl yume-mb">Grid 4 colonnes</h3>
+      <div class="yume-grid-4">
+        <div class="yume-card yume-card-padding yume-text-center">1</div>
+        <div class="yume-card yume-card-padding yume-text-center">2</div>
+        <div class="yume-card yume-card-padding yume-text-center">3</div>
+        <div class="yume-card yume-card-padding yume-text-center">4</div>
+      </div>
+    </section>
+
+    <!-- 8. Espacements -->
+    <section class="demo-section">
+      <h2 class="yume-title yume-title-md yume-mb">Espacements</h2>
+      
+      <table class="token-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Valeur</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--yume-space-xs</code></td>
+            <td>0.5rem (8px)</td>
+            <td>Espacement minimal</td>
+          </tr>
+          <tr>
+            <td><code>--yume-space-sm</code></td>
+            <td>0.75rem (12px)</td>
+            <td>Petit espacement</td>
+          </tr>
+          <tr>
+            <td><code>--yume-space-md</code></td>
+            <td>1rem (16px)</td>
+            <td>Espacement standard</td>
+          </tr>
+          <tr>
+            <td><code>--yume-space-lg</code></td>
+            <td>1.5rem (24px)</td>
+            <td>Grand espacement</td>
+          </tr>
+          <tr>
+            <td><code>--yume-space-xl</code></td>
+            <td>2rem (32px)</td>
+            <td>Très grand espacement</td>
+          </tr>
+          <tr>
+            <td><code>--yume-space-2xl</code></td>
+            <td>3rem (48px)</td>
+            <td>Espacement section</td>
+          </tr>
+          <tr>
+            <td><code>--yume-space-3xl</code></td>
+            <td>4rem (64px)</td>
+            <td>Espacement large section</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 9. Utilitaires -->
+    <section class="demo-section">
+      <h2 class="yume-title yume-title-md yume-mb">Classes utilitaires</h2>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-lg yume-mb">Alignement texte</h3>
+      <div class="yume-card yume-card-padding">
+        <p class="yume-text-left">Aligné à gauche (.yume-text-left)</p>
+        <p class="yume-text-center">Centré (.yume-text-center)</p>
+        <p class="yume-text-right">Aligné à droite (.yume-text-right)</p>
+      </div>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-xl yume-mb">Couleurs de texte</h3>
+      <div class="yume-card yume-card-padding">
+        <p class="yume-text-primary">Texte primaire (.yume-text-primary)</p>
+        <p class="yume-text-muted">Texte atténué (.yume-text-muted)</p>
+        <p class="yume-text-gold">Texte doré (.yume-text-gold)</p>
+      </div>
+      
+      <h3 class="yume-title yume-title-sm yume-mt-xl yume-mb">Bordures arrondies</h3>
+      <div class="yume-flex yume-gap-lg" style="flex-wrap: wrap;">
+        <div class="yume-rounded-sm" style="width: 80px; height: 80px; background: #f5f5f5; border: 1px solid var(--yume-border);"></div>
+        <div class="yume-rounded" style="width: 80px; height: 80px; background: #f5f5f5; border: 1px solid var(--yume-border);"></div>
+        <div class="yume-rounded-lg" style="width: 80px; height: 80px; background: #f5f5f5; border: 1px solid var(--yume-border);"></div>
+        <div class="yume-rounded-pill" style="width: 120px; height: 80px; background: #f5f5f5; border: 1px solid var(--yume-border);"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="yume-footer">
+    <div class="yume-footer-content yume-text-center">
+      <div class="yume-footer-brand yume-mb">YUME</div>
+      <p class="yume-footer-text">
+        Design System v1.0 — Objets vendus, athlètes soutenus
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
+
