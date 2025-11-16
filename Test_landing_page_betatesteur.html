@@ -451,7 +451,7 @@
     <div class="form-section">
       <h3 class="form-title">Je m'inscris maintenant 👇</h3>
       
-      <form id="beta-form" action="https://luigileouf.pythonanywhere.com/register" method="POST">
+      <form id="beta-form">
         <div class="form-group">
           <label class="label" for="name">Prénom et nom</label>
           <input 
@@ -572,7 +572,10 @@
     // Start brand typewriter effect
     setTimeout(brandTypeWriter, pauseBeforeType);
 
-    // Gestion du formulaire
+    // URL Google Apps Script pour collecter les inscriptions bêta-testeurs
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2Lm4Wm3fAbI0V-JYFFmXIwqkAyd5m1iUS90Y9ZfxO4vrHh4ZU4I9Ad9d8GXRZQap6/exec';
+
+    // Gestion du formulaire bêta-testeurs
     const form = document.getElementById('beta-form');
     const submitBtn = document.getElementById('submit-btn');
     const successMsg = document.getElementById('success-msg');
@@ -580,6 +583,9 @@
     
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
       
       const originalBtnText = submitBtn.textContent;
       submitBtn.disabled = true;
@@ -590,21 +596,23 @@
       errorMsg.style.display = 'none';
       
       try {
-        const formData = new FormData(form);
-        const response = await fetch(form.action, {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
-          body: formData
+          mode: 'no-cors', // Important pour Google Apps Script
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email
+          })
         });
         
-        if (response.ok) {
-          // Succès
-          form.style.display = 'none';
-          successMsg.style.display = 'block';
-          successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          // Erreur serveur
-          throw new Error('Erreur serveur');
-        }
+        // Avec mode no-cors, on ne peut pas lire la réponse, donc on suppose que ça a marché
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
       } catch (error) {
         console.error('Erreur:', error);
         errorMsg.style.display = 'block';
