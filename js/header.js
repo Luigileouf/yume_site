@@ -14,16 +14,58 @@ document.addEventListener("DOMContentLoaded", function () {
     return h;
   }
 
-  // ---- Injecte la barre (exemple minimal ; garde ta version si besoin)
+  // ---- Injecte la barre avec effet typewriter
   if (!document.querySelector(".yume-nav")) {
     document.body.insertAdjacentHTML(
       "afterbegin",
       `
+      <style>
+        .yume-brand-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          letter-spacing: .25em;
+          text-transform: uppercase;
+          font-family: 'Playfair Display', serif;
+          font-size: 13px;
+          font-weight: 700;
+        }
+        .yume-brand-text {
+          color: #111;
+          font-size: 10px;
+          font-weight: 600;
+          min-width: 200px;
+          white-space: nowrap;
+        }
+        .yume-brand-cursor {
+          color: #b39545;
+          animation: yume-blink 1s step-end infinite;
+          font-weight: 700;
+        }
+        @keyframes yume-blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
+        }
+        @media (max-width: 991px) {
+          .yume-brand-text {
+            min-width: 180px;
+            font-size: 9px;
+          }
+        }
+        @media (max-width: 767px) {
+          .yume-brand-text {
+            min-width: 150px;
+            font-size: 8px;
+          }
+        }
+      </style>
       <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm py-3 fixed-top yume-nav">
         <div class="container">
           <a class="navbar-brand d-flex align-items-center gap-2" href="accueil.html">
             <img src="img/logo-yume-solidarite.png" alt="YUME" width="44" height="44" class="rounded-circle">
-            <span class="yume-brand d-none d-md-inline" style="letter-spacing:.25em;text-transform:uppercase;font-family:'Playfair Display',serif;font-size:13px">YUME</span>
+            <div class="yume-brand-wrapper d-none d-md-flex">
+              YUME <span class="yume-brand-text" id="header-typewriter"></span><span class="yume-brand-cursor">|</span>
+            </div>
           </a>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
@@ -51,6 +93,70 @@ document.addEventListener("DOMContentLoaded", function () {
       </nav>
       `
     );
+    
+    // ---- Effet typewriter pour le header
+    const headerPhrases = [
+      { text: 'POUR QU\'ILS CONTINUENT À NOUS FAIRE ', words: ['RÊVER', 'VIBRER', 'ESPÉRER'] },
+      { text: '', words: ['PARCE QU\'ILS LE MÉRITENT'] },
+      { text: '', words: ['OBJETS VENDUS ATHLÈTES SOUTENUS'] },
+      { text: '', words: ['PLATEFORME DE SECONDE MAIN SOLIDAIRE'] }
+    ];
+    
+    let phraseIndex = 0;
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    const headerTypewriterEl = document.getElementById('header-typewriter');
+    const typingSpeed = 100;
+    const deletingSpeed = 70;
+    const pauseAfterWord = 2000;
+    const pauseBeforeType = 300;
+    const pauseBeforePhrase = 800;
+
+    function headerTypeWriter() {
+      if (!headerTypewriterEl) return;
+      
+      const currentPhrase = headerPhrases[phraseIndex];
+      const currentWord = currentPhrase.words[wordIndex];
+      const fullText = currentPhrase.text + currentWord;
+      
+      if (isDeleting) {
+        const displayText = fullText.substring(0, currentPhrase.text.length + charIndex - 1);
+        headerTypewriterEl.textContent = displayText;
+        charIndex--;
+        
+        if (charIndex === 0) {
+          isDeleting = false;
+          wordIndex++;
+          
+          if (wordIndex >= currentPhrase.words.length) {
+            wordIndex = 0;
+            phraseIndex = (phraseIndex + 1) % headerPhrases.length;
+            setTimeout(headerTypeWriter, pauseBeforePhrase);
+            return;
+          }
+          
+          setTimeout(headerTypeWriter, pauseBeforeType);
+          return;
+        }
+        setTimeout(headerTypeWriter, deletingSpeed);
+      } else {
+        const displayText = fullText.substring(0, currentPhrase.text.length + charIndex + 1);
+        headerTypewriterEl.textContent = displayText;
+        charIndex++;
+        
+        if (charIndex === currentWord.length) {
+          isDeleting = true;
+          setTimeout(headerTypeWriter, pauseAfterWord);
+          return;
+        }
+        setTimeout(headerTypeWriter, typingSpeed);
+      }
+    }
+
+    // Démarrer l'effet typewriter
+    setTimeout(headerTypeWriter, pauseBeforeType);
   }
 
   // ---- Offset dynamique pour la navbar

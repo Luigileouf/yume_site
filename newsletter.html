@@ -34,6 +34,40 @@
     .jp-area{border-radius:22px;padding:1rem 1.1rem;min-height:120px}
     .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
     .reveal.in-view{opacity:1;transform:none}
+    
+    .brand-typewriter-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: "Playfair Display", serif;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .brand-typewriter-text {
+      color: #111;
+      font-size: 10px;
+      font-weight: 600;
+      min-width: 200px;
+      white-space: nowrap;
+    }
+    .brand-typewriter-cursor {
+      color: #b39545;
+      animation: newsletter-blink 1s step-end infinite;
+      font-weight: 700;
+    }
+    @keyframes newsletter-blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    @media (max-width: 767px) {
+      .brand-typewriter-text {
+        min-width: 150px;
+        font-size: 8px;
+      }
+    }
   </style>
 </head>
 
@@ -121,10 +155,13 @@
       }
     });
   </script>
+
   <!-- Footer luxe minimal -->
 <footer class="jp-footer">
   <div class="inner text-center">
-    <div class="brand mb-3">YUME</div>
+    <div class="brand mb-3 brand-typewriter-wrapper">
+      YUME <span class="brand-typewriter-text" id="newsletter-typewriter"></span><span class="brand-typewriter-cursor">|</span>
+    </div>
     <div class="links">
       <a class="jp-link" href="index.html">Projet</a>
       <a class="jp-link" href="accueil.html">Plateforme</a>
@@ -132,6 +169,76 @@
     </div>
   </div>
 </footer>
+
+  <script>
+    // ---- Effet typewriter pour le footer
+    (function() {
+      const phrases = [
+        { text: 'POUR QU\'ILS CONTINUENT À NOUS FAIRE ', words: ['RÊVER', 'VIBRER', 'ESPÉRER'] },
+        { text: '', words: ['PARCE QU\'ILS LE MÉRITENT'] },
+        { text: '', words: ['OBJETS VENDUS ATHLÈTES SOUTENUS'] },
+        { text: '', words: ['PLATEFORME DE SECONDE MAIN SOLIDAIRE'] }
+      ];
+      
+      let phraseIndex = 0;
+      let wordIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      
+      const typewriterEl = document.getElementById('newsletter-typewriter');
+      if (!typewriterEl) {
+        console.error('Element newsletter-typewriter not found');
+        return;
+      }
+      
+      const typingSpeed = 100;
+      const deletingSpeed = 70;
+      const pauseAfterWord = 2000;
+      const pauseBeforeType = 300;
+      const pauseBeforePhrase = 800;
+
+      function typeWriter() {
+        const currentPhrase = phrases[phraseIndex];
+        const currentWord = currentPhrase.words[wordIndex];
+        const fullText = currentPhrase.text + currentWord;
+        
+        if (isDeleting) {
+          const displayText = fullText.substring(0, currentPhrase.text.length + charIndex - 1);
+          typewriterEl.textContent = displayText;
+          charIndex--;
+          
+          if (charIndex === 0) {
+            isDeleting = false;
+            wordIndex++;
+            
+            if (wordIndex >= currentPhrase.words.length) {
+              wordIndex = 0;
+              phraseIndex = (phraseIndex + 1) % phrases.length;
+              setTimeout(typeWriter, pauseBeforePhrase);
+              return;
+            }
+            
+            setTimeout(typeWriter, pauseBeforeType);
+            return;
+          }
+          setTimeout(typeWriter, deletingSpeed);
+        } else {
+          const displayText = fullText.substring(0, currentPhrase.text.length + charIndex + 1);
+          typewriterEl.textContent = displayText;
+          charIndex++;
+          
+          if (charIndex === currentWord.length) {
+            isDeleting = true;
+            setTimeout(typeWriter, pauseAfterWord);
+            return;
+          }
+          setTimeout(typeWriter, typingSpeed);
+        }
+      }
+
+      setTimeout(typeWriter, pauseBeforeType);
+    })();
+  </script>
 
 </body>
 </html>

@@ -481,3 +481,4 @@ Pour ajouter de nouveaux composants ou modifier le design system :
 
 **YUME Design System** — Objets vendus, athlètes soutenus 💛
 
+

@@ -34,6 +34,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="yume_luxe_nb.css">
     <link rel="stylesheet" href="css/main.min.css">
+  
+  <style>
+    .brand-typewriter-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: "Playfair Display", serif;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .brand-typewriter-text {
+      color: #111;
+      font-size: 9px;
+      font-weight: 600;
+      min-width: 180px;
+      white-space: nowrap;
+    }
+    .brand-typewriter-cursor {
+      color: #b39545;
+      animation: media-blink 1s step-end infinite;
+      font-weight: 700;
+    }
+    @keyframes media-blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    @media (max-width: 767px) {
+      .brand-typewriter-wrapper {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -43,9 +77,8 @@
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="accueil.html">
       <img src="img/logo-yume-solidarite.png" alt="Logo YUME" class="me-2 rounded-circle" width="40" height="38">
-      <div>
-        <strong>YUME</strong><br>
-        <small>Objets vendus<br> Athlètes soutenus</small>
+      <div class="brand-typewriter-wrapper">
+        YUME <span class="brand-typewriter-text" id="media-typewriter"></span><span class="brand-typewriter-cursor">|</span>
       </div>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -387,6 +420,71 @@
     // Si l’utilisateur met en pause depuis le player natif, synchroniser l’icône
     audio.addEventListener('pause', () => btn.classList.remove('is-playing'));
     audio.addEventListener('play',  () => btn.classList.add('is-playing'));
+  })();
+
+  // ---- Effet typewriter pour le header
+  (function() {
+    const phrases = [
+      { text: 'POUR QU\'ILS CONTINUENT À NOUS FAIRE ', words: ['RÊVER', 'VIBRER', 'ESPÉRER'] },
+      { text: '', words: ['PARCE QU\'ILS LE MÉRITENT'] },
+      { text: '', words: ['OBJETS VENDUS ATHLÈTES SOUTENUS'] },
+      { text: '', words: ['PLATEFORME DE SECONDE MAIN SOLIDAIRE'] }
+    ];
+    
+    let phraseIndex = 0;
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    const typewriterEl = document.getElementById('media-typewriter');
+    if (!typewriterEl) return;
+    
+    const typingSpeed = 100;
+    const deletingSpeed = 70;
+    const pauseAfterWord = 2000;
+    const pauseBeforeType = 300;
+    const pauseBeforePhrase = 800;
+
+    function typeWriter() {
+      const currentPhrase = phrases[phraseIndex];
+      const currentWord = currentPhrase.words[wordIndex];
+      const fullText = currentPhrase.text + currentWord;
+      
+      if (isDeleting) {
+        const displayText = fullText.substring(0, currentPhrase.text.length + charIndex - 1);
+        typewriterEl.textContent = displayText;
+        charIndex--;
+        
+        if (charIndex === 0) {
+          isDeleting = false;
+          wordIndex++;
+          
+          if (wordIndex >= currentPhrase.words.length) {
+            wordIndex = 0;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            setTimeout(typeWriter, pauseBeforePhrase);
+            return;
+          }
+          
+          setTimeout(typeWriter, pauseBeforeType);
+          return;
+        }
+        setTimeout(typeWriter, deletingSpeed);
+      } else {
+        const displayText = fullText.substring(0, currentPhrase.text.length + charIndex + 1);
+        typewriterEl.textContent = displayText;
+        charIndex++;
+        
+        if (charIndex === currentWord.length) {
+          isDeleting = true;
+          setTimeout(typeWriter, pauseAfterWord);
+          return;
+        }
+        setTimeout(typeWriter, typingSpeed);
+      }
+    }
+
+    setTimeout(typeWriter, pauseBeforeType);
   })();
 </script>
 
