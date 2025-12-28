@@ -1,725 +1,358 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>YUME — Objets vendus Athlétes soutenus</title>
-<meta content="YUME : plateforme solidaire digitale. Seconde main, dons aux sportifs, partenaires, cadre éthique." name="description"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
-<style>
-  :root{
-  --bg:#ffffff; --fg:#111111; --muted:#666; --border:rgba(0,0,0,.14);
-  --gold-1:#fbf3d2; --gold-2:#d9c571; --gold-3:#b39545;
-  --radius:22px; --shadow:0 8px 24px rgba(0,0,0,.08); --maxw:1120px;
-}
-
-/* ===== Base ===== */
-*{box-sizing:border-box}
-body{
-  margin:0; background:var(--bg); color:var(--fg);
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-  text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;
-  scroll-behavior:smooth;
-}
-.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
-.stack-xs{margin-top:.5rem}.stack-s{margin-top:.75rem}.stack-m{margin-top:1rem}.stack-l{margin-top:1.5rem}.stack-xl{margin-top:2rem}
-.muted{color:var(--muted)}
-.rule{display:inline-block;width:24px;height:1px;background:var(--border);margin-right:8px}
-.eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#9a9a9a;display:flex;align-items:center;gap:8px}
-.title{font-family:"Playfair Display",ui-serif,Georgia,serif;letter-spacing:.02em}
-.lead{color:#222;max-width:780px}
-.section{padding:64px 0}
-.grid{display:grid;gap:24px}
-.grid-2{grid-template-columns:1fr}
-
-/* ===== Header / Nav ===== */
-header{
-  position:sticky; top:0; z-index:20;
-  background:rgba(255,255,255,.75);
-  backdrop-filter:saturate(140%) blur(8px);
-  border-bottom:1px solid var(--border);
-}
-.nav{height:64px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px}
-.brand-mark{width:28px;height:28px;border-radius:50%;
-  background:linear-gradient(135deg,#e8e8e8,#bdbdbd)}
-.brand-logo{display:block;height:28px;width:auto;object-fit:contain}
-.brand-name{font-family:"Playfair Display",ui-serif,Georgia,serif;letter-spacing:.25em;text-transform:uppercase;font-size:13px;display:flex;align-items:center;gap:8px}
-.brand-typewriter{color:#111;font-size:10px;font-weight:600;min-width:200px;white-space:nowrap}
-.brand-cursor{color:#b39545;animation:brand-blink 1s step-end infinite;font-weight:700}
-@keyframes brand-blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-@media(max-width:991px){.brand-typewriter{min-width:180px;font-size:9px}}
-@media(max-width:767px){.brand-typewriter{display:none}}
-.nav a{color:#333;text-decoration:none;font-size:14px;margin-left:14px}
-.nav a:hover{color:#000}
-.menu-toggle{
-  display:none;width:42px;height:42px;border:1px solid var(--border);border-radius:10px;
-  background:#fff;cursor:pointer;align-items:center;justify-content:center;gap:4px;
-}
-.menu-toggle span{display:block;width:18px;height:2px;background:#111;border-radius:2px}
-.menu-toggle span:nth-child(2){width:14px}
-.menu-toggle span:nth-child(3){width:18px}
-
-/* ===== HERO — Halo néon (gauche) ===== */
-.hero-neon{
-  position:relative; background:#fff; border-bottom:1px solid var(--border);
-  overflow:hidden;
-}
-.hero-left{ padding: clamp(48px, 10vh, 120px) 0 64px; }
-.hero-left .container{ position:relative; }
-.hero-stack{ max-width:980px; }
-
-.hero-title{
-  color:#111;
-  font-family:"Playfair Display",ui-serif,Georgia,serif;
-  text-transform:uppercase; letter-spacing:.2em;
-  font-size:clamp(36px, 6vw, 64px);
-  line-height:1.15; margin:0 0 18px 0;
-}
-
-/* Sous-titre */
-.hero-left .lead{ color:#222; }
-
-/* Triple halo punchy & élargi (cyan + magenta/jaune + bleu) */
-.hero-glow{ position:relative; display:inline-block; z-index:0; }
-.hero-glow::before,
-.hero-glow::after,
-.hero-glow span::before{
-  content:"";
-  position:absolute; top:50%; left:0;
-  width:480px; height:480px;                     /* large */
-  transform:translate(-40%, -50%);
-  border-radius:50%;
-  filter:blur(130px);                             /* glow diffus et puissant */
-  pointer-events:none; z-index:-1; opacity:.9;
-}
-
-/* Cyan électrique */
-.hero-glow::before{
-  background:radial-gradient(circle, rgba(0,255,255,0.8) 0%, rgba(0,255,255,0) 75%);
-  animation:glowCyan 6s ease-in-out infinite;
-}
-
-/* Magenta <-> Jaune (alterne) */
-.hero-glow::after{
-  background:radial-gradient(circle, rgba(255,0,150,0.7) 0%, rgba(255,0,150,0) 75%);
-  animation:glowAlt 8s ease-in-out infinite alternate;
-  transform:translate(25%, -45%) scale(1.1);
-}
-
-/* Bleu électrique (troisième halo) */
-.hero-glow span::before{
-  background:radial-gradient(circle, rgba(0,90,255,0.75) 0%, rgba(0,90,255,0) 75%);
-  animation:glowBlue 10s ease-in-out infinite alternate;
-  transform:translate(-10%, -30%) scale(1.2);
-}
-
-/* Animations halos */
-@keyframes glowCyan{
-  0%,100%{ transform:translate(-40%, -50%) scale(1);   opacity:.8; }
-  50%    { transform:translate(-40%, -50%) scale(1.35); opacity:1;   }
-}
-@keyframes glowAlt{
-  0%  { background:radial-gradient(circle, rgba(255,0,150,0.7) 0%, rgba(255,0,150,0) 75%); }
-  50% { background:radial-gradient(circle, rgba(255,220,0,0.75) 0%, rgba(255,220,0,0) 75%); }
-  100%{ background:radial-gradient(circle, rgba(255,0,150,0.7) 0%, rgba(255,0,150,0) 75%); }
-}
-@keyframes glowBlue{
-  0%,100%{ transform:translate(-10%, -30%) scale(1.2); opacity:.7; }
-  50%    { transform:translate(-10%, -30%) scale(1.4); opacity:1;  }
-}
-
-/* Accessibilité : réduire les mouvements */
-@media (prefers-reduced-motion:reduce){
-  .hero-glow::before,
-  .hero-glow::after,
-  .hero-glow span::before{ animation:none; opacity:.5; }
-}
-
-/* ===== UI ===== */
-.btn{appearance:none;border:1px solid var(--border);border-radius:18px;padding:12px 16px;background:#fff;color:#111;cursor:pointer;font-weight:600}
-.btn:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
-.btn-primary{
-  border-color:color-mix(in oklab, var(--gold-3) 30%, #000 10%);
-  background:linear-gradient(90deg,var(--gold-1),var(--gold-2)); color:#111
-}
-.btn-link{border:0;background:transparent;padding:0;color:#111}
-
-.card{border:1px solid var(--border);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow)}
-.card .p{padding:28px}
-.tile{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
-.tile>img{display:block;width:100%;height:220px;object-fit:cover}
-.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(255,255,255,.6),transparent)}
-
-.list{margin:0;padding-left:1.2rem}
-.list li{margin:.35rem 0}
-
-/* Motion */
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
-.reveal.in-view{opacity:1;transform:none}
-.hover-rise{transition:transform .35s ease}.hover-rise:hover{transform:translateY(-4px)}
-
-/* ===== Parallax sections ===== */
-.parallax{
-  position: relative;               /* ancre les légendes à leur section */
-  height: 500px;
-  background-attachment: fixed;
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.parallax-caption{
-  position: absolute;
-  z-index: 1;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(0,0,0,.55);
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 1.4;
-  max-width: 340px;
-}
-
-/* iOS / mobile : évite le comportement erratique du fixed */
-@media (max-width: 900px){
-  .parallax{ background-attachment: scroll; }
-}
-
-
-/* ===== Footer ===== */
-footer{border-top:1px solid var(--border)}
-footer{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
-footer .footer-brand{font-weight:bold}
-footer .footer-links{display:flex;flex-direction:column;gap:4px}
-footer .footer-links a{text-decoration:none}
-
-/* ===== Breakpoints ===== */
-@media (max-width:900px){
-  .grid-2{grid-template-columns:1fr}
-  .nav{height:64px;gap:10px}
-  .brand-name{font-size:12px;letter-spacing:.22em}
-  .menu-toggle{display:inline-flex}
-
-  header .nav > nav{
-    position:fixed; inset:64px 0 auto 0;
-    background:#fff; border-top:1px solid var(--border);
-    display:none; flex-direction:column; padding:10px 14px 16px;
-    box-shadow:0 8px 24px rgba(0,0,0,.08);
-  }
-  header .nav > nav a{margin:0;padding:14px 8px;font-size:16px;border-radius:10px}
-  header .nav > nav a:active{background:rgba(0,0,0,.04)}
-  header .nav > nav.open{display:flex}
-
-  .nav .btn.btn-primary{padding:10px 12px;white-space:nowrap;font-size:13px}
-
-  /* Halos plus petits en mobile pour éviter la saturation */
-  .hero-glow::before,
-  .hero-glow::after,
-  .hero-glow span::before{
-    width:320px; height:320px; filter:blur(110px);
-    transform:translate(-30%, -50%);
-  }
-}
-
-@media (min-width:900px){
-  .grid-2{grid-template-columns:5fr 7fr}
-  .brand-logo{height:32px}
-}
-
-@media (min-width:1200px){
-  :root{--maxw:1280px}
-  .title{font-size:32px}
-  .lead{font-size:20px}
-  .section{padding:96px 0}
-  .grid-2{grid-template-columns:4fr 8fr;gap:32px}
-  .brand-logo{height:34px}
-}
-
-/* Bloquer le scroll quand menu mobile ouvert */
-body.no-scroll{overflow:hidden}
-
-/* Réduire autres transitions si préférence */
-@media (prefers-reduced-motion:reduce){
-  .reveal,.hover-rise{transition:none}
-}
-
-  </style>
-</head>
-<body>
-<header>
-<div class="container nav">
-<div class="brand">
-<img src="img/logo-yume-solidarite.png" alt="Logo YUME" class="brand-logo">
-<a aria-label="Accueil YUME" class="brand-name" href="#">YUME <span class="brand-typewriter" id="index-typewriter"></span><span class="brand-cursor">|</span></a>
-</div>
-<!-- Bouton burger (mobile) -->
-<button aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu" class="menu-toggle">
-<span></span><span></span><span></span>
-</button>
-<nav aria-label="Navigation principale" id="site-nav">
-<a href="media.html">Podcast</a>
-<a href="manifeste.html">Manifeste</a>
-<a href="#mission">Mission</a>
-<a href="#solution">Solution</a>
-<a href="#modele">Modèle</a>
-<a href="#ethique">Éthique</a>
-<a href="#structure">Structure</a>
-<a href="#developpement">Plateforme</a>
-<a href="#contact">Contact</a><a href="index_dossier_de_press_7_fixed.html">Dossier de presse</a>
-</nav>
-<div><a class="btn btn-primary" href="accueil.html">Plateforme</a></div>
-</div>
-</header>
-<main>
-<section class="hero-neon hero-left">
-  <div class="container">
-    <div class="hero-stack">
-      <h1 class="title hero-title hero-glow">YUME</h1>
-      <p class="lead stack-s">
-        Plateforme de seconde main solidaire — au service des athlètes peu médiatisés et des associations.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!--paralax-->
-<!-- Alice -->
-<section class="parallax" style="background-image:url('img/sportif_paralax_Alice.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>Alice Recher</strong><br>
-      Coupe du monde d’escrime à Hong Kong<br>
-      Crédit : © Bizzi Team
-    </p>
-  </div>
-</section>
-
-
-<!-- Mission d'intérêt général -->
-<section class="section" id="mission">
-  <div class="container card reveal">
-    <div class="p">
-      <div class="eyebrow"><span class="rule"></span>Mission d’intérêt général</div>
-      <h2 class="title stack-xs" style="font-size:28px">Soutenir des sportifs de haut niveau peu méditiasés et les associations qui les accompagnent.</h2>
-      <p class="muted stack-s"><em>« Yume » signifie rêve en japonais.</em></p>
-      <ul class="list stack-s">
-        <li>Athlètes valides</li>
-        <li>Athlètes féminines</li>
-        <li>Athlètes handisports</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!--paralax-->
-<!-- Alice -->
-<section class="parallax" style="background-image:url('img/sportif_paralax_Alice.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>Alice Recher</strong><br>
-      Coupe du monde d’escrime à Hong Kong<br>
-      Crédit : © Bizzi Team
-    </p>
-  </div>
-</section>
-
-
-<!-- Solution simple et vertueuse -->
-<section class="section" id="solution">
-  <div class="container grid grid-2">
-    <!-- Carte texte à gauche -->
-    <div class="card reveal">
-      <div class="p">
-        <div class="eyebrow"><span class="rule"></span>Solution simple &amp; vertueuse</div>
-        <h2 class="title stack-xs" style="font-size:28px">Soutien grâce à la seconde main.</h2>
-        <p class="stack-s">
-          Plateforme d’achat/vente de seconde main et de bonnes affaires. Chaque transaction génère un don pour les sportifs.
-        </p>
-        <ul class="list stack-s">
-          <li>Une famille vend un objet → <strong>à partir de 1%</strong> du prix reversé aux sportifs.</li>
-          <li><strong>1 € de soutien = 1 point YUME</strong> valable chez les partenaires YUME : cadeaux, remises, offres spéciales, événements…</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Image à droite (même grille) -->
-    <div class="tile hover-rise reveal">
-      <img
-        alt="Objets seconde main, sélection soignée"
-        src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&amp;w=1600&amp;auto=format&amp;fit=crop"
-      />
-    </div>
-  </div>
-</section>
-
-<!--paralax-->
-<!-- Alice -->
-<section class="parallax" style="background-image:url('img/sportif_paralax_Alice.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>Alice Recher</strong><br>
-      Coupe du monde d’escrime à Hong Kong<br>
-      Crédit : © Bizzi Team
-    </p>
-  </div>
-</section>
-
-<!-- Modèle participatif -->
-<section class="section" id="modele">
-<div class="container grid" style="grid-template-columns:1fr;gap:24px">
-<article class="card reveal">
-<div class="p">
-<div class="eyebrow"><span class="rule"></span>Modèle participatif</div>
-<h2 class="title stack-xs" style="font-size:28px">Un écosystème où tout le monde gagne.</h2>
-<ul class="list stack-s">
-<li><strong>Familles</strong> : avantages exclusifs, économies, solidarité.</li>
-<li><strong>Entreprises &amp; associations</strong> : chiffre d'affaire, visibilité, engagement, sans mobiliser de trésorerie.</li>
-<li><strong>Sportifs</strong> : financement durable et médiatisation.</li>
-</ul>
-</div>
-</article>
-<article class="card reveal">
-<div class="p">
-<div class="eyebrow"><span class="rule"></span>Communauté &amp; événements</div>
-<h2 class="title stack-xs" style="font-size:24px">Des rendez-vous qui rassemblent.</h2>
-<p class="muted">Des événements innovants pour engager les familles, valoriser les sportifs et les partenaires.</p>
-</div>
-</article>
-</div>
-</section>
-
-<!--paralax-->
-<!-- Yannick -->
-<section class="parallax" style="background-image:url('img/Sportif_paralax_yannick.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>« Ta seule limite c’est celle que tu t’imposes »</strong><br>
-      Yannick Matejicek<br>
-      Triathlète semi-professionnel
-    </p>
-  </div>
-</section>
-
-<!-- Transparence & cadre éthique -->
-<section class="section" id="ethique">
-<div class="container grid grid-2">
-<div class="card reveal">
-<div class="p">
-<div class="eyebrow"><span class="rule"></span>Transparence &amp; éthique</div>
-<ul class="list">
-<li>Comptes publiés et consultables.</li>
-<li>Respect total des associations loi 1901 (aucune filiation juridique ou financière).</li>
-<li>Organisation appartenant à l'économise sociale et solidaire.</li>
-<li>Label ESUS : Entreprise solidaire d’utilité sociale</li>
-</ul>
-</div>
-</div>
-<div class="tile hover-rise reveal">
-<img alt="Transparence et confiance" src="https://images.unsplash.com/photo-1523359346063-d879354c0ea5?q=80&amp;w=1600&amp;auto=format&amp;fit=crop"/>
-</div>
-</div>
-</section>
-
-<!--paralax-->
-<!-- Yannick -->
-<section class="parallax" style="background-image:url('img/Sportif_paralax_yannick.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>« Ta seule limite c’est celle que tu t’imposes »</strong><br>
-      Yannick Matejicek<br>
-      Triathlète semi-professionnel
-    </p>
-  </div>
-</section>
-
-<!-- Structure légale & répartition -->
-<section class="section" id="structure">
-  <div class="container grid grid-2">
-    <!-- Bloc Structure & mission -->
-    <div class="card reveal">
-      <div class="p">
-        <div class="eyebrow"><span class="rule"></span>Structure &amp; mission</div>
-        <h2 class="title stack-xs" style="font-size:26px">SAS société à mission (Loi PACTE) ou une association loi 1901.</h2>
-        <ul class="list stack-s">
-          <li>Mission d'intérêt général et d'utilité sociale inscrit dans les statuts.</li>
-          <li>Comité d'évaluation indépendant.</li>
-          <li>Rapport annuel public.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Bloc Répartition des revenus (déplacé ici, affiché à droite) -->
-    <div class="card reveal">
-      <div class="p">
-        <div class="eyebrow"><span class="rule"></span>Répartition des revenus</div>
-        <h2 class="title stack-xs" style="font-size:26px">70% / 30% — clair et durable.</h2>
-        <ul class="list stack-s">
-          <li><strong>1€</strong> c'est :</li>
-          <li><strong>0,70 €</strong> pour les athlètes et les structures associatives.</li>
-          <li><strong>0,30 €</strong> pour le fonctionnement de YUME.</li>
-        </ul>
-        <p class="muted stack-xs">Un modèle transparent, pérenne et engagé.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!--paralax-->
-<!-- Yannick -->
-<section class="parallax" style="background-image:url('img/Sportif_paralax_yannick.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>« Ta seule limite c’est celle que tu t’imposes »</strong><br>
-      Yannick Matejicek<br>
-      Triathlète semi-professionnel
-    </p>
-  </div>
-</section>
-
-<!-- Transparence financière & Préservation du cadre associatif -->
-<section class="section">
-<div class="container grid grid-2">
-<div class="card reveal">
-<div class="p">
-<div class="eyebrow"><span class="rule"></span>Transparence financière</div>
-<p>Tous les comptes (résultats &amp; bilans) sont publiés et accessibles à tous.</p>
-<p class="muted">Gestion responsable et ouverte.</p>
-</div>
-</div>
-<div class="card reveal">
-<div class="p">
-<div class="eyebrow"><span class="rule"></span>Cadre associatif préservé</div>
-<ul class="list">
-<li>Aucune filiation juridique ou financière entre YUME et les associations partenaires.</li>
-<li>Respect de leur but non lucratif (loi 1901).</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-
-<!--paralax-->
-<!-- Yannick -->
-<section class="parallax" style="background-image:url('img/Sportif_paralax_yannick.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>« Ta seule limite c’est celle que tu t’imposes »</strong><br>
-      Yannick Matejicek<br>
-      Triathlète semi-professionnel
-    </p>
-  </div>
-</section>
-
-<!-- Origine de YUME -->
-<section class="section">
-<div class="container card reveal">
-<div class="p">
-<div class="eyebrow"><span class="rule"></span>Origine</div>
-<h2 class="title stack-xs" style="font-size:26px">Une intuition de terrain.</h2>
-<p class="stack-s"><em>« Je m’appelle Loïc Métivier. Issu du monde associatif et pratiquant de karaté, j’ai vu des athlètes se battre chaque jour pour continuer leur passion, faute de moyens et de visibilité. »</em></p>
-<p class="stack-s">La seconde main a un potentiel solidaire immense : transformer des objets qui dorment chez nous en trajectoires soutenues.</p>
-<p class="stack-s">De cette rencontre entre sport et économie circulaire est née <strong>YUME</strong> — un projet profondément solidaire qui met la responsabilité au cœur de chaque transaction.</p>
-<ul class="list stack-s">
-<li>Faire de l’achat/vente de seconde main un réflexe solidaire.</li>
-<li>Offrir aux entreprises une association au sport **sans mobiliser de trésorerie**.</li>
-<li>Donner aux associations sportives un levier éthique, transparent et pérenne — et un nouveau média.</li>
-</ul>
-</div>
-</div>
-</section>
-
-<!--paralax-->
-<!-- fks -->
-<section class="parallax" style="background-image:url('img/sportif_parlax_FKS_Fujairah_2024.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>Christophe Brondy - Lola Cochard - Marylou Cochard</strong><br>
-      Karaté | 3éme place | Youth league Mondiale | Fujairah | 2024 <br>
-      Fontenay Karaté Shotokan
-    </p>
-  </div>
-</section>
-
-<!-- Plateforme en développement -->
-<section class="section" id="developpement">
-<div class="container card reveal">
-<div class="p">
-<div class="eyebrow"><span class="rule"></span>Plateforme en développement</div>
-<p>La plateforme arrive bientôt pour acheter, vendre et soutenir les sportifs peu médiatisés.</p>
-<p class="stack-s">Phase actuelle : communication &amp; mobilisation pour :</p>
-<ul class="list">
-<li>faire connaître le projet,</li>
-<li>fédérer des soutiens (sportifs, partenaires, collectivités),</li>
-<li>co-construire la plateforme avec les retours du terrain.</li>
-</ul>
-<p class="muted stack-s">On construit YUME avec vous.</p>
-<div class="stack-m">
-<a class="btn btn-primary" href="accueil.html">Accéder à la page Application</a>
-</div>
-</div>
-</div>
-</section>
-
-<!--paralax-->
-<!-- fks -->
-<section class="parallax" style="background-image:url('img/sportif_parlax_FKS_Fujairah_2024.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>Christophe Brondy - Lola Cochard - Marylou Cochard</strong><br>
-      Karaté | 3éme place | Youth league Mondiale | Fujairah | 2024 <br>
-      Fontenay Karaté Shotokan
-    </p>
-  </div>
-</section>
-
-<!-- Call to explore -->
-<section class="section">
-<div class="container" style="text-align:center">
-<p class="title" style="font-size:20px">Envie de voir l’aperçu ?</p>
-<a class="btn btn-primary" href="accueil.html">Ouvrir la page d'accueil de l'app YUME</a>
-</div>
-</section>
-
-<!--paralax-->
-<!-- fks -->
-<section class="parallax" style="background-image:url('img/sportif_parlax_FKS_Fujairah_2024.jpg')">
-  <div class="parallax-caption">
-    <p>
-      <strong>Christophe Brondy - Lola Cochard - Marylou Cochard</strong><br>
-      Karaté | 3éme place | Youth league Mondiale | Fujairah | 2024 <br>
-      Fontenay Karaté Shotokan
-    </p>
-  </div>
-</section>
-
-<!-- Newsletter embed -->
-<section class="section" id="newsletter">
-<div class="container">
-<p class="title" style="font-size:20px; text-align:center; margin-bottom: 16px;">
-      Inscrivez-vous à la newsletter
-    </p>
-<div style="border:1px solid var(--border); border-radius: var(--radius); overflow:hidden;">
-<iframe src="newsletter.html" style="width:100%; height: 430px; border:0; display:block;" title="Formulaire d'inscription à la newsletter">
-</iframe>
-</div>
-</div>
-</section>
-</main>
-
-<footer id="contact">
-<div class="container" style="display:flex;gap:16px;align-items:center;justify-content:space-between;padding:28px 0;flex-wrap:wrap">
-<div style="display:flex;align-items:center;gap:10px">
-<div aria-hidden="true" class="brand-mark"></div>
-<div class="brand-name">YUME</div>
-</div>
-<div class="muted" style="font-size:12px">© <span id="year"></span> YUME — Tous droits réservés</div>
-<div style="display:flex;gap:12px;align-items:center">
-<a class="btn btn-link" href="mailto:loic@yu-me.fr"> ✉️ loic@yu-me.fr</a>
-<a class="btn btn-link" href="tel:+33613524886">📞 0613524886</a>
-<a class="btn btn-link" href="https://www.linkedin.com/in/lo%C3%AFc-m%C3%A9tivier/" target="_blank">LinkedIn</a>
-</div>
-</div>
-</footer>
-
-<script>
-  // Year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Reveal on view
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries)=>{
-    for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target);}}
-  },{threshold:.18});
-  revealEls.forEach(el=>io.observe(el));
-</script>
-<script>
-  // Toggle menu mobile
-  const toggle = document.querySelector('.menu-toggle');
-  const nav = document.getElementById('site-nav');
-  if (toggle && nav){
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('open');
-      document.body.classList.toggle('no-scroll', isOpen);
-      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-
-    // Ferme le menu quand on clique un lien
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      document.body.classList.remove('no-scroll');
-      toggle.setAttribute('aria-expanded','false');
-    }));
-  }
-
-  // ---- Effet typewriter pour le header
-  (function() {
-    const phrases = [
-      { text: 'POUR QU\'ILS CONTINUENT À NOUS FAIRE ', words: ['RÊVER', 'VIBRER', 'ESPÉRER'] },
-      { text: '', words: ['PARCE QU\'ILS LE MÉRITENT'] },
-      { text: '', words: ['OBJETS VENDUS ATHLÈTES SOUTENUS'] },
-      { text: '', words: ['PLATEFORME DE SECONDE MAIN SOLIDAIRE'] }
-    ];
-    
-    let phraseIndex = 0;
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    const typewriterEl = document.getElementById('index-typewriter');
-    if (!typewriterEl) return;
-    
-    const typingSpeed = 100;
-    const deletingSpeed = 70;
-    const pauseAfterWord = 2000;
-    const pauseBeforeType = 300;
-    const pauseBeforePhrase = 800;
-
-    function typeWriter() {
-      const currentPhrase = phrases[phraseIndex];
-      const currentWord = currentPhrase.words[wordIndex];
-      const fullText = currentPhrase.text + currentWord;
-      
-      if (isDeleting) {
-        const displayText = fullText.substring(0, currentPhrase.text.length + charIndex - 1);
-        typewriterEl.textContent = displayText;
-        charIndex--;
-        
-        if (charIndex === 0) {
-          isDeleting = false;
-          wordIndex++;
-          
-          if (wordIndex >= currentPhrase.words.length) {
-            wordIndex = 0;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            setTimeout(typeWriter, pauseBeforePhrase);
-            return;
-          }
-          
-          setTimeout(typeWriter, pauseBeforeType);
-          return;
-        }
-        setTimeout(typeWriter, deletingSpeed);
-      } else {
-        const displayText = fullText.substring(0, currentPhrase.text.length + charIndex + 1);
-        typewriterEl.textContent = displayText;
-        charIndex++;
-        
-        if (charIndex === currentWord.length) {
-          isDeleting = true;
-          setTimeout(typeWriter, pauseAfterWord);
-          return;
-        }
-        setTimeout(typeWriter, typingSpeed);
-      }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YUME devient SOLISPORT</title>
+  <meta name="description" content="YUME évolue et devient SOLISPORT. Même mission : soutenir les sportifs de haut niveau peu médiatisés. Découvrez Solisport.fr et demandez l'accès à la version Alpha." />
+  <meta http-equiv="refresh" content="12;url=https://solisport.fr" />
+  <style>
+    :root{
+      --bg1:#07080b;
+      --bg2:#0f1220;
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.90);
+      --muted: rgba(255,255,255,.70);
+      --muted2: rgba(255,255,255,.55);
+      --accent:#6ee7ff;
+      --accent2:#a78bfa;
+      --good:#34d399;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 22px;
     }
 
-    setTimeout(typeWriter, pauseBeforeType);
-  })();
-</script>
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(110,231,255,.14), transparent 55%),
+        radial-gradient(1000px 700px at 80% 30%, rgba(167,139,250,.14), transparent 55%),
+        radial-gradient(900px 700px at 40% 90%, rgba(52,211,153,.10), transparent 55%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 28px 16px;
+    }
+
+    .wrap{
+      width:min(980px, 100%);
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+    }
+
+    @media (max-width: 860px){
+      .wrap{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      padding: 28px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: .2px;
+    }
+
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(110,231,255,.08);
+    }
+
+    h1{
+      margin: 14px 0 8px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height:1.05;
+      letter-spacing: -.6px;
+    }
+
+    .sub{
+      margin: 0 0 18px;
+      font-size: 16px;
+      color: var(--muted);
+      line-height:1.5;
+    }
+
+    .highlight{
+      display:inline-block;
+      background: linear-gradient(90deg, rgba(110,231,255,.18), rgba(167,139,250,.18));
+      border: 1px solid rgba(255,255,255,.16);
+      padding: 10px 12px;
+      border-radius: 14px;
+      color: rgba(255,255,255,.92);
+      margin: 12px 0 18px;
+      line-height:1.4;
+    }
+
+    .list{
+      margin: 14px 0 20px;
+      padding: 0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .list li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color: var(--muted);
+      line-height:1.45;
+    }
+    .check{
+      flex:0 0 auto;
+      width: 20px; height: 20px;
+      border-radius: 6px;
+      display:grid; place-items:center;
+      background: rgba(52,211,153,.12);
+      border: 1px solid rgba(52,211,153,.22);
+      color: var(--good);
+      font-weight:700;
+      margin-top: 1px;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.90);
+      text-decoration:none;
+      font-weight:600;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      min-width: 220px;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); }
+    .btn.primary{
+      border-color: rgba(110,231,255,.35);
+      background: linear-gradient(135deg, rgba(110,231,255,.14), rgba(167,139,250,.12));
+    }
+
+    .small{
+      margin-top: 14px;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height:1.45;
+    }
+
+    .right h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing:-.2px;
+    }
+
+    .pill{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.03);
+      margin: 10px 0;
+      color: var(--muted);
+      line-height:1.4;
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12.5px;
+      color: rgba(255,255,255,.86);
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 10px 12px;
+      border-radius: 14px;
+      overflow:auto;
+      white-space: nowrap;
+    }
+
+    .timer{
+      margin-top: 12px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .bar{
+      flex:1;
+      height: 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      position:relative;
+    }
+    .fill{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, rgba(110,231,255,.75), rgba(167,139,250,.75));
+      animation: load 12s linear forwards;
+    }
+    @keyframes load{ to{ width:100%; } }
+
+    footer{
+      margin-top: 14px;
+      color: var(--muted2);
+      font-size: 12px;
+    }
+
+    .logoRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 6px;
+    }
+
+    .mark{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      letter-spacing:.4px;
+      text-transform:uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+    }
+    .mark span{
+      padding: 8px 10px;
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+    }
+
+    .link{
+      color: rgba(110,231,255,.95);
+      text-decoration:none;
+      border-bottom: 1px dashed rgba(110,231,255,.35);
+    }
+    .link:hover{ border-bottom-style: solid; }
+  </style>
+</head>
+
+<body>
+  <main class="wrap" role="main" aria-label="Redirection YUME vers SOLISPORT">
+    <!-- LEFT -->
+    <section class="card left">
+      <div class="logoRow">
+        <div class="badge"><span class="dot" aria-hidden="true"></span>Transition officielle</div>
+        <div class="mark">
+          <span>YUME</span>
+          <span>→</span>
+          <span>SOLISPORT</span>
+        </div>
+      </div>
+
+      <h1>YUME devient <span style="background:linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent;">SOLISPORT</span>.</h1>
+      <p class="sub">
+        Même mission, mêmes valeurs : <strong>soutenir les sportifs de haut niveau peu médiatisés</strong>.
+      </p>
+
+      <div class="highlight">
+        Avec <strong>SOLISPORT</strong>, les vendeurs de seconde main vendent mieux… et donnent du sens à leurs ventes.
+      </div>
+
+      <ul class="list">
+        <li><span class="check">✓</span><span><strong>1€ donné</strong> = <strong>1 point</strong> pour le vendeur + <strong>1 point</strong> pour l’acheteur.</span></li>
+        <li><span class="check">✓</span><span>Des <strong>cadeaux</strong> et des <strong>avantages</strong> auprès des partenaires SOLISPORT.</span></li>
+        <li><span class="check">✓</span><span>Une plateforme simple : tu vends, tu prouves le don, tout le monde y gagne (même ton karma).</span></li>
+      </ul>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="https://solisport.fr" rel="noopener">
+          Aller sur SOLISPORT.FR →
+        </a>
+
+        <a class="btn" href="mailto:contact@solisport.fr?subject=Test%20version%20Alpha&body=Bonjour%2C%0D%0A%0D%0AJe%20souhaite%20tester%20la%20version%20Alpha%20de%20Solisport.%0D%0A%0D%0AMerci%20de%20m%E2%80%99envoyer%20le%20mot%20de%20passe%20de%20connexion.%0D%0A%0D%0ABien%20%C3%A0%20vous%2C%0D%0A">
+          Demander l’accès Alpha (email)
+        </a>
+      </div>
+
+      <div class="timer" aria-label="Redirection automatique">
+        <span>Redirection auto vers solisport.fr</span>
+        <div class="bar" aria-hidden="true"><div class="fill"></div></div>
+        <span>12s</span>
+      </div>
+
+      <p class="small">
+        Si tu n’es pas redirigé automatiquement, clique ici :
+        <a class="link" href="https://solisport.fr" rel="noopener">solisport.fr</a>
+      </p>
+
+      <footer>
+        © SOLISPORT — plateforme en version Alpha (tests en cours).
+      </footer>
+    </section>
+
+    <!-- RIGHT -->
+    <aside class="card right" aria-label="Accès Alpha">
+      <h2>Tester la version Alpha</h2>
+      <p class="sub" style="margin-top:0;">
+        La plateforme est en test sur <strong>SOLISPORT.FR</strong>.
+        Pour obtenir le mot de passe, envoie une demande par email :
+      </p>
+
+      <div class="pill">
+        <div style="min-width:70px;color:rgba(255,255,255,.85);font-weight:700;">Email</div>
+        <div><a class="link" href="mailto:contact@solisport.fr">contact@solisport.fr</a></div>
+      </div>
+
+      <div class="pill">
+        <div style="min-width:70px;color:rgba(255,255,255,.85);font-weight:700;">Objet</div>
+        <div>Test version Alpha</div>
+      </div>
+
+      <div class="mono" aria-label="Texte à copier">
+Bonjour,
+
+Je souhaite tester la version Alpha de Solisport.
+Merci de m’envoyer le mot de passe pour me connecter.
+
+Bien à vous,
+      </div>
+
+      <p class="small">
+        Pro tip : garde ce lien en favori. Ça t’évitera de retaper “SOLISPORT” avec des majuscules héroïques.
+      </p>
+    </aside>
+  </main>
+
+  <noscript>
+    <div style="max-width:980px;margin:16px auto;color:rgba(255,255,255,.8);">
+      JavaScript est désactivé. Tu peux accéder à SOLISPORT ici : <a href="https://solisport.fr" style="color:#6ee7ff;">solisport.fr</a>
+    </div>
+  </noscript>
 </body>
 </html>
